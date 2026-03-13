@@ -1,0 +1,78 @@
+Belivia 2.0 – API Endpoints
+
+Ziel
+Diese Datei dokumentiert die geplanten API-Endpunkte für Belivia 2.0 v1.
+
+Grundprinzip
+Die API bleibt klein, fokussiert und geschäftsnah.
+In v1 werden nur die wirklich nötigen Endpunkte bereitgestellt.
+
+Lokaler Dienst
+FastAPI läuft lokal auf:
+- 127.0.0.1:8000
+
+Öffentliche Erreichbarkeit
+Die API ist nicht direkt auf ihrem Port öffentlich erreichbar.
+Sie wird ausschließlich über Nginx und Cloudflare unter /api/* veröffentlicht.
+
+v1-Endpunkte
+
+1. GET /api/health
+Zweck:
+- einfacher technischer Health-Check
+- Prüfung, ob die API erreichbar und lauffähig ist
+
+Zielgruppe:
+- Betrieb / Monitoring / technische Verifikation
+
+Erwartetes Verhalten:
+- liefert eine einfache Erfolgsmeldung oder Statusantwort
+
+2. POST /api/contact
+Zweck:
+- Annahme und Verarbeitung des Hauptformulars
+
+Verarbeitet u. a.:
+- Anfrageart
+- Name
+- Telefonnummer
+- E-Mail
+- Rolle
+- Ort oder PLZ
+- Anliegen
+- optionale Rückrufpräferenz
+- Datenschutz-Einwilligung
+
+Aufgaben des Endpunkts:
+- serverseitige Validierung
+- Prüfung auf Pflichtfelder
+- Prüfung der Datenschutz-Einwilligung
+- Erzeugung eines Contact Request Datensatzes
+- Event-Erzeugung
+- Auslösen interner Mailbenachrichtigung
+- Rückgabe eines klaren Erfolgs- oder Fehlerergebnisses
+
+Fehlerfälle:
+- fehlende Pflichtfelder
+- ungültige Eingaben
+- fehlende Datenschutz-Einwilligung
+- technische Verarbeitungsfehler
+
+V1 bewusst nicht vorgesehen
+- öffentliches Login-API
+- Benutzerverwaltung
+- Terminbuchung
+- Matching
+- große Admin-API
+- offene externe API
+- komplexe Drittanbieter-Webhooks
+
+Später mögliche Endpunkte
+Diese Endpunkte sind architektonisch denkbar, aber nicht Teil von v1:
+- POST /api/reminders/run
+- POST /api/integrations/telegram
+- POST /api/integrations/airtable
+- weitere interne Service- oder Worker-Endpunkte
+
+API-Prinzip
+Wenige saubere Endpunkte sind für Belivia 2.0 besser als eine künstlich aufgeblähte API-Landschaft.

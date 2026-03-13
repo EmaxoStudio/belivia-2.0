@@ -1,0 +1,91 @@
+Belivia 2.0 – System Architecture
+
+Projektziel
+Belivia 2.0 ist ein reales Kundenprojekt im Bereich Alltagsbegleitung / Senioren / Angehörige.
+Das System wird bewusst nicht als WordPress-/Plugin-Lösung aufgebaut, sondern als schlanke Custom-Webarchitektur mit klarer Trennung von öffentlicher Website, internen Verwaltungsfunktionen und Infrastrukturzugängen.
+
+Architekturziel
+Die Architektur soll gleichzeitig:
+- professionell und produktionsnah sein
+- sicher und wartungsarm sein
+- für ein reales Kundenprojekt geeignet sein
+- im Portfolio technische Kompetenz sichtbar machen
+- spätere Erweiterungen ermöglichen, ohne in v1 unnötig komplex zu werden
+
+Grundprinzip
+Belivia 2.0 besteht aus vier Hauptschichten:
+
+1. Edge- und Zugriffs-Schicht
+- Cloudflare als DNS-, Proxy- und Edge-Schicht
+- Cloudflare Tunnel für die Veröffentlichung der neuen Website und des internen Admin-Bereichs
+- Cloudflare Access für geschützte interne Webbereiche
+- Tailscale für technischen Adminzugang per SSH
+
+2. Web- und Routing-Schicht
+- Nginx als lokaler Web-Entry Point
+- Trennung zwischen öffentlicher Website und internem Admin-Bereich
+- Reverse Proxy für API- und Admin-Zugriffe
+
+3. Anwendungs-Schicht
+- Statisches Frontend für die öffentliche Website
+- FastAPI als Backend für Formularlogik, Validierung, Mailversand und Event-Logik
+- Separater Admin-/Ops-Bereich für interne Bearbeitung von Anfragen
+
+4. Daten- und Betriebs-Schicht
+- SQLite als v1-Datenbasis
+- systemd für Service-Betrieb
+- getrennte Secrets und Konfigurationsdateien
+- Logging und vorbereitete Backup-Struktur
+
+Öffentliche Website
+Die öffentliche Website ist statisch aufgebaut und dient als ruhige, vertrauenswürdige Kontakt- und Informationsbasis.
+Geplante Seiten:
+- Startseite
+- Leistungen
+- Für Angehörige
+- Über Belivia / Vertrauen
+- FAQ
+- Kontakt
+- Impressum
+- Datenschutz
+
+Backend
+Das Backend basiert auf FastAPI und übernimmt in v1:
+- Health-Check
+- Formularannahme
+- serverseitige Validierung
+- Event-Erzeugung
+- Mailversand
+- Datenhaltung für Kontaktanfragen
+- Basis für spätere Automationen
+
+Admin-/Ops-Bereich
+Zusätzlich zur öffentlichen Website gibt es einen internen Admin-Bereich.
+Dieser Bereich ist nicht öffentlich frei zugänglich und dient der operativen Bearbeitung von Anfragen.
+
+Funktionen in v1:
+- Anfrageübersicht
+- Filter nach Anfrageart und Status
+- Detailansicht
+- internes Notizfeld
+- Statuswechsel
+- Sichtbarkeit von Rückrufwünschen
+- kleine Tagesübersicht
+
+Sicherheitsmodell
+- SSH nur per Key
+- kein Root-Login
+- eigener sudo-User
+- Adminzugang technisch nur über Tailscale
+- interne Webbereiche zusätzlich über Cloudflare Access geschützt
+- FastAPI nicht direkt öffentlich exponiert
+- Secrets getrennt vom Code
+- restriktive Firewall serverseitig
+
+Bau- und Migrationsprinzip
+Die bestehende alte WordPress-Live-Seite bleibt während des Neuaufbaus online.
+Belivia 2.0 wird parallel unter separaten Subdomains aufgebaut und getestet.
+Der Go-Live erfolgt erst am Ende kontrolliert über Cloudflare-Umschaltung.
+
+Zielbild
+Belivia 2.0 ist kein CMS-Projekt, sondern eine kleine, saubere, sichere und portfolio-starke Custom-Webplattform für lokale Leadgenerierung, Vertrauensaufbau und interne Anfragebearbeitung.

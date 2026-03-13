@@ -1,0 +1,89 @@
+Belivia 2.0 – Routing Logic
+
+Ziel
+Diese Datei beschreibt, welche Hostnamen auf welche internen Komponenten zeigen und wie die Requests innerhalb des Systems weitergeleitet werden.
+
+Bauphase
+
+1. Bestehende Live-Seite
+Host:
+- www.belivia-alltagsbegleitung.de
+- belivia-alltagsbegleitung.de
+
+Ziel:
+- bestehende WordPress-Live-Seite
+
+2. Neue Preview-Seite
+Host:
+- new.belivia-alltagsbegleitung.de
+
+Request-Fluss:
+Besucher
+-> Cloudflare
+-> Cloudflare Tunnel
+-> lokaler Public Nginx
+-> statisches Frontend
+
+API-Fluss unter Preview:
+- new.belivia-alltagsbegleitung.de/api/*
+
+Request-Fluss:
+Besucher
+-> Cloudflare
+-> Cloudflare Tunnel
+-> lokaler Public Nginx
+-> Proxy an FastAPI Public/API
+
+3. Admin-Bereich
+Host:
+- admin.belivia-alltagsbegleitung.de
+
+Request-Fluss:
+berechtigter Nutzer
+-> Cloudflare
+-> Cloudflare Access
+-> Cloudflare Tunnel
+-> lokaler Admin Nginx
+-> Proxy an Admin-Anwendung
+
+Go-Live-Phase
+
+1. Neue Hauptseite
+Host:
+- www.belivia-alltagsbegleitung.de
+
+Neuer Fluss:
+Besucher
+-> Cloudflare
+-> Cloudflare Tunnel
+-> lokaler Public Nginx
+-> statisches Frontend oder API-Proxy
+
+2. Apex-Domain
+Host:
+- belivia-alltagsbegleitung.de
+
+Empfehlung:
+- Weiterleitung auf www
+
+Routenstruktur Public
+- / -> statische Startseite
+- /leistungen -> statisch
+- /fuer-angehoerige -> statisch
+- /ueber-belivia -> statisch
+- /faq -> statisch
+- /kontakt -> statisch
+- /impressum -> statisch
+- /datenschutz -> statisch
+- /api/health -> FastAPI
+- /api/contact -> FastAPI
+
+Routenstruktur Admin
+- / -> Admin-Dashboard / Übersicht
+- weitere interne Pfade je nach Admin-App-Struktur
+
+Routingprinzipien
+- keine unnötige Aufteilung auf viele Hostnamen
+- Public und Admin sauber getrennt
+- FastAPI nie direkt öffentlich auf eigenem Port
+- Nginx ist immer der lokale Vermittler zwischen Webanfrage und Anwendung

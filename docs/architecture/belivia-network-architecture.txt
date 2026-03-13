@@ -1,0 +1,89 @@
+Belivia 2.0 – Network Architecture
+
+Ziel
+Die Netzwerkarchitektur von Belivia 2.0 soll den öffentlichen Webzugriff, interne Verwaltungszugriffe und technische Adminzugriffe sauber voneinander trennen.
+
+Grundstruktur
+Es gibt drei Zonen:
+
+1. Öffentliche Zone
+- öffentliche Website
+- öffentliche Kontaktfunktionen
+- öffentliche API-Endpunkte für Formularübermittlung
+
+2. Interne Web-Zone
+- Admin-/Ops-Panel
+- interne Übersichten und Bearbeitungsfunktionen
+- nicht frei öffentlich zugänglich
+
+3. Infrastruktur-/Admin-Zone
+- SSH
+- Systemwartung
+- Deploy
+- Service-Management
+- Logs
+- Konfigurationsverwaltung
+
+Externer Zugriffsfluss – öffentliche Website
+Besucher
+-> Cloudflare DNS / Proxy
+-> Cloudflare Tunnel
+-> lokaler Nginx
+-> statisches Frontend oder Proxy an FastAPI
+
+Externer Zugriffsfluss – Admin-Bereich
+berechtigter Nutzer
+-> Cloudflare
+-> Cloudflare Access
+-> Cloudflare Tunnel
+-> lokaler Nginx für Admin
+-> Admin-Anwendung
+
+Technischer Adminzugriff
+Admin-Gerät
+-> Tailscale-Netz
+-> SSH auf Server
+-> kein öffentlicher SSH-Port als Zielbild
+
+Wichtige Sicherheitsprinzipien
+- Kein Root-SSH
+- SSH nur per Key
+- Adminzugang nicht über öffentliche Webports
+- Backend-Dienste nur lokal erreichbar
+- Cloudflare als vorgelagerte Web-Schicht
+- Tailscale als technischer Zugriffspfad
+- Public und Admin logisch und technisch getrennt
+
+Cloudflare-Rolle
+Cloudflare übernimmt:
+- DNS
+- Proxy/Edge-Schicht
+- Tunnel-Publishing
+- Schutz für interne Webflächen per Access
+- spätere Ergänzung von Rate Limits/WAF möglich
+
+Tailscale-Rolle
+Tailscale übernimmt:
+- sicheren Serverzugang für Administration
+- Entkopplung von SSH vom öffentlichen Internet
+- klaren Betreiberzugriff
+
+Server-Rolle
+Der Hetzner-Server ist der Origin.
+Er hostet:
+- Nginx
+- Frontend-Dateien
+- FastAPI-Backend
+- Admin-Anwendung
+- SQLite-Datenbasis
+- Logging und Betriebskomponenten
+
+Bauphasenlogik
+Während der Bauphase bleibt die alte Live-Seite aktiv.
+Die neue Architektur läuft parallel unter:
+- new.belivia-alltagsbegleitung.de
+- admin.belivia-alltagsbegleitung.de
+
+Go-Live-Prinzip
+Nach Fertigstellung wird die Hauptdomain kontrolliert auf das neue System umgestellt.
+Die alte WordPress-Seite bleibt bis zum sicheren Wechsel unangetastet.

@@ -1,0 +1,67 @@
+Belivia 2.0 – Cloudflare Architecture
+
+Ziel
+Cloudflare ist die vorgelagerte öffentliche Infrastruktur-Schicht für Belivia 2.0.
+Cloudflare übernimmt nicht die eigentliche Anwendung, sondern die DNS-, Edge-, Zugriffs- und Schutzfunktionen vor dem eigentlichen Origin-System auf dem Hetzner-Server.
+
+Rolle von Cloudflare
+Cloudflare wird in Belivia 2.0 eingesetzt für:
+- DNS-Verwaltung
+- Proxy-/Edge-Schicht für öffentliche Webzugriffe
+- Bereitstellung der Tunnel-Ziele
+- Schutz des internen Admin-Bereichs über Cloudflare Access
+- spätere Ergänzung von Rate Limits oder WAF-Regeln bei Bedarf
+- optionale Analytics-Grundlage über Cloudflare Web Analytics
+
+Ausgangslage
+Die Domain belivia-alltagsbegleitung.de ist bereits vorhanden.
+Die Nameserver laufen bereits über Cloudflare.
+Die bestehende alte WordPress-Seite bleibt während der Bauphase online.
+
+Bauphasenlogik
+Cloudflare wird so genutzt, dass während des Neuaufbaus zwei Welten parallel existieren:
+
+1. Bestehende Live-Seite
+- www.belivia-alltagsbegleitung.de
+- belivia-alltagsbegleitung.de
+zeigen zunächst weiterhin auf die alte Website
+
+2. Neue Belivia-2.0-Umgebung
+- new.belivia-alltagsbegleitung.de
+- admin.belivia-alltagsbegleitung.de
+werden über die neue Infrastruktur veröffentlicht
+
+Cloudflare-Ziele
+Cloudflare soll folgende Hostnamen steuern:
+- belivia-alltagsbegleitung.de
+- www.belivia-alltagsbegleitung.de
+- new.belivia-alltagsbegleitung.de
+- admin.belivia-alltagsbegleitung.de
+
+Schutzprinzipien
+Cloudflare ist die äußere Sicherheits- und Veröffentlichungs-Schicht, aber kein Ersatz für die serverseitige Sicherheitsbasis.
+Die eigentliche Serverhärtung bleibt weiterhin über:
+- SSH-Key-only
+- Tailscale
+- UFW
+- lokale Bindings
+- getrennte Dienste
+- getrennte Secrets
+
+Cloudflare Access
+Für den internen Admin-Bereich wird Cloudflare Access vorgesehen.
+Dadurch wird admin.belivia-alltagsbegleitung.de nicht frei öffentlich zugänglich, sondern nur nach vorgeschalteter Zugriffsprüfung erreichbar.
+
+Cloudflare Web Analytics
+Cloudflare Web Analytics ist als datensparsame v1-Analytics-Lösung vorgesehen.
+Die Verwendung ist optional in der ersten Inbetriebnahme, aber architektonisch eingeplant.
+
+Spätere Erweiterungen
+Später kann Cloudflare zusätzlich genutzt werden für:
+- Rate Limiting auf Formularpfade
+- WAF-Regeln
+- weitere geschützte interne Webflächen
+- Staging-Hostnamen, falls nötig
+
+Grundprinzip
+Cloudflare ist bei Belivia 2.0 die vorgelagerte Edge-Schicht, während die Anwendungslogik vollständig auf dem eigenen Hetzner-Origin läuft.

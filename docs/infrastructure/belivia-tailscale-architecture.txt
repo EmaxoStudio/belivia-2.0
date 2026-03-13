@@ -1,0 +1,50 @@
+Belivia 2.0 – Tailscale Architecture
+
+Ziel
+Tailscale wird verwendet, um den technischen Adminzugang zum Server sicher und vom öffentlichen Webzugriff getrennt umzusetzen.
+
+Grundprinzip
+Der öffentliche Zugriff auf Belivia 2.0 erfolgt über Cloudflare und Cloudflare Tunnel.
+Der technische Betreiberzugriff erfolgt dagegen nicht über öffentliche SSH-Freigabe, sondern über das private Tailscale-Netz.
+
+Rolle von Tailscale
+Tailscale übernimmt:
+- sicheren Zugriff auf den Server für Administration
+- private Erreichbarkeit des Servers
+- Entkopplung von SSH vom öffentlichen Internet
+- Notfall- und Wartungszugänge
+
+Geplante Nutzung
+Der Hetzner-Server wird Mitglied im Tailscale-Netz.
+Der primäre Admin-Zugriff erfolgt von:
+- dem verschlüsselten Ubuntu-Laptop als Hauptgerät
+- optional weiteren explizit zugelassenen Geräten
+
+Kein öffentliches SSH als Zielbild
+Das angestrebte Sicherheitsziel ist:
+- kein dauerhaft offener öffentlicher SSH-Port
+- SSH nur über Tailscale
+- Authentifizierung nur per SSH-Key
+- kein Root-Login
+
+Bedeutung für den Betrieb
+Tailscale ermöglicht:
+- sicheres Administrieren von überall
+- klare Trennung zwischen Website-Verkehr und Wartungszugriff
+- sauberes Sicherheitskonzept für ein produktives Projekt
+
+Abgrenzung zu Cloudflare
+Cloudflare und Tailscale erfüllen unterschiedliche Aufgaben:
+
+Cloudflare:
+- öffentliche Website
+- Tunnel
+- Access für interne Webflächen
+
+Tailscale:
+- technischer SSH-/Adminzugang
+- private Servererreichbarkeit
+- kein Einsatz für öffentliche Webauslieferung
+
+Portfolio-Relevanz
+Die Kombination aus Cloudflare für die Webkante und Tailscale für den Adminzugang ist ein modernes und nachvollziehbares Zugriffskonzept und stärkt die technische Aussagekraft des Projekts.

@@ -1,0 +1,85 @@
+Belivia 2.0 – Deployment Strategy
+
+Ziel
+Diese Datei beschreibt die grundlegende Deploy- und Inbetriebnahmestrategie für Belivia 2.0.
+
+Grundprinzip
+Belivia 2.0 wird nicht direkt auf der bestehenden Live-Seite aufgebaut.
+Die neue Version wird parallel auf einer eigenen Infrastruktur erstellt, getestet und erst am Ende kontrolliert live geschaltet.
+
+Wichtige Ausgangslage
+- die bestehende WordPress-Seite bleibt während der Entwicklung online
+- die Domain läuft bereits über Cloudflare
+- Belivia 2.0 wird parallel aufgebaut
+- Ziel ist ein kontrollierter Wechsel statt Live-Bastelei
+
+Deploy-Phasen
+
+1. Infrastruktur-Basis
+- erster SSH-Zugang
+- Updates
+- Admin-User
+- SSH-Härtung
+- Tailscale
+- UFW
+- Basisstruktur auf dem Server
+- Cloudflare Tunnel
+- Nginx-Basis
+- systemd-Basis
+
+2. Anwendungs-Basis
+- Projektordner anlegen
+- Frontend-Struktur bereitstellen
+- FastAPI-Grundstruktur bereitstellen
+- Admin-Anwendung-Grundstruktur bereitstellen
+- SQLite vorbereiten
+- Env- und Secret-Struktur vorbereiten
+
+3. Funktionale Inbetriebnahme
+- Health-Endpoint prüfen
+- Formularverarbeitung aufbauen
+- Mailversand testen
+- Admin-Bereich Grundfunktionen aktivieren
+- Logging prüfen
+
+4. Preview-/Bauphase
+- neue Seite unter new.belivia-alltagsbegleitung.de erreichbar
+- Admin-Bereich unter admin.belivia-alltagsbegleitung.de erreichbar
+- Inhalte, Formular, Mail und Admin-Funktionen werden iterativ fertiggestellt
+
+5. Go-Live
+- finaler Test
+- Cloudflare-Umschaltung der Hauptdomain
+- neue Seite wird zum Hauptsystem
+- alte WordPress-Seite bleibt kurzzeitig als Fallback verfügbar
+
+Deploy-Prinzipien
+- read-only zuerst
+- Änderungen kontrolliert und nachvollziehbar
+- keine unnötigen Direktänderungen ohne Prüfungen
+- kleine, robuste Deploy-Schritte statt schwer nachvollziehbarer Komplettaktionen
+- Services über systemd statt über manuelle Dauerprozesse
+
+Frontend-Deploy-Idee
+Das Frontend soll in einer klaren Release-Struktur liegen:
+- /srv/belivia/frontend/releases/
+- /srv/belivia/frontend/current/
+
+Dadurch bleiben Releases nachvollziehbar und austauschbar.
+
+Backend-Deploy-Idee
+Backend und Admin-Anwendung liegen getrennt unter:
+- /srv/belivia/backend/
+- /srv/belivia/admin/
+
+Deploys erfolgen bewusst strukturiert und nicht vermischt mit Daten oder Secrets.
+
+Wichtige Betriebsprinzipien
+- Secrets nicht im Code
+- Logs getrennt
+- SQLite getrennt
+- Konfigurationen nachvollziehbar
+- Dienste systemseitig betrieben
+
+Architekturvorteil
+Die Deployment-Strategie zeigt, dass Belivia 2.0 als produktives Rebuild-Projekt gedacht ist und nicht als direktes Live-Experiment.

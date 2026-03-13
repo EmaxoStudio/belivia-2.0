@@ -1,0 +1,70 @@
+Belivia 2.0 – Nginx Architecture
+
+Ziel
+Nginx ist die lokale Web- und Routing-Schicht auf dem Hetzner-Server.
+Nginx trennt die öffentliche Preview-/Website-Fläche vom internen Admin-Bereich und vermittelt Requests an die passenden lokalen Dienste.
+
+Grundprinzip
+Es gibt zwei logisch getrennte Nginx-Ziele:
+
+1. Public Nginx
+- für die öffentliche Belivia-2.0-Seite
+- lokaler Zielport: 127.0.0.1:8080
+
+2. Admin Nginx
+- für den internen Admin-/Ops-Bereich
+- lokaler Zielport: 127.0.0.1:8081
+
+Public Nginx – Aufgaben
+- Auslieferung des statischen Frontends
+- Reverse Proxy für /api/* an FastAPI
+- saubere Trennung zwischen statischen Seiten und API-Aufrufen
+
+Geplante Host-Zuordnung:
+- new.belivia-alltagsbegleitung.de während der Bauphase
+- später www.belivia-alltagsbegleitung.de nach Go-Live
+
+Geplante Routing-Logik:
+- / -> statisches Frontend
+- /leistungen -> statisch
+- /fuer-angehoerige -> statisch
+- /ueber-belivia -> statisch
+- /faq -> statisch
+- /kontakt -> statisch
+- /impressum -> statisch
+- /datenschutz -> statisch
+- /api/health -> Proxy an FastAPI
+- /api/contact -> Proxy an FastAPI
+
+Admin Nginx – Aufgaben
+- Weiterleitung der Admin-Domain an die interne Admin-Anwendung
+- Trennung vom Public-Webfluss
+- zusätzlicher Schutz durch vorgeschalteten Cloudflare Access
+
+Geplante Host-Zuordnung:
+- admin.belivia-alltagsbegleitung.de
+
+Geplantes lokales Ziel:
+- Proxy an 127.0.0.1:8100
+
+FastAPI-Ziel
+FastAPI Public/API läuft lokal auf:
+- 127.0.0.1:8000
+
+Admin-App-Ziel
+Admin-Anwendung läuft lokal auf:
+- 127.0.0.1:8100
+
+Bedeutung von Nginx
+Nginx ist die lokale Vermittlungsinstanz zwischen Tunnel-Endpunkt und Anwendung.
+Keine Anwendung wird direkt öffentlich auf ihrem eigenen Port veröffentlicht.
+
+Architekturvorteile
+- saubere Trennung von Public und Admin
+- zentrale Routinglogik
+- bessere Wartbarkeit
+- bessere Sicherheitsklarheit
+- klare Dokumentierbarkeit
+
+Betrieb
+Nginx ist ein zentraler Infrastrukturbaustein und wird systemseitig betrieben.

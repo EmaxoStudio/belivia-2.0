@@ -1,0 +1,135 @@
+Belivia 2.0 – Component Architecture
+
+Ziel
+Diese Datei beschreibt die zentralen technischen Komponenten des Systems und ihre Aufgaben.
+
+1. Cloudflare
+Aufgabe:
+- DNS-Verwaltung
+- Edge-/Proxy-Schicht
+- Tunnel-Endpunkt
+- Schutz und Zugangskontrolle für interne Webbereiche
+
+Bedeutung:
+Cloudflare bildet die öffentliche Eintrittsschicht für Website und interne Weboberflächen.
+
+2. cloudflared
+Aufgabe:
+- Aufbau des Cloudflare Tunnels vom Server aus
+- sichere Veröffentlichung der lokalen Dienste ohne klassische direkte öffentliche Exponierung
+
+Bedeutung:
+cloudflared verbindet Cloudflare mit dem lokalen Nginx auf dem Server.
+
+3. Nginx Public
+Aufgabe:
+- Auslieferung des statischen Frontends
+- Reverse Proxy für öffentliche API-Anfragen
+
+Geplanter lokaler Zielport:
+- 127.0.0.1:8080
+
+Bedeutung:
+Nginx Public ist der lokale Entry Point für die öffentliche Belivia-2.0-Seite.
+
+4. Nginx Admin
+Aufgabe:
+- Weiterleitung an die interne Admin-Anwendung
+- Trennung vom Public-Webfluss
+
+Geplanter lokaler Zielport:
+- 127.0.0.1:8081
+
+Bedeutung:
+Nginx Admin kapselt den internen Verwaltungsbereich und trennt ihn logisch von der öffentlichen Seite.
+
+5. Frontend
+Aufgabe:
+- öffentliche Website
+- Informations- und Vertrauensaufbau
+- Kontaktseite und CTA-Struktur
+
+Technik:
+- statisches HTML
+- CSS
+- wenig JavaScript
+
+Bedeutung:
+Das Frontend ist bewusst schlank, schnell und wartungsarm.
+
+6. FastAPI Public/API
+Aufgabe:
+- Health Endpoint
+- Kontaktformular-Verarbeitung
+- serverseitige Validierung
+- Event-Erzeugung
+- Mailversand
+- Zugriff auf SQLite
+
+Geplanter lokaler Port:
+- 127.0.0.1:8000
+
+Bedeutung:
+FastAPI bildet den Kern der Geschäftslogik für v1.
+
+7. Admin-Anwendung
+Aufgabe:
+- interne Anfrageübersicht
+- Statuswechsel
+- Notizen
+- Filter
+- Tagesübersicht
+
+Geplanter lokaler Port:
+- 127.0.0.1:8100
+
+Bedeutung:
+Die Admin-Anwendung macht aus der Website ein kleines operatives System.
+
+8. SQLite
+Aufgabe:
+- Speicherung von Kontaktanfragen
+- Status
+- interne Notizen
+- Events
+- spätere Reminder-Vorbereitung
+
+Bedeutung:
+SQLite ist die bewusst schlanke v1-Datenbasis.
+
+9. systemd
+Aufgabe:
+- Betrieb der Anwendungen als Dienste
+- Neustarts
+- Service-Management
+- Integration von Umgebungsdateien
+
+Geplante Services:
+- belivia-api.service
+- belivia-admin.service
+- cloudflared.service
+
+10. Tailscale
+Aufgabe:
+- sicherer technischer Zugriff
+- SSH-Verbindungen außerhalb des öffentlichen Webpfads
+
+11. Mail-Komponente
+Aufgabe:
+- Versand interner Benachrichtigungen
+- priorisierte Rückrufwunsch-Mails
+- spätere Erweiterung auf zusätzliche Benachrichtigungen
+
+Bedeutung:
+Mail ist integraler Teil des Geschäftsprozesses.
+
+12. Logging und Backup-Basis
+Aufgabe:
+- Nachvollziehbarkeit
+- Fehleranalyse
+- spätere Wiederherstellung
+- vorbereitete Backup-Strategie
+
+Gesamtlogik
+Belivia 2.0 ist als modulare, aber bewusst kleine Systemarchitektur aufgebaut.
+Jede Komponente hat eine klare Rolle, ohne unnötige Überlagerung oder Plugin-Abhängigkeit.

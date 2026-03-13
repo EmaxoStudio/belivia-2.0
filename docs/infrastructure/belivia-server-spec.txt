@@ -1,0 +1,66 @@
+Belivia 2.0 – Server Specification
+
+Ziel
+Diese Datei dokumentiert die gewählte Serverbasis für Belivia 2.0.
+
+Gewählte Plattform
+- Hetzner Cloud Server
+
+Servername
+- belivia-prod-01
+
+Servertyp
+- CCX13
+
+Linie
+- Dedicated / AMD
+
+Standort
+- Deutschland / NBG1
+
+Betriebssystem
+- Ubuntu 24.04 LTS
+
+Öffentliche IP
+- IPv4 aktiv
+
+Zugriffsart
+- SSH-Key eingerichtet und verwendet
+
+Nicht verwendet
+- kein WordPress
+- keine App-Vorinstallation
+- kein zusätzliches Volume
+- keine Platzierungsgruppe
+- keine Cloud-Config
+- keine initialen Labels
+
+Backup-Entscheidung
+- Hetzner-Backups im Panel wurden nicht aktiviert
+- geplant ist eine eigene serverseitige Backup-Strategie
+- zusätzlich sind manuelle Snapshots bei wichtigen Meilensteinen sinnvoll
+
+Firewall-Entscheidung
+- keine Hetzner-Panel-Firewall vorab eingerichtet
+- serverseitige Sicherheitsbasis wird bewusst direkt auf Ubuntu aufgebaut
+- UFW soll nach dem ersten Login sauber umgesetzt werden
+
+Warum diese Serverwahl
+Der Server wurde nicht auf knappes v1-Minimum optimiert, sondern so gewählt, dass er den geplanten Zielzustand von Belivia 2.0 ohne frühen Ressourcenwechsel tragen kann.
+
+Der Server soll ausreichend Reserve bieten für:
+- statisches Frontend
+- FastAPI
+- SQLite in v1
+- internes Admin-/Ops-Panel
+- Cloudflare Tunnel
+- Tailscale
+- Mailversand
+- Logging
+- spätere Reminder-/Worker-Logik
+- spätere Telegram-/WhatsApp-/Airtable-Anbindung
+- zusätzliche kleinere interne Tools
+
+Architekturprinzip
+Ein produktiver Hauptserver reicht für Belivia 2.0 v1 und den geplanten frühen Ausbau aus.
+Es wird bewusst kein unnötig verteiltes Setup mit mehreren Maschinen aufgebaut.

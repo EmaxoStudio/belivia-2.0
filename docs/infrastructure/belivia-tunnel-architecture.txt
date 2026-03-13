@@ -1,0 +1,65 @@
+Belivia 2.0 – Tunnel Architecture
+
+Ziel
+Cloudflare Tunnel wird verwendet, um die neue Belivia-2.0-Umgebung sicher zu veröffentlichen, ohne die lokalen Webdienste klassisch direkt öffentlich zu exponieren.
+
+Grundprinzip
+Auf dem Hetzner-Server läuft cloudflared.
+Dieser Dienst baut eine ausgehende Verbindung zu Cloudflare auf.
+Cloudflare leitet Anfragen für definierte Hostnamen über diesen Tunnel an lokale Ziele auf dem Server weiter.
+
+Vorteile dieser Architektur
+- keine klassische direkte Veröffentlichung der lokalen App-Ports
+- saubere Trennung zwischen Cloudflare und Origin
+- kontrollierte Veröffentlichung einzelner Hostnamen
+- gute Grundlage für den Parallelaufbau während die alte Seite noch online bleibt
+
+Veröffentlichte Hostnamen in der Bauphase
+- new.belivia-alltagsbegleitung.de
+- admin.belivia-alltagsbegleitung.de
+
+Veröffentlichte Ziele
+1. new.belivia-alltagsbegleitung.de
+-> lokaler Public Nginx
+-> 127.0.0.1:8080
+
+2. admin.belivia-alltagsbegleitung.de
+-> lokaler Admin Nginx
+-> 127.0.0.1:8081
+
+Lokale Zielstruktur
+cloudflared stellt keine eigene Geschäftslogik bereit.
+cloudflared verbindet nur Cloudflare mit den lokalen Nginx-Zielen.
+
+Fluss Preview-Seite
+Besucher
+-> Cloudflare
+-> Cloudflare Tunnel
+-> cloudflared auf dem Server
+-> lokaler Public Nginx auf 127.0.0.1:8080
+-> statisches Frontend oder Proxy zu FastAPI
+
+Fluss Admin-Bereich
+berechtigter Nutzer
+-> Cloudflare
+-> Cloudflare Access
+-> Cloudflare Tunnel
+-> cloudflared
+-> lokaler Admin Nginx auf 127.0.0.1:8081
+-> Admin-Anwendung
+
+Go-Live-Prinzip
+Nach Fertigstellung kann der Tunnel auch für die Hauptdomain genutzt werden, indem www.belivia-alltagsbegleitung.de und ggf. belivia-alltagsbegleitung.de auf das neue System umgelegt werden.
+
+Betriebsprinzip
+cloudflared läuft als systemd-Service.
+Der Tunnel ist damit ein fester Bestandteil der Infrastruktur und kein manueller Einzelprozess.
+
+Abgrenzung
+Cloudflare Tunnel ersetzt nicht:
+- Tailscale
+- SSH
+- UFW
+- lokale Sicherheitsmaßnahmen
+
+Cloudflare Tunnel ist nur die Veröffentlichungs-Schicht für HTTP/HTTPS-basierte Webdienste.

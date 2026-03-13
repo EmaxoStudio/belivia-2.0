@@ -1,0 +1,112 @@
+Belivia 2.0 – Data Models
+
+Ziel
+Diese Datei beschreibt die fachlichen Datenmodelle für Belivia 2.0 v1.
+
+Grundprinzip
+Die Datenbasis in v1 soll klein, klar und geschäftlich sinnvoll bleiben.
+Die Modelle werden so gewählt, dass:
+- das Kontaktformular sauber verarbeitet werden kann
+- der Admin-Bereich sinnvoll arbeiten kann
+- spätere Erweiterungen möglich sind
+- keine unnötige Datenkomplexität entsteht
+
+V1-Datenbasis
+- SQLite
+- zentrale Datenbankdatei:
+  /srv/belivia/data/sqlite/belivia.db
+
+1. Modell: Contact Request
+
+Beschreibung
+Ein Contact Request repräsentiert eine eingegangene Anfrage über das öffentliche Hauptformular.
+
+Zweck
+- zentrale Erfassung von Kontaktanfragen
+- Grundlage für Admin-Bearbeitung
+- Grundlage für Statuslogik
+- Ausgangspunkt für Mail- und Event-Logik
+
+Vorgesehene Felder
+- id
+- created_at
+- request_type
+- name
+- phone
+- email
+- role
+- location
+- message
+- callback_preference
+- privacy_accepted
+- status
+- internal_note
+
+Bedeutung ausgewählter Felder
+request_type:
+- allgemeine Anfrage
+- Rückrufwunsch
+
+status:
+- neu
+- in Bearbeitung
+- erledigt
+
+privacy_accepted:
+- dokumentiert die Einwilligung für die Formularverarbeitung
+
+internal_note:
+- internes Freitextfeld für Bearbeitungshinweise im Admin-Bereich
+
+2. Modell: Event
+
+Beschreibung
+Ein Event dokumentiert geschäftsrelevante Vorgänge rund um eine Anfrage.
+
+Zweck
+- Nachvollziehbarkeit
+- Grundlage für spätere Automationen
+- technische und fachliche Historie
+- Trennung zwischen Hauptdatensatz und Prozessereignissen
+
+Vorgesehene Felder
+- id
+- created_at
+- event_type
+- request_id
+- payload_json
+
+Typische v1-Events
+- contact_submitted
+- callback_requested
+- notification_sent
+- validation_failed
+
+3. Modell: Reminder (vorbereitet, nicht zwingend produktiv in v1)
+
+Beschreibung
+Ein Reminder repräsentiert einen zukünftigen Hinweis oder eine geplante Aktion.
+
+Zweck
+- spätere Reminder- und Automationslogik
+- optionale Follow-up-Prozesse
+- Grundlage für interne oder externe Benachrichtigungen
+
+Vorgesehene Felder
+- id
+- request_id
+- due_at
+- channel
+- status
+
+Mögliche Kanäle
+- mail
+- telegram
+- whatsapp
+
+V1-Entscheidung
+Das Reminder-Modell wird logisch mitgedacht, muss aber in v1 nicht zwingend schon aktiv produktiv verwendet werden.
+
+Modellprinzip
+Belivia 2.0 startet mit wenigen, fachlich klaren Kernmodellen.
+So bleibt die Datenbasis verständlich, robust und erweiterbar.

@@ -1,0 +1,102 @@
+Belivia 2.0 – Growth Strategy
+
+Ziel
+Diese Datei beschreibt die Growth- und Sichtbarkeitsstrategie für Belivia 2.0.
+
+Grundprinzip
+Belivia 2.0 soll nicht nur eine schöne und technisch saubere Website sein, sondern auch als Grundlage für reale Neukundengewinnung dienen.
+Growth wird dabei nicht als aggressive Marketingmaschine verstanden, sondern als sinnvolle Kombination aus lokaler Sichtbarkeit, Vertrauen und sauberer Conversion-Struktur.
+
+Growth-Ziele
+Belivia 2.0 soll:
+- lokal sichtbar werden
+- Vertrauen bei Interessenten und Angehörigen aufbauen
+- echte Kontaktanfragen erzeugen
+- später gezielt mit Werbung unterstützt werden können
+- technisch und strategisch im Portfolio zeigen, dass Webentwicklung, Conversion und Nachfrage zusammengedacht wurden
+
+Grundsäulen der Growth-Strategie
+
+1. Starke lokale Vertrauenswebsite
+Die Website selbst ist der erste Growth-Baustein.
+Sie soll:
+- hochwertig wirken
+- verständlich sein
+- Kontakt leicht machen
+- Vertrauen aufbauen
+- Suchmaschinen und Nutzer gleichzeitig bedienen
+
+2. SEO-Grundlage
+Die Seite wird technisch und inhaltlich so aufgebaut, dass sie lokal auffindbar sein kann.
+Dazu gehören:
+- klare Seitenstruktur
+- Meta-Daten
+- semantisches HTML
+- lokale Relevanz
+- Search Console Vorbereitung
+- strukturierte Daten
+
+3. Google Business Profile
+Belivia 2.0 soll auf Google Business Profile vorbereitet sein.
+Das Profil ist für lokale Dienstleistungsangebote ein wichtiger Growth-Baustein.
+Es ergänzt Website und lokale Suchsichtbarkeit.
+
+4. Google Ads Search
+Google Ads Search ist als später wichtiger bezahlter Nachfragekanal vorgesehen.
+Begründung:
+- hohe Suchintention
+- lokale Dienstleistungsrelevanz
+- klare Lead-Ausrichtung
+- bessere Eignung als breit gestreute Werbeformate zum Start
+
+5. Conversion-Struktur
+Growth funktioniert nur, wenn die Website klare Umwandlungspunkte hat.
+
+Wichtige Conversion-Punkte:
+- Telefonnummer
+- Kontaktformular
+- Rückrufwunsch
+- klare Kontaktseite
+- vertrauensstarke CTA-Struktur
+
+Growth-Prinzipien
+- lokale Relevanz vor Reichweitenphantasie
+- Vertrauen vor Werbedruck
+- klare Conversion vor unnötiger Komplexität
+- kleine saubere Schritte statt Marketing-Overkill
+- technische Vorbereitung von Anfang an mitdenken
+
+Was in v1 vorbereitet sein soll
+- SEO-Basis
+- klare Kontakt- und Conversion-Struktur
+- Analytics-Grundlage
+- Search Console Vorbereitung
+- Google Ads Search technische Anschlussfähigkeit
+- Google Business Profile Mitdenken
+- Grundlage für spätere Conversion-Messung
+
+Was nicht in v1 Pflicht ist
+- Performance Max als Startkanal
+- große Multi-Channel-Kampagnen
+- aggressive Funnel-Logik
+- komplexe Marketing-Automationen
+- künstlich aufgeblasene SEO-Landingpage-Masse
+
+Spätere Growth-Erweiterungen
+Nach v1 oder nach dem Go-Live sinnvoll:
+- Google Business Profile aktiv pflegen
+- Google Ads Search live schalten
+- Conversion-Messung verfeinern
+- lokale Content- oder Landingpage-Erweiterungen
+- evtl. weitere lokale Nachfragebausteine
+
+Portfolio-Wirkung
+Belivia 2.0 soll später zeigen, dass das Projekt nicht nur technisch gebaut wurde, sondern auch:
+- suchbar
+- anfragefähig
+- conversion-orientiert
+- geschäftlich nutzbar
+gedacht und umgesetzt wurde.
+
+Zielbild
+Belivia 2.0 wächst von einer hochwertigen lokalen Website zu einem sichtbaren, vertrauenswürdigen und geschäftlich nutzbaren Lead-System.

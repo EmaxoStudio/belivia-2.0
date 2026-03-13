@@ -1,0 +1,103 @@
+Belivia 2.0 – Case Study
+
+Ausgangssituation
+
+Der Kunde verfügte bereits über eine einfache Website.
+Diese war jedoch schnell aufgebaut worden und erfüllte weder gestalterisch noch technisch die Anforderungen eines langfristig stabilen Webauftritts.
+
+Probleme der ursprünglichen Lösung:
+
+- geringe Vertrauenswirkung
+- eingeschränkte Struktur
+- technische Limitierungen
+- fehlende Erweiterbarkeit
+- keine klare Backendlogik
+
+Ziel des Projekts
+
+Der Auftrag war ein vollständiger Rebuild der Website mit folgenden Zielen:
+
+- vertrauenswürdiger Webauftritt
+- klare Kommunikation für Senioren und Angehörige
+- einfache Kontaktaufnahme
+- technische Stabilität
+- Erweiterbarkeit für spätere Automationen
+
+Projektstrategie
+
+Statt das bestehende System weiter auszubauen, wurde entschieden, die Website komplett neu aufzubauen.
+
+Wichtige strategische Entscheidungen:
+
+- kein klassisches CMS
+- statisches Frontend
+- eigenes Backend
+- eigene Infrastruktur
+- klare Trennung zwischen Frontend, Backend und Betrieb
+
+Technische Umsetzung
+
+Frontend
+
+Die öffentliche Website wurde als statisches System aufgebaut.
+Dadurch entstehen Vorteile bei:
+
+- Performance
+- Wartbarkeit
+- Sicherheit
+
+Backend
+
+Das Backend wurde mit FastAPI umgesetzt und übernimmt:
+
+- Formularverarbeitung
+- Datenvalidierung
+- Anfrageverwaltung
+- Event-System
+- Mailbenachrichtigungen
+
+Admin-Bereich
+
+Ein internes Admin-/Ops-Panel ermöglicht:
+
+- Übersicht über eingehende Anfragen
+- Statusverwaltung
+- interne Notizen
+- einfache Prozesssteuerung
+
+Infrastruktur
+
+Die Infrastruktur basiert auf:
+
+- Hetzner Cloud Server
+- Ubuntu 24.04 LTS
+- Nginx
+- Cloudflare DNS und Edge
+- Cloudflare Tunnel
+- Tailscale für sicheren SSH-Zugriff
+- UFW Firewall
+- systemd Service-Struktur
+
+Besondere Herausforderungen
+
+- Aufbau einer vertrauenswürdigen Website für eine ältere Zielgruppe
+- Balance zwischen technischer Architektur und einfacher Nutzung
+- Entwicklung einer Infrastruktur, die sowohl stabil als auch erweiterbar ist
+- Integration von Growth- und SEO-Grundlagen
+
+Ergebnis
+
+Belivia 2.0 ist eine performante und wartungsarme Website mit eigener Backendstruktur.
+
+Das System ermöglicht:
+
+- einfache Kontaktaufnahme
+- interne Bearbeitung von Anfragen
+- sichere Infrastruktur
+- klare Erweiterungsmöglichkeiten
+
+Lessons Learned
+
+Das Projekt zeigt, dass auch kleinere Dienstleistungswebsites von einer klaren Architektur profitieren.
+
+Durch die Kombination aus statischem Frontend, API-Backend und moderner Infrastruktur entsteht eine Lösung, die langfristig stabil und flexibel bleibt.

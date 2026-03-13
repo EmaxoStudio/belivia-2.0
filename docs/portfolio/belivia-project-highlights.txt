@@ -1,0 +1,102 @@
+Belivia 2.0 – Project Highlights
+
+Dieses Projekt zeigt mehrere technische und konzeptionelle Kompetenzen.
+
+Systemarchitektur
+
+Belivia 2.0 wurde nicht als klassisches CMS-Projekt umgesetzt, sondern als eigene Architektur mit klar getrennten Systemkomponenten.
+
+Die Architektur kombiniert:
+
+- statisches Frontend
+- API-Backend
+- internes Admin-System
+- moderne Serverinfrastruktur
+
+Backendentwicklung
+
+Das Backend basiert auf Python und FastAPI.
+
+Es übernimmt:
+
+- Formularverarbeitung
+- serverseitige Validierung
+- Datenpersistenz
+- Event-Erfassung
+- interne Benachrichtigungen
+
+API-Struktur
+
+Die API wurde bewusst klein und fokussiert gehalten.
+
+Sie enthält:
+
+- Health-Endpunkt
+- Formularverarbeitung
+- Event-System
+- Grundlage für spätere Erweiterungen
+
+Serverinfrastruktur
+
+Das Projekt wurde auf einem eigenen Cloudserver aufgebaut.
+
+Technologien:
+
+- Ubuntu Server
+- Nginx Reverse Proxy
+- systemd Service-Struktur
+- SQLite Datenbank
+
+Sicherheitskonzept
+
+Die Infrastruktur verwendet mehrere Sicherheitsmechanismen:
+
+- SSH-Key-only Zugriff
+- kein Root-Login
+- UFW Firewall
+- Cloudflare Edge
+- Cloudflare Tunnel
+- Tailscale für Adminzugriff
+
+Deployment
+
+Das Projekt wird kontrolliert deployed.
+
+Strategie:
+
+- paralleler Neuaufbau
+- Preview-Domain
+- kontrollierter Go-Live
+
+SEO und Growth
+
+Die Website wurde mit klarer SEO-Struktur aufgebaut.
+
+Enthalten sind:
+
+- semantisches HTML
+- klare Seitenstruktur
+- Meta-Daten
+- strukturierte Daten
+- Search Console Vorbereitung
+
+Growth-Vorbereitung
+
+Die Website ist vorbereitet für:
+
+- Google Business Profile
+- Google Ads Search
+- Conversion-orientierte Kontaktpunkte
+
+Portfolio-Relevanz
+
+Belivia 2.0 zeigt Fähigkeiten in mehreren Bereichen:
+
+- Webarchitektur
+- Backendentwicklung
+- Serverbetrieb
+- Sicherheitskonzepte
+- SEO-Grundlagen
+- reale Kundenprojekte
+
+Das Projekt verbindet technische Umsetzung mit realer Geschäftsnutzung.

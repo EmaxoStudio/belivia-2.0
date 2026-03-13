@@ -1,0 +1,148 @@
+Belivia 2.0 – V1 Scope
+
+Ziel
+Diese Datei definiert den verbindlichen v1-Umfang von Belivia 2.0.
+
+Grundprinzip
+Belivia 2.0 v1 ist keine Plattform und kein komplexes Portal.
+V1 ist bewusst als hochwertige, vertrauenswürdige Kontakt- und Informationsbasis mit eigener kleiner Backend- und Ops-Struktur definiert.
+
+V1-Ziele
+Belivia 2.0 v1 soll:
+- professionell und vertrauenswürdig wirken
+- Senioren und Angehörigen Orientierung geben
+- persönliche Kontaktaufnahme einfach machen
+- technisch sauber, sicher und wartungsarm sein
+- als starkes Portfolio-Projekt dienen
+- auf spätere Erweiterungen vorbereitet sein, ohne v1 zu überladen
+
+V1 ist
+- eine hochwertige Website
+- ein kleines Anfrage- und Kontakt-System
+- ein kleines internes Ops-System
+- eine saubere Sicherheits- und Betriebsbasis
+- eine SEO-/Growth-vorbereitete Webpräsenz
+
+V1 ist nicht
+- kein Kundenportal
+- kein Login-System für Endkunden
+- keine Terminbuchungsplattform
+- kein Matching-System
+- kein Chatbot
+- kein medizinisches Intake-System
+- kein großes CRM
+- keine komplexe Multi-User-Software
+
+Öffentliche Website in v1
+Öffentliche Seiten:
+- Startseite
+- Leistungen
+- Für Angehörige
+- Über Belivia / Vertrauen
+- FAQ
+- Kontakt
+- Impressum
+- Datenschutz
+
+Anforderungen an die Website:
+- ruhige, hochwertige Gestaltung
+- hohe Lesbarkeit
+- verständliche Sprache
+- vertrauensstarke Struktur
+- mobil gut nutzbar
+- klare Kontaktmöglichkeiten
+- Fokus auf Telefon und Rückrufwunsch
+- semantisches HTML
+- gute Performance
+
+Kontaktlogik in v1
+Es gibt genau ein Hauptformular mit folgenden Feldern:
+- Anfrageart
+- Name
+- Telefonnummer
+- E-Mail
+- Rolle
+- Ort oder PLZ
+- Anliegen
+- optionale Rückrufpräferenz
+- Datenschutz-Einwilligung
+
+Anfragearten:
+- allgemeine Anfrage
+- Rückrufwunsch
+
+Formularprinzipien:
+- klar
+- nicht überladen
+- keine sensiblen Gesundheitsdaten
+- serverseitige Validierung
+- klare Fehler- und Erfolgsmeldungen
+
+Backend in v1
+Das Backend übernimmt in v1:
+- Health-Check
+- Formularverarbeitung
+- serverseitige Validierung
+- Speicherung von Anfragen
+- Event-Erzeugung
+- Mailversand
+- Basis für spätere Erweiterungen
+
+Admin-/Ops-Bereich in v1
+Der interne Bereich enthält:
+- Anfrageübersicht
+- Filter nach Anfrageart
+- Filter nach Status
+- Detailansicht
+- internes Notizfeld
+- Statuswechsel
+- Sichtbarkeit von Rückrufwünschen
+- kleine Tagesübersicht
+
+Statuswerte in v1:
+- neu
+- in Bearbeitung
+- erledigt
+
+Datenbasis in v1
+- SQLite
+- Contact Request
+- Event
+- Reminder-Struktur nur logisch vorbereitet
+
+Sicherheit in v1
+- SSH nur per Key
+- kein Root-Login
+- Tailscale für Adminzugang
+- UFW
+- Cloudflare Tunnel
+- Cloudflare Access für Admin-Bereich
+- lokale Bindings für App-Dienste
+- Secrets getrennt vom Code
+
+SEO und Growth in v1
+V1 enthält:
+- saubere URL-Struktur
+- Meta Titles
+- Meta Descriptions
+- semantisches HTML
+- Sitemap
+- robots.txt
+- strukturierte Daten
+- Google Search Console Vorbereitung
+- Cloudflare Web Analytics als mögliche Basis
+- klare Conversion-Punkte für spätere Google Ads Search Nutzung
+
+Was bewusst nicht in v1 enthalten ist
+- WhatsApp live
+- Telegram live
+- Airtable live als Pflichtbestandteil
+- Reminder live
+- komplexe Automationen
+- großer Analytics-Stack
+- Performance-Max-Setups
+- mehrstufige Rollen- und Rechteverwaltung
+- zusätzliche große interne Tools
+
+Qualitätsanspruch
+V1 soll nicht wie ein Zwischenstand wirken, sondern wie ein fertiges, professionelles Kernsystem mit klarer Ausbaubarkeit.

@@ -1,0 +1,77 @@
+Belivia 2.0 – Backup Strategy
+
+Ziel
+Diese Datei beschreibt die geplante Backup-Strategie für Belivia 2.0.
+
+Grundprinzip
+Belivia 2.0 soll nicht nur technisch sauber laufen, sondern auch in einer Weise betrieben werden, die Wiederherstellung und Sicherheit bei Fehlern, Änderungen oder Ausfällen berücksichtigt.
+
+Bewusste Ausgangsentscheidung
+- Hetzner-Backups im Panel wurden initial nicht aktiviert
+- stattdessen ist eine eigene serverseitige Backup-Strategie geplant
+- zusätzlich sind manuelle Snapshots zu wichtigen Meilensteinen sinnvoll
+
+Backup-Ebenen
+
+1. Manuelle Full Snapshots auf Infrastruktur-Ebene
+Diese Snapshots bilden vollständige Serverzustände ab.
+
+Sinnvolle Snapshot-Zeitpunkte:
+- nach Grundinstallation
+- nach Sicherheitssetup
+- nach fertiger Infrastruktur-Basis
+- vor größeren Architektur- oder Konfigurationsänderungen
+- vor Go-Live
+
+Beispielhafte Snapshot-Namen:
+- snapshot-belivia-base
+- snapshot-belivia-secured
+- snapshot-belivia-pre-golive
+
+Ziel:
+- schnelle Wiederherstellung eines kompletten Serverzustands
+
+2. Serverinterne Backups
+Diese Backups sichern gezielt die produktiv wichtigen Projektbestandteile.
+
+Zu sichernde Bereiche:
+- /srv/belivia/frontend
+- /srv/belivia/backend
+- /srv/belivia/admin
+- /srv/belivia/data
+- /srv/belivia/logs soweit sinnvoll
+- /etc/belivia
+- wichtige Nginx- und systemd-Konfigurationen
+
+Besonders wichtig:
+- SQLite-Datenbank
+- Konfigurationsdateien
+- Secrets und Env-Struktur
+- Anwendungscode
+
+Vorgesehener Backup-Zielordner:
+- /srv/belivia/backups/
+
+SQLite-Backup-Prinzip
+Die SQLite-Datenbank soll regelmäßig in konsistenter Form gesichert werden.
+Ziel ist nicht nur Dateikopie, sondern eine saubere, wiederherstellbare Sicherung.
+
+Rotationsprinzip
+Backups sollen nicht unbegrenzt anwachsen.
+Eine spätere einfache Rotationslogik ist sinnvoll, z. B.:
+- tägliche Backups für einen kurzen Zeitraum
+- zusätzliche markierte manuelle Sicherungen vor größeren Änderungen
+
+Offsite-Idee
+Ein späterer zusätzlicher Offsite-Speicher ist sinnvoll, aber nicht zwingend Teil der ersten Inbetriebnahme.
+Mögliche spätere Optionen:
+- Hetzner Storage Box
+- anderer externer Backup-Speicher
+
+Zielbild
+Belivia 2.0 soll mindestens auf zwei Ebenen abgesichert sein:
+- Serverzustand über Snapshots
+- Projektdaten und Konfiguration über interne Backups
+
+Wichtiger Grundsatz
+Backups sind kein Nebengedanke, sondern Teil des produktiven Betriebs.

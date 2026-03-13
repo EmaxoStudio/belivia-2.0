@@ -1,0 +1,87 @@
+Belivia 2.0 – Analytics Strategy
+
+Ziel
+Diese Datei beschreibt die Analytics-Strategie für Belivia 2.0.
+
+Grundprinzip
+Analytics soll Belivia 2.0 helfen, Nutzung, Kontaktverhalten und spätere Lead-Entstehung besser zu verstehen.
+Dabei soll das Tracking sinnvoll, datensparsam und nicht unnötig überladen sein.
+
+Analytics-Ziele
+Belivia 2.0 soll nachvollziehbar machen:
+- ob die Website besucht wird
+- welche Seiten relevant sind
+- ob Kontaktpunkte genutzt werden
+- ob Formulare erfolgreich abgesendet werden
+- welche Anfragearten vorkommen
+- wie sich spätere Growth-Maßnahmen auswirken
+
+V1-Prinzip
+In v1 wird bewusst keine unnötig große Tracking-Landschaft aufgebaut.
+Stattdessen wird eine schlanke, technisch saubere Grundlage geschaffen.
+
+Geplante v1-Bausteine
+
+1. Cloudflare Web Analytics
+Cloudflare Web Analytics ist als datensparsame Basislösung vorgesehen.
+
+Zweck:
+- Grundverständnis von Seitenaufrufen
+- einfache Nutzungsdaten
+- schlanke Webanalyse ohne unnötige Tracking-Komplexität
+
+2. Eigene Backend-Business-Events
+Zusätzlich zur allgemeinen Website-Analytics werden fachliche Ereignisse intern erfasst.
+
+Typische Ereignisse:
+- contact_submitted
+- callback_requested
+- notification_sent
+- validation_failed
+
+Zweck:
+- geschäftsrelevante Ereignisse nachvollziehbar machen
+- Formularnutzung bewerten
+- spätere Automationen vorbereiten
+- fachliche Prozesssicht ergänzen
+
+3. CTA- und Kontaktpunkt-Sichtbarkeit
+Es soll nachvollziehbar sein, wie wichtige Kontaktpunkte genutzt werden.
+
+Wichtige Punkte:
+- Formular erfolgreich abgesendet
+- Klick auf Telefonnummer
+- Nutzung von Rückrufwunsch
+- Seiten mit hoher Kontaktrelevanz
+
+Analytics-Prinzipien
+- so wenig Tracking wie nötig
+- so viel Geschäftsnutzen wie sinnvoll
+- keine Tool-Inflation
+- klare Trennung zwischen Webanalyse und fachlichen Events
+- datensparsame Grundhaltung
+
+Was in v1 nicht Pflicht ist
+- großer GA4-Pflichtstack
+- komplexe Cross-Channel-Attribution
+- übertriebene Event-Massen
+- unnötig komplizierte Dashboard-Landschaften
+
+Spätere Erweiterungen
+Wenn Belivia aktiv mit Google Ads und lokaler Leadgenerierung arbeitet, kann das Analytics-Setup später erweitert werden.
+
+Mögliche spätere Ergänzungen:
+- Google Ads Conversion-Messung
+- Call-Tracking
+- vertiefte Conversion-Analyse
+- weitere kanalbezogene Messung
+
+Beziehung zu Growth
+Analytics ist bei Belivia 2.0 kein Selbstzweck.
+Es dient dazu:
+- echte Kontaktwirkung zu verstehen
+- Entscheidungen für SEO und Ads zu verbessern
+- den geschäftlichen Nutzen der Website nachvollziehbar zu machen
+
+Zielbild
+Belivia 2.0 soll eine kleine, saubere Analytics-Basis besitzen, die Nutzung und Geschäftswirkung sichtbar macht, ohne die Website in ein unnötig schweres Tracking-System zu verwandeln.

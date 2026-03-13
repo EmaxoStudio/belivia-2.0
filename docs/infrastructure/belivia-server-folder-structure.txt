@@ -1,0 +1,150 @@
+Belivia 2.0 – Server Folder Structure
+
+Ziel
+
+Diese Datei beschreibt die Laufzeitstruktur des Belivia-Servers.
+
+Der Server dient als Produktionsumgebung für Website, Backend, Admin-Anwendung und Infrastrukturkomponenten.
+
+Die Serverstruktur unterscheidet sich bewusst von der lokalen Git-Projektstruktur.
+
+Während das Git-Repository die Entwicklungsstruktur abbildet, organisiert die Serverstruktur die laufenden Dienste und Daten.
+
+Serverbasis
+
+Serverplattform:
+Hetzner Cloud
+
+Servername:
+belivia-prod-01
+
+Betriebssystem:
+Ubuntu 24.04 LTS
+
+Hauptverzeichnis
+
+Die zentrale Projektstruktur liegt unter:
+
+/srv/belivia
+
+Struktur
+
+/srv/belivia/
+├── frontend/
+│   ├── current/
+│   └── releases/
+├── backend/
+│   ├── app/
+│   └── venv/
+├── admin/
+│   ├── app/
+│   └── venv/
+├── data/
+│   ├── sqlite/
+│   └── uploads/
+├── logs/
+│   ├── api/
+│   ├── admin/
+│   └── nginx/
+├── scripts/
+└── backups/
+
+Beschreibung der Bereiche
+
+frontend/
+
+Enthält die ausgelieferte Website.
+
+current
+Die aktuell aktive Version des Frontends.
+
+releases
+Vorherige oder neue Release-Stände des Frontends.
+
+Diese Struktur ermöglicht einfache Rollbacks.
+
+backend/
+
+FastAPI-Anwendung für die Backend-Logik.
+
+app
+Quellcode der Backend-Anwendung.
+
+venv
+Python Virtual Environment für das Backend.
+
+admin/
+
+Interne Admin- oder Ops-Anwendung.
+
+app
+Quellcode der Admin-Anwendung.
+
+venv
+Python Virtual Environment für die Admin-Anwendung.
+
+data/
+
+Persistente Daten.
+
+sqlite
+SQLite-Datenbankdateien.
+
+uploads
+Optionale hochgeladene Dateien.
+
+logs/
+
+Logdateien für Betrieb und Fehleranalyse.
+
+api
+Backend-Logs.
+
+admin
+Admin-Anwendungslogs.
+
+nginx
+Webserver-Logs.
+
+scripts/
+
+Serverseitige Hilfsskripte für Wartung oder Backup.
+
+backups/
+
+Serverseitige Backups.
+
+Zusätzliche Konfigurationsstruktur
+
+Neben /srv/belivia existiert eine Konfigurationsstruktur unter:
+
+/etc/belivia
+
+Beispiele:
+
+/etc/belivia/api.env
+/etc/belivia/admin.env
+
+Diese Dateien enthalten:
+
+- Environment Variablen
+- API-Schlüssel
+- Zugangsdaten
+- Konfigurationswerte
+
+Diese Daten liegen bewusst außerhalb des Git-Repositories.
+
+Sicherheitsprinzipien
+
+- Secrets liegen nicht im Code.
+- Produktionsdaten liegen nicht im Git-Repository.
+- Anwendungen laufen über systemd-Services.
+- Webzugriffe laufen über Nginx und Cloudflare Tunnel.
+
+Architekturprinzip
+
+Der Server organisiert die laufenden Dienste und Daten.
+
+Das Git-Repository organisiert Entwicklung, Versionierung und Dokumentation.
+
+Diese Trennung sorgt für klare Struktur, bessere Wartbarkeit und höhere Sicherheit.

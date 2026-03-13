@@ -1,0 +1,97 @@
+Belivia 2.0 – Portfolio Description
+
+Projektüberblick
+
+Belivia 2.0 ist ein professionelles Website- und Backendprojekt für einen realen Dienstleistungsanbieter im Bereich Alltagsbegleitung und Unterstützung für Senioren sowie deren Angehörige.
+
+Das Projekt entstand als vollständiger Rebuild einer bestehenden einfachen Website, die technisch und gestalterisch nicht mehr den Anforderungen an Vertrauen, Klarheit und langfristige Wartbarkeit entsprach.
+
+Ziel war es, eine hochwertige, performante und wartungsarme Weblösung zu entwickeln, die sowohl für Nutzer als auch für den Betreiber sinnvoll funktioniert.
+
+Besonderheiten des Projekts
+
+Belivia 2.0 wurde bewusst nicht als klassisches WordPress-Projekt umgesetzt, sondern als eigene Architektur mit klar getrennten Komponenten.
+
+Die Lösung kombiniert:
+
+- statisches Frontend
+- Python/FastAPI Backend
+- eigene Admin-/Ops-Oberfläche
+- Cloudflare Edge-Infrastruktur
+- Cloudflare Tunnel
+- Tailscale Adminzugang
+- Nginx Reverse Proxy
+- SQLite-Datenbasis
+- systemd-betriebene Dienste
+- eigene Sicherheits- und Loggingstruktur
+
+Dadurch entsteht eine Architektur, die gleichzeitig:
+
+- performant
+- wartungsarm
+- sicher
+- erweiterbar
+
+ist.
+
+Projektziele
+
+Die wichtigsten Ziele von Belivia 2.0 waren:
+
+- Vertrauen und Klarheit für Senioren und Angehörige
+- einfache und verständliche Kontaktaufnahme
+- technisch stabile Infrastruktur
+- wartungsarme Website
+- klare Trennung von Frontend, Backend und Betrieb
+- Erweiterbarkeit für zukünftige Automationen
+- Nutzung als Portfolio- und Referenzprojekt
+
+Technischer Ansatz
+
+Die Website wurde bewusst als statische Website mit Backend-API aufgebaut, statt als klassisches CMS.
+
+Das ermöglicht:
+
+- hohe Performance
+- reduzierte Angriffsfläche
+- klare Architektur
+- vollständige Kontrolle über Code und Infrastruktur
+
+Die geschäftslogischen Funktionen werden über eine kleine FastAPI-Anwendung bereitgestellt.
+
+Dazu gehören:
+
+- Formularverarbeitung
+- serverseitige Validierung
+- Anfrageverwaltung
+- Event-System
+- interne Benachrichtigungen
+
+Admin- und Betriebsfunktionen werden über ein internes Panel bereitgestellt.
+
+Infrastruktur
+
+Das System läuft auf einem Hetzner Cloud Server mit Ubuntu 24.04 LTS.
+
+Die Infrastruktur umfasst:
+
+- Nginx Reverse Proxy
+- Cloudflare DNS und Edge
+- Cloudflare Tunnel
+- Tailscale für sicheren Adminzugang
+- UFW Firewall
+- SSH-Key-only Zugriff
+- systemd Services für Backend und Infrastrukturkomponenten
+
+Ziel des Projekts
+
+Belivia 2.0 zeigt nicht nur Websiteentwicklung, sondern auch:
+
+- Architekturdenken
+- sichere Serverinfrastruktur
+- Backendentwicklung
+- Betriebs- und Deploymentkonzepte
+- Growth- und SEO-Grundlagen
+- reale Kundenanforderungen
+
+Das Projekt dient gleichzeitig als produktives Kundensystem und als technische Referenz für zukünftige Projekte.

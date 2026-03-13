@@ -1,0 +1,84 @@
+Belivia 2.0 – Event System
+
+Ziel
+Das Event-System dient dazu, geschäftsrelevante Vorgänge innerhalb von Belivia 2.0 strukturiert zu erfassen und spätere Automationen vorzubereiten.
+
+Grundprinzip
+Neben dem eigentlichen Hauptdatensatz einer Anfrage sollen auch wichtige Prozessereignisse dokumentiert werden.
+Dadurch wird die Logik nicht nur datenorientiert, sondern auch prozessorientiert aufgebaut.
+
+Warum Events wichtig sind
+Das Projekt soll nicht nur eine Website sein, sondern ein kleines operatives System.
+Events helfen dabei:
+- Vorgänge nachvollziehbar zu machen
+- interne Prozesse sichtbar zu halten
+- Automationen später leichter anzubinden
+- technische und geschäftliche Aktionen sauber zu dokumentieren
+
+V1-Ziele des Event-Systems
+- Protokollierung eingehender Anfragen
+- Erkennung von Rückrufwünschen
+- Dokumentation ausgelöster Benachrichtigungen
+- Dokumentation von Validierungsfehlern, soweit sinnvoll
+
+Typische v1-Events
+- contact_submitted
+- callback_requested
+- notification_sent
+- validation_failed
+
+Beispielhafte Bedeutung
+
+contact_submitted
+- eine neue Anfrage wurde erfolgreich über das Formular angenommen
+
+callback_requested
+- eine Anfrage mit Typ Rückrufwunsch wurde erfolgreich angelegt
+
+notification_sent
+- eine interne Mailbenachrichtigung wurde ausgelöst oder erfolgreich verschickt
+
+validation_failed
+- eine Anfrage konnte wegen fehlerhafter oder unvollständiger Eingaben nicht normal verarbeitet werden
+
+Verknüpfung
+Events referenzieren in der Regel einen Contact Request über request_id.
+Dadurch bleibt die Beziehung zwischen Anfrage und Prozesshistorie nachvollziehbar.
+
+Payload-Idee
+Zusätzliche Details können als strukturierte Metadaten im payload_json gespeichert werden.
+Beispiele:
+- welche Art von Benachrichtigung gesendet wurde
+- welche Felder fehlerhaft waren
+- welche Zusatzinformationen für einen späteren Prozess relevant sind
+
+Nutzen für spätere Ausbaustufen
+Das Event-System ist die Grundlage für spätere Funktionen wie:
+- Reminder
+- Tagesübersichten
+- Telegram-Benachrichtigungen
+- WhatsApp-Nachrichten
+- Airtable-Synchronisation
+- interne Prozessautomationen
+
+Architekturprinzip
+Belivia 2.0 soll nicht direkt kanalzentriert gebaut werden, sondern ereigniszentriert.
+Das bedeutet:
+Erst wird ein sauberes internes Ereignis modelliert.
+Danach können daraus unterschiedliche Reaktionen folgen.
+
+Beispiel:
+Event callback_requested
+-> interne Mail
+-> später Reminder
+-> später Telegram intern
+-> später WhatsApp extern
+
+Vorteil
+Dieses Modell verbessert:
+- Erweiterbarkeit
+- Klarheit
+- Wiederverwendbarkeit
+- Portfolio-Wirkung
+
+Belivia 2.0 zeigt dadurch nicht nur Website-Entwicklung, sondern auch strukturiertes Prozessdenken.

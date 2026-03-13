@@ -1,0 +1,113 @@
+Belivia 2.0 – Feature Roadmap
+
+Ziel
+Diese Datei beschreibt die geplante Roadmap von Belivia 2.0 über v1 hinaus.
+
+Grundprinzip
+Belivia 2.0 wird bewusst in Stufen aufgebaut.
+Nicht alles wird in v1 umgesetzt.
+Die Roadmap sorgt dafür, dass v1 schlank bleibt und spätere Erweiterungen trotzdem klar vorbereitet sind.
+
+Phase 1 – V1 Kernsystem
+Ziel:
+ein professionelles, produktionsfähiges Grundsystem
+
+Inhalte:
+- hochwertige statische Website
+- FastAPI-Backend
+- SQLite
+- Hauptformular
+- Mailversand
+- internes Admin-/Ops-Panel light
+- Cloudflare / Tunnel / Tailscale / UFW / SSH-Härtung
+- SEO-Grundlage
+- Growth-/Ads-Vorbereitung
+- kontrollierte Go-Live-Strategie
+
+Ergebnis:
+Belivia ist live, vertrauenswürdig, anfragefähig und intern bearbeitbar.
+
+Phase 1.1 – Frühe operative Erweiterungen
+Ziel:
+die interne Bearbeitung und der Alltag werden praktischer
+
+Sinnvolle Erweiterungen:
+- Bestätigungsmail an Anfragende
+- Telegram intern für neue Anfragen oder Rückrufwünsche
+- Airtable-Anbindung als zusätzliche interne Arbeitsoberfläche
+- kleine Reminder-Logik
+- weitere kleine Status-/Übersichtsverbesserungen im Admin-Bereich
+
+Ergebnis:
+Belivia wird vom Anfrage-System zu einem kleinen operativen Assistenzsystem.
+
+Phase 1.2 – Kommunikations- und Reminder-Ausbau
+Ziel:
+strukturiertere Follow-ups und Benachrichtigungen
+
+Sinnvolle Erweiterungen:
+- geplante Reminder
+- Tagesübersichten
+- interne Follow-up-Ansichten
+- WhatsApp für einfache Bestätigungen oder Erinnerungen
+- bessere Ereignis- und Prozesssteuerung
+
+Ergebnis:
+Belivia wird stärker prozessorientiert und entlastet den Alltag mehr.
+
+Phase 2 – Growth und Sichtbarkeit
+Ziel:
+aktive Neukundengewinnung und bessere lokale Auffindbarkeit
+
+Sinnvolle Erweiterungen:
+- Google Business Profile aktiv pflegen
+- Google Ads Search live schalten
+- Conversion-Messung vertiefen
+- zusätzliche lokale Landingpages
+- feinere SEO-Struktur
+- bessere Auswertung von Kontakt- und Anrufsignalen
+
+Ergebnis:
+Belivia wird aktiv als Wachstumskanal genutzt, nicht nur als Website.
+
+Phase 3 – Interne Tooling-Verbesserung
+Ziel:
+interne Prozesse professioneller und komfortabler gestalten
+
+Mögliche Erweiterungen:
+- stärkere Admin-Ansichten
+- Filter-/Suche-Ausbau
+- bessere Historienansichten
+- Exportfunktionen
+- Reminder-/Status-Dashboards
+- engere Verknüpfung mit internen Tools
+
+Wichtig:
+Phase 3 ist nur sinnvoll, wenn der reale Nutzen dafür da ist.
+Kein Ausbau nur um der Technik willen.
+
+Nicht geplante Richtung
+Belivia soll nach aktueller Entscheidung nicht in Richtung eines großen Portals oder komplexen SaaS-Systems wachsen.
+Nicht geplant sind:
+- Endkunden-Login-Bereiche
+- komplexe Multi-User-Rechteverwaltung
+- Matching-Systeme
+- medizinische Intake-Strecken
+- große Kundenplattform-Logik
+
+Roadmap-Prinzip
+Die Roadmap dient dazu:
+- v1 klar zu halten
+- spätere Ideen sinnvoll einzuordnen
+- unnötigen Überbau zu vermeiden
+- Produktreife und Portfolio-Wirkung gleichzeitig zu stärken
+
+Zielbild
+Belivia 2.0 wächst nicht chaotisch, sondern schrittweise von:
+- Website
+zu
+- Website + Backend
+zu
+- Website + Backend + operatives Mini-System
+zu
+- lokal sichtbarem und geschäftlich nutzbarem System

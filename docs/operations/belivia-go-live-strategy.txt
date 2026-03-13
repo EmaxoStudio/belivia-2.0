@@ -1,0 +1,70 @@
+Belivia 2.0 – Go-Live Strategy
+
+Ziel
+Diese Datei beschreibt die geplante Go-Live-Strategie für Belivia 2.0.
+
+Ausgangslage
+Es existiert bereits eine einfache Live-Website auf WordPress-Basis.
+Diese Seite bleibt während des Neuaufbaus online.
+Belivia 2.0 wird parallel aufgebaut und getestet.
+
+Grundprinzip
+Der Go-Live erfolgt nicht als frühes Live-Bauen auf der bestehenden Website, sondern als kontrollierte Umschaltung von der alten auf die neue Architektur.
+
+Phasen
+
+1. Paralleler Neuaufbau
+- neue Belivia-2.0-Infrastruktur wird aufgebaut
+- Preview-Seite läuft unter new.belivia-alltagsbegleitung.de
+- Admin-Bereich läuft unter admin.belivia-alltagsbegleitung.de
+- alte Live-Seite bleibt unverändert erreichbar
+
+2. Interne Fertigstellung und Tests
+Vor dem Go-Live müssen folgende Punkte sauber geprüft sein:
+- Frontend vollständig
+- Formular funktioniert
+- Mailversand funktioniert
+- Admin-Bereich funktioniert
+- Sicherheitsbasis steht
+- Logging funktioniert
+- SEO-Grundlage ist gesetzt
+- Analytics/Console-Grundlage ist vorbereitet
+
+3. Go-Live-Umschaltung
+Nach Abschluss der Tests wird die Hauptdomain kontrolliert auf die neue Infrastruktur gelegt.
+
+Ziel danach:
+- www.belivia-alltagsbegleitung.de -> neue Belivia-2.0-Seite
+- belivia-alltagsbegleitung.de -> Weiterleitung oder konsistente Hauptseitenlogik
+- admin.belivia-alltagsbegleitung.de -> interner Bereich bleibt bestehen
+
+4. Fallback-Prinzip
+Die alte WordPress-Seite soll nicht sofort endgültig gelöscht werden.
+Sie bleibt zunächst kurz als technischer oder organisatorischer Fallback verfügbar, bis das neue System stabil bestätigt ist.
+
+Wichtige Go-Live-Prinzipien
+- kein hektischer Direktwechsel
+- keine Umschaltung ohne funktionierende Formular- und Maillogik
+- keine Umschaltung ohne Admin- und Sicherheitsprüfung
+- kontrollierte Cloudflare-/Tunnel-Zuordnung
+- möglichst klarer Zeitpunkt und eindeutige Verantwortlichkeit
+
+Post-Go-Live
+Nach dem Go-Live sollen geprüft werden:
+- Website-Erreichbarkeit
+- Formularfluss
+- Mailzustellung
+- Admin-Zugriff
+- SEO-Basis
+- Analytics-Basis
+- eventuelle Routing- oder Redirect-Probleme
+
+Rolle der Preview-Domain
+new.belivia-alltagsbegleitung.de dient während der Bauphase als Vorschau- und Testumgebung.
+Nach dem Go-Live kann diese Domain:
+- entfernt werden
+- intern beibehalten werden
+- oder als spätere Vorschau-/Review-Adresse dienen
+
+Zielbild
+Der Wechsel von der alten auf die neue Website soll professionell, risikoarm und nachvollziehbar erfolgen.

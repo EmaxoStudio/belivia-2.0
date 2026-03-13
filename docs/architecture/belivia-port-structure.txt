@@ -1,0 +1,75 @@
+Belivia 2.0 – Port Structure
+
+Ziel
+Diese Datei dokumentiert die lokale Portverteilung innerhalb des Servers.
+
+Grundprinzip
+Es werden nur lokale Bindings verwendet.
+Anwendungsdienste sollen nicht direkt öffentlich exponiert werden.
+
+Lokale Ports
+
+1. Public Nginx
+Bindung:
+- 127.0.0.1:8080
+
+Aufgabe:
+- Auslieferung des statischen Frontends
+- Reverse Proxy für /api/*
+
+2. Admin Nginx
+Bindung:
+- 127.0.0.1:8081
+
+Aufgabe:
+- Reverse Proxy für die Admin-Anwendung
+- getrennte lokale Webschicht für admin.*
+
+3. FastAPI Public/API
+Bindung:
+- 127.0.0.1:8000
+
+Aufgabe:
+- /api/health
+- /api/contact
+- Validierung
+- Mailversand
+- DB-Zugriff
+- Event-Erzeugung
+
+4. Admin-Anwendung
+Bindung:
+- 127.0.0.1:8100
+
+Aufgabe:
+- Anfrageübersicht
+- Statusbearbeitung
+- Notizen
+- Tagesübersicht
+
+Externe Erreichbarkeit
+Es gibt keine geplante direkte öffentliche Freigabe dieser Ports.
+Die Veröffentlichung erfolgt über:
+- Cloudflare
+- Cloudflare Tunnel
+- lokales Routing zu den jeweiligen Diensten
+
+SSH
+Das Zielbild ist:
+- kein öffentlicher SSH-Port
+- SSH nur über Tailscale
+- Authentifizierung nur per SSH-Key
+
+Portprinzipien
+- Public und Admin bewusst getrennt
+- API und Admin-App laufen als eigene lokale Dienste
+- Ports sind klar dokumentiert und stabil
+- keine unnötige dynamische Portlogik
+
+Begründung
+Die getrennte Portstruktur verbessert:
+- Wartbarkeit
+- Nachvollziehbarkeit
+- Sicherheitsklarheit
+- saubere Service-Trennung
+- Portfolio-Dokumentierbarkeit

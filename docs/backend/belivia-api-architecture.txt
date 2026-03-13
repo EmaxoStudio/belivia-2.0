@@ -1,0 +1,76 @@
+Belivia 2.0 – API Architecture
+
+Ziel
+Das Backend von Belivia 2.0 basiert auf FastAPI und übernimmt die geschäftsrelevante Logik, die über die reine statische Website hinausgeht.
+
+Grundprinzip
+Die öffentliche Website bleibt bewusst statisch.
+Dynamische und geschäftslogische Vorgänge werden über eine kleine, klar definierte API verarbeitet.
+
+Technologiewahl
+- Python
+- FastAPI
+- SQLite in v1
+- systemd-Betrieb
+- Mailversand aus dem Backend
+- spätere Erweiterbarkeit für Reminder, Automationen und Integrationen
+
+Rolle des Backends
+Das Backend übernimmt in v1:
+- Health-Check
+- Formularannahme
+- serverseitige Validierung
+- Erzeugung und Verarbeitung von Kontaktanfragen
+- Differenzierung zwischen allgemeiner Anfrage und Rückrufwunsch
+- Event-Erzeugung
+- Mailversand
+- Schreiben und Lesen der v1-Datenbasis
+- spätere Grundlage für interne Automationen
+
+Abgrenzung
+Das Backend ist bewusst klein und fokussiert.
+Es ist kein allgemeines API-Ökosystem, kein öffentliches Entwickler-API und kein großes Portal-Backend.
+
+Betriebsmodell
+Die API läuft als eigener lokaler Dienst auf:
+- 127.0.0.1:8000
+
+Sie ist nicht direkt öffentlich exponiert.
+Öffentliche Zugriffe erfolgen ausschließlich über:
+- Cloudflare
+- Cloudflare Tunnel
+- lokalen Public Nginx
+- Nginx-Proxy auf /api/*
+
+Hauptfunktion in v1
+Die wichtigste v1-Funktion ist die Verarbeitung des Hauptformulars.
+Dabei soll die API:
+- Eingaben sicher annehmen
+- Pflichtfelder prüfen
+- Datenschutz-Einwilligung prüfen
+- strukturierte Daten speichern
+- eine interne Benachrichtigung auslösen
+- Business-Events protokollieren
+- dem Frontend eine saubere Erfolg- oder Fehlerrückmeldung geben
+
+Sicherheitsprinzipien
+- keine direkte öffentliche Portfreigabe
+- serverseitige Validierung als Pflicht
+- keine sensiblen Gesundheitsdaten in v1
+- Secrets getrennt vom Code
+- definierte Fehlerantworten
+- klare interne Datenstruktur
+
+Erweiterbarkeit
+Das Backend soll später erweiterbar sein für:
+- Reminder-Logik
+- Telegram intern
+- WhatsApp extern
+- Airtable-Anbindung
+- weitere interne Prozesslogik
+- zusätzliche Admin-Funktionen
+
+Architekturidee
+Belivia 2.0 verwendet bewusst eine schlanke API-Architektur:
+statische Website vorne, kleine robuste Geschäftslogik hinten.
+Dadurch bleibt das Projekt performant, verständlich und portfolio-stark.

@@ -1,0 +1,76 @@
+Belivia 2.0 – Logging Strategy
+
+Ziel
+Diese Datei beschreibt die Logging-Strategie für Belivia 2.0.
+
+Grundprinzip
+Belivia 2.0 soll ausreichend Logging besitzen, um:
+- Fehler nachvollziehen zu können
+- Betriebszustände zu prüfen
+- Anfragen und wichtige Aktionen verständlich zu beobachten
+- Probleme im Backend oder Admin-Bereich gezielt zu analysieren
+
+Dabei soll das Logging bewusst schlank bleiben und nicht in unnötige Komplexität ausarten.
+
+Logging-Ebenen
+
+1. System- und Service-Logging
+Die Basis bildet journald / journalctl über systemd.
+
+Betrifft:
+- belivia-api.service
+- belivia-admin.service
+- cloudflared.service
+- Nginx und andere Systemdienste
+
+Vorteile:
+- systemnah
+- direkt verfügbar
+- gut für Betriebs- und Fehlersuche
+- sauber mit systemd integrierbar
+
+2. Anwendungslogging
+Zusätzliche anwendungsnahe Logs können, wo sinnvoll, in /srv/belivia/logs/ organisiert werden.
+
+Geplante Logpfade:
+- /srv/belivia/logs/api/
+- /srv/belivia/logs/admin/
+- /srv/belivia/logs/nginx/
+
+Ziel:
+- optionale getrennte Nachvollziehbarkeit pro Anwendungsteil
+- bei Bedarf klarer Zugriff auf anwendungsspezifische Logdateien
+
+Worauf Logging sich konzentrieren soll
+- API-Start und API-Fehler
+- wichtige Formularverarbeitungsschritte
+- Mailversand-Ergebnisse soweit sinnvoll
+- Admin-App-Fehler
+- Reverse-Proxy-/Routing-Probleme
+- wesentliche technische Ausfälle
+
+Was nicht Ziel ist
+- übertriebene Log-Massen
+- schwer wartbare Log-Infrastruktur
+- SIEM-ähnlicher Overkill
+- unnötige Duplizierung jedes Ereignisses
+
+Datenschutzprinzip
+Beim Logging muss darauf geachtet werden:
+- keine unnötig sensiblen Inhalte im Klartext zu loggen
+- keine ausufernde Protokollierung persönlicher Inhalte
+- Fehler- und Betriebslogik vor Volltextspeicherung sensibler Nutzdaten
+
+Beziehung zum Event-System
+Geschäftsrelevante Ereignisse wie contact_submitted oder callback_requested gehören fachlich ins Event-System bzw. in die Datenbasis.
+Technisches Logging und fachliche Events sollen nicht vermischt werden.
+
+Zielbild
+Belivia 2.0 soll:
+- technisch nachvollziehbar
+- betriebsfähig
+- debugbar
+- aber nicht log-lastig überbaut sein
+
+Grundsatz
+So viel Logging wie nötig, nicht so viel wie möglich.

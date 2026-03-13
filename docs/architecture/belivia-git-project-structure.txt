@@ -1,0 +1,167 @@
+Belivia 2.0 – Git Project Structure
+
+Ziel
+
+Diese Datei beschreibt die Struktur des lokalen Git-Projekts für Belivia 2.0 und erklärt den Entwicklungsworkflow zwischen Laptop, GitHub und Server.
+
+Grundprinzip
+
+Die Entwicklung von Belivia 2.0 erfolgt nicht direkt auf dem Server, sondern primär lokal auf dem Entwicklungsrechner.
+
+Der Laptop ist die zentrale Entwicklungsumgebung. GitHub dient als Versionsspeicher und Projektarchiv. Der Server ist die Produktionsumgebung, auf der die Anwendung läuft.
+
+Systemrollen
+
+Laptop
+Der Laptop ist die Entwicklungsumgebung.
+
+Hier werden erstellt und bearbeitet:
+
+- Quellcode
+- Dokumentation
+- Konfigurationsdateien
+- Deploy-Dateien
+- Projektstruktur
+
+Alle Änderungen entstehen zunächst lokal.
+
+GitHub
+GitHub ist das Versionsarchiv des Projekts.
+
+Dort werden gespeichert:
+
+- Codehistorie
+- Dokumentation
+- Projektstruktur
+- Konfigurationsdateien
+
+GitHub ermöglicht:
+
+- Versionskontrolle
+- Sicherung des Projektstands
+- Nachvollziehbarkeit von Änderungen
+- professionelle Projektstruktur für Portfoliozwecke
+
+Server
+Der Server ist die Laufzeitumgebung.
+
+Auf dem Server laufen:
+
+- öffentliche Website
+- Backend-API
+- Admin-Anwendung
+- Datenbank
+- Logging
+- Infrastrukturkomponenten
+
+Der Server dient nicht als primärer Entwicklungsort.
+
+Entwicklungsworkflow
+
+1. Entwicklung lokal auf dem Laptop
+
+Änderungen werden im lokalen Projektverzeichnis durchgeführt.
+
+Beispielpfad:
+
+~/projects/belivia-2.0
+
+2. Versionierung mit Git
+
+Nach Änderungen werden diese versioniert:
+
+git add
+git commit
+
+3. Upload zu GitHub
+
+Der aktuelle Projektstand wird nach GitHub übertragen:
+
+git push
+
+4. Deployment auf den Server
+
+Der Server erhält die benötigten Projektteile über definierte Deploy-Schritte.
+
+Dabei werden nur die relevanten Teile des Projekts auf den Server übertragen.
+
+Lokale Projektstruktur
+
+belivia-2.0/
+├── docs/
+├── frontend/
+├── backend/
+├── admin/
+├── deploy/
+├── assets/
+└── local/
+
+docs/
+
+Projekt- und Architektur-Dokumentation.
+
+Unterordner:
+
+architecture
+infrastructure
+backend
+operations
+product
+growth
+portfolio
+
+frontend/
+
+Quellcode der öffentlichen Website.
+
+Typische Inhalte:
+
+src
+public
+dist
+
+backend/
+
+FastAPI-Anwendung für Backend-Logik.
+
+Typische Inhalte:
+
+app
+tests
+requirements.txt
+
+admin/
+
+Interne Admin- oder Ops-Anwendung.
+
+Typische Inhalte:
+
+app
+tests
+requirements.txt
+
+deploy/
+
+Konfigurationsdateien für Infrastruktur und Deployment.
+
+Typische Inhalte:
+
+nginx
+systemd
+cloudflared
+scripts
+
+assets/
+
+Projektressourcen wie Logos, Bilder oder Textreferenzen.
+
+local/
+
+Lokale Hilfsdateien oder Scripts für die Entwicklungsumgebung.
+
+Wichtige Prinzipien
+
+- Der Laptop ist die primäre Entwicklungsumgebung.
+- GitHub speichert Versionen und Projektstruktur.
+- Der Server ist ausschließlich die Produktionsumgebung.
+- Dokumentation und Code liegen gemeinsam im Projektrepository.

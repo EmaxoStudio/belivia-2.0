@@ -1,0 +1,55 @@
+Belivia 2.0 – Domain Structure
+
+Ausgangslage
+Die bestehende Domain ist bereits vorhanden und läuft bereits über Cloudflare-DNS.
+Die alte WordPress-Seite bleibt während des Neuaufbaus online.
+
+Hauptdomain
+- belivia-alltagsbegleitung.de
+- www.belivia-alltagsbegleitung.de
+
+Bau-/Preview-Domain
+- new.belivia-alltagsbegleitung.de
+
+Interne Admin-Domain
+- admin.belivia-alltagsbegleitung.de
+
+Bedeutung der Domains
+
+1. www.belivia-alltagsbegleitung.de
+Während der Bauphase:
+- zeigt auf die bestehende Live-WordPress-Seite
+
+Nach Go-Live:
+- wird zur neuen Hauptdomain für Belivia 2.0
+
+2. belivia-alltagsbegleitung.de
+Während der Bauphase:
+- zeigt auf die bestehende Live-Seite oder leitet auf www weiter
+
+Nach Go-Live:
+- leitet kanonisch auf www weiter oder wird konsistent zur Hauptseite geführt
+
+Empfehlung:
+- www als kanonische Hauptdomain
+
+3. new.belivia-alltagsbegleitung.de
+- neue Belivia-2.0-Seite während des Neuaufbaus
+- Test-, Vorschau- und Review-Adresse
+- nach Go-Live optional entfernbar oder als Preview beibehaltbar
+
+4. admin.belivia-alltagsbegleitung.de
+- interner Admin-/Ops-Bereich
+- nicht öffentlich frei
+- zusätzlich durch Cloudflare Access geschützt
+
+Domainprinzipien
+- keine unnötige api-Subdomain in v1
+- öffentliche API bleibt unter derselben Public-Domain-Struktur
+- klare Trennung zwischen öffentlicher Preview-Seite und internem Admin-Bereich
+- möglichst wenige Subdomains für geringe Komplexität
+
+Go-Live-Prinzip
+- die alte Live-Seite bleibt bestehen, bis Belivia 2.0 fertig ist
+- danach wird die Hauptdomain kontrolliert auf das neue System umgestellt
+- new bleibt optional als Vorschau bestehen oder wird zurückgebaut

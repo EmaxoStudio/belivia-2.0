@@ -1,0 +1,128 @@
+Belivia 2.0 – SEO Architecture
+
+Ziel
+Diese Datei beschreibt die SEO-Grundarchitektur für Belivia 2.0.
+
+Grundprinzip
+SEO ist bei Belivia 2.0 kein nachträglicher Zusatz, sondern Teil der System- und Seitenarchitektur.
+Die Website soll von Anfang an so aufgebaut werden, dass sie für Suchmaschinen technisch sauber verständlich, lokal relevant und für Nutzer klar strukturiert ist.
+
+SEO-Ziel von Belivia 2.0
+Belivia 2.0 soll:
+- lokal auffindbar sein
+- Vertrauen aufbauen
+- relevante Dienstleistungsbegriffe sauber abdecken
+- für Senioren und Angehörige verständlich bleiben
+- technisch eine gute Grundlage für Google und ähnliche Suchmaschinen bieten
+
+Wichtige SEO-Prinzipien
+- klare Seitenstruktur
+- eindeutige URL-Struktur
+- semantisches HTML
+- sinnvolle Titles und Descriptions
+- gute mobile Nutzbarkeit
+- starke Lesbarkeit
+- lokale Relevanz
+- schnelle Ladezeiten
+- saubere interne Verlinkung
+- kein SEO-Tricksen
+- keine künstlich aufgeblasenen Texte
+
+Geplante Seiten als SEO-Grundlage
+- Startseite
+- Leistungen
+- Für Angehörige
+- Über Belivia / Vertrauen
+- FAQ
+- Kontakt
+- Impressum
+- Datenschutz
+
+SEO-Rolle der einzelnen Seiten
+
+Startseite
+- zentrale Orientierung
+- lokale Hauptrelevanz
+- wichtigste Einstiegsseite
+
+Leistungen
+- fachliche Beschreibung des Angebots
+- zentrale Leistungsbegriffe
+
+Für Angehörige
+- spezifische Ansprache einer wichtigen Zielgruppe
+- eigenständige Such- und Vertrauensrelevanz
+
+Über Belivia / Vertrauen
+- Vertrauensaufbau
+- Personen- und Angebotsnähe
+- unterstützende Relevanz
+
+FAQ
+- Beantwortung typischer Fragen
+- Unterstützung für Suchintentionen und Vertrauen
+
+Kontakt
+- Conversion-Seite
+- lokale Kontaktrelevanz
+- klare Handlungsorientierung
+
+Technische SEO-Bausteine
+Belivia 2.0 soll in v1 enthalten:
+- saubere URL-Struktur
+- eine kanonische Hauptdomain
+- Meta Title pro Seite
+- Meta Description pro Seite
+- semantische Überschriftenstruktur
+- Sitemap
+- robots.txt
+- strukturierte Daten in sinnvoller Form
+- Google Search Console Vorbereitung
+- HTTPS und performante Auslieferung
+- mobile Nutzbarkeit
+
+URL-Prinzip
+URLs sollen:
+- kurz
+- verständlich
+- sprechend
+- stabil
+sein
+
+Beispiele:
+- /
+- /leistungen
+- /fuer-angehoerige
+- /ueber-belivia
+- /faq
+- /kontakt
+
+Content-Prinzip
+Die Texte sollen:
+- ruhig
+- vertrauenswürdig
+- verständlich
+- menschlich
+- lokal passend
+sein
+
+Nicht Ziel:
+- aggressive Keyword-Wiederholung
+- künstlich lange Texte
+- SEO auf Kosten der Lesbarkeit
+
+Strukturierte Daten
+Belivia 2.0 soll in sinnvoller Form strukturierte Daten mitdenken, z. B.:
+- Organization oder LocalBusiness
+- Kontaktinformationen
+- evtl. FAQ-Struktur, wenn inhaltlich passend
+
+Search Console
+Die technische Architektur soll so vorbereitet sein, dass Google Search Console sauber angebunden und genutzt werden kann.
+
+Core Web Vitals / Performance
+Da Belivia statisch aufgebaut wird, ist eine sehr gute technische Ausgangslage für Performance vorhanden.
+Diese Stärke soll bewusst genutzt werden.
+
+Zielbild
+Belivia 2.0 soll nicht wie eine überoptimierte SEO-Seite wirken, sondern wie eine hochwertige reale Dienstleistungswebsite mit starker technischer und inhaltlicher SEO-Basis.
