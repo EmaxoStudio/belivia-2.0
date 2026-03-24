@@ -78,20 +78,3 @@ echo ---
 echo "=== PREVIEW HTML ==="
 curl -sS -H "Host: new.belivia-alltagsbegleitung.de" http://127.0.0.1:8081/ | head -n 5
 echo
-```
-
-## Wichtige Leitplanken
-- keine Änderungen an `www` oder Apex in diesem V1-Deploy-Ablauf
-- keine Secrets ins Repo
-- keine DB-Dateien ins Repo
-- keine CI/CD-Annahmen
-- immer kleine kontrollierte Schritte
-
-## Server-only bleibt server-only
-Nicht Teil des Repo-Deploys:
-- `/srv/belivia/data`
-- `/srv/belivia/ops`
-- `backend/venv`
-- `/etc/belivia/mail.env`
-- `/etc/cloudflared/config.yml`
-- Secrets / Credentials / Logs / DB-Inhalte
