@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Belivia Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .box { border: 1px solid #ddd; padding: 12px; margin-bottom: 16px; }
+    .controls { margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
+    th { background: #f5f5f5; }
+    code { background: #f3f3f3; padding: 2px 4px; }
+    button, select { padding: 6px 8px; }
+  </style>
+</head>
+<body>
+  <h1>Belivia Admin</h1>
+
+  <div class="box">
+    <h2>Tagesübersicht</h2>
+    <div id="overview">Lädt...</div>
+  </div>
+
+  <div class="box">
+    <h2>Letzte Anfragen</h2>
+    <div class="controls">
+      <label for="statusFilter">Status:</label>
+      <select id="statusFilter">
+        <option value="">alle</option>
+        <option value="new">new</option>
+        <option value="in_progress">in_progress</option>
+        <option value="done">done</option>
+        <option value="archived">archived</option>
+      </select>
+      <button id="reloadBtn">Neu laden</button>
+    </div>
+    <div id="requests">Lädt...</div>
+  </div>
+
+  <div class="box">
+    <h2>Anfrage-Details</h2>
+    <div id="requestDetail">Noch keine Anfrage ausgewählt.</div>
+  </div>
+
+  <script>
+    async function loadOverview() {
+      const r = await fetch('/api/admin/day-overview');
+      const d = await r.json();
+      document.getElementById('overview').innerHTML =
+        '<p><strong>Tag:</strong> ' + d.day + '</p>' +
+        '<p><strong>Heute erstellt:</strong> ' + d.created_total + '</p>' +
+        '<p><strong>Termine am Tag:</strong> ' + d.events_total + '</p>';
+    }
+
+    async function loadRequests() {
+      const status = document.getElementById('statusFilter').value;
+      const url = status ? '/api/admin/requests?status=' + encodeURIComponent(status) : '/api/admin/requests';
+
+      const r = await fetch(url);
+      const d = await r.json();
+
+      if (!d.items || !d.items.length) {
+        document.getElementById('requests').innerHTML = '<p>Keine Anfragen vorhanden.</p>';
+        return;
+      }
+
+      let html = '<table><thead><tr>';
+      html += '<th>ID</th><th>Name</th><th>E-Mail</th><th>Status</th><th>Mail</th><th>Mail versucht</th><th>Event</th><th>Notiz</th>';
+      html += '</tr></thead><tbody>';
+
+      for (const item of d.items) {
+        html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer">';
+        html += '<td>' + item.id + '</td>';
+        html += '<td>' + item.name + '</td>';
+        html += '<td>' + item.email + '</td>';
+        html += '<td><code>' + item.status + '</code></td>';
+        html += '<td><code>' + (item.mail_status || '') + '</code></td>';
+        html += '<td>' + (item.mail_last_attempt_at || '') + '</td>';
+        html += '<td>' + (item.event_date || '') + '</td>';
+        html += '<td>' + (item.internal_note || '') + '</td>';
+        html += '</tr>';
+      }
+
+      html += '</tbody></table>';
+      document.getElementById('requests').innerHTML = html;
+    }
+
+    async function loadRequestDetail(requestId) {
+      const listRes = await fetch('/api/admin/requests?limit=200');
+      const listData = await listRes.json();
+      const item = (listData.items || []).find(x => x.id === requestId);
+
+      const eventsRes = await fetch('/api/admin/requests/' + requestId + '/events');
+      const eventsData = await eventsRes.json();
+
+      if (!item) {
+        document.getElementById('requestDetail').innerHTML = '<p>Anfrage nicht gefunden.</p>';
+        return;
+      }
+
+      let html = '';
+      html += '<p><strong>ID:</strong> ' + item.id + '</p>';
+      html += '<p><strong>Name:</strong> ' + item.name + '</p>';
+      html += '<p><strong>E-Mail:</strong> ' + item.email + '</p>';
+      html += '<p><strong>Telefon:</strong> ' + (item.phone || '') + '</p>';
+      html += '<p><strong>Status:</strong> ' +
+        '<select id="detailStatus">' +
+        '<option value="new"' + (item.status === 'new' ? ' selected' : '') + '>new</option>' +
+        '<option value="in_progress"' + (item.status === 'in_progress' ? ' selected' : '') + '>in_progress</option>' +
+        '<option value="done"' + (item.status === 'done' ? ' selected' : '') + '>done</option>' +
+        '<option value="archived"' + (item.status === 'archived' ? ' selected' : '') + '>archived</option>' +
+        '</select></p>';
+      html += '<p><strong>Mail:</strong> <code>' + (item.mail_status || '') + '</code></p>';
+      html += '<p><strong>Mail versucht:</strong> ' + (item.mail_last_attempt_at || '') + '</p>';
+      html += '<p><strong>Mailfehler:</strong> ' + (item.mail_last_error || '') + '</p>';
+      html += '<p><strong>Event-Datum:</strong> ' + (item.event_date || '') + '</p>';
+      html += '<p><strong>Notiz:</strong><br>' +
+        '<textarea id="detailNote" rows="4" style="width:100%;">' + (item.internal_note || '') + '</textarea></p>';
+      html += '<p><button onclick="saveRequestDetail(' + item.id + ')">Speichern</button></p>';
+      html += '<div id="detailSaveResult"></div>';
+      html += '<p><strong>Nachricht:</strong><br>' + (item.message || '') + '</p>';
+
+      html += '<h3>Events</h3>';
+      if (!eventsData.items || !eventsData.items.length) {
+        html += '<p>Keine Events vorhanden.</p>';
+      } else {
+        html += '<ul>';
+        for (const ev of eventsData.items) {
+          html += '<li><strong>' + ev.created_at + '</strong> — ' + ev.event_type + ' — ' + (ev.event_data || '') + '</li>';
+        }
+        html += '</ul>';
+      }
+
+      document.getElementById('requestDetail').innerHTML = html;
+    }
+
+
+    async function saveRequestDetail(requestId) {
+      const status = document.getElementById('detailStatus').value;
+      const note = document.getElementById('detailNote').value;
+      const resultBox = document.getElementById('detailSaveResult');
+
+      resultBox.innerHTML = '<p>Speichere...</p>';
+
+      const statusRes = await fetch('/api/admin/requests/' + requestId + '/status?status=' + encodeURIComponent(status), {
+        method: 'POST'
+      });
+
+      const noteRes = await fetch('/api/admin/requests/' + requestId + '/note', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ internal_note: note })
+      });
+
+      if (!statusRes.ok || !noteRes.ok) {
+        resultBox.innerHTML = '<p>Speichern fehlgeschlagen.</p>';
+        return;
+      }
+
+      resultBox.innerHTML = '<p>Gespeichert.</p>';
+      await loadRequests();
+      await loadRequestDetail(requestId);
+    }
+
+    document.getElementById('reloadBtn').addEventListener('click', loadRequests);
+    document.getElementById('statusFilter').addEventListener('change', loadRequests);
+
+    loadOverview();
+    loadRequests();
+  </script>
+</body>
+</html>
