@@ -22,7 +22,7 @@ fi
 
 mkdir -p "$BACKUP_DIR"
 
-cp "$DB_SOURCE" "$BACKUP_FILE"
+sqlite3 "$DB_SOURCE" ".backup '${BACKUP_FILE}'"
 
 echo "Backup written: $BACKUP_FILE"
 
