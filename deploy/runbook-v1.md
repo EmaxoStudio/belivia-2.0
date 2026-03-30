@@ -81,27 +81,79 @@ ls -lh /srv/belivia/ops/backups/
 
 ## Restore
 
-**Voraussetzung:** Dienst muss gestoppt sein, bevor die Datenbankdatei ersetzt wird.
+Das Restore-Script liegt im Repo unter `deploy/scripts/restore-v1.sh`.
+Auf dem Server ablegen unter `/srv/belivia/ops/scripts/restore-v1.sh`.
+
+### Verfügbare Backups anzeigen
 
 ```bash
-# 1. Dienst stoppen
+ls -lht /srv/belivia/ops/backups/
+```
+
+### Backup-Integrität manuell prüfen (optional, vor Restore)
+
+```bash
+sqlite3 /srv/belivia/ops/backups/belivia-YYYYMMDD-HHMMSS.sqlite "PRAGMA integrity_check;"
+# Erwartet: ok
+```
+
+### Restore per Script ausführen
+
+```bash
+bash /srv/belivia/ops/scripts/restore-v1.sh \
+  /srv/belivia/ops/backups/belivia-YYYYMMDD-HHMMSS.sqlite
+```
+
+Das Script:
+1. Prüft Backup-Integrität (SQLite PRAGMA integrity_check)
+2. Zeigt Tabellenübersicht des Backups
+3. Fragt zur Bestätigung (kein automatischer Restore)
+4. Stoppt belivia-api
+5. Erstellt Sicherheitskopie der aktuellen DB als `.before-restore`
+6. Installiert Backup mit korrekten Berechtigungen (beliviaapp:beliviaapp 644)
+7. Startet belivia-api
+8. Führt Post-Restore-Verifikation durch
+
+### Post-Restore-Verifikation
+
+```bash
+# Dienststatus
+systemctl is-active belivia-api
+systemctl is-active nginx
+
+# Health-Endpunkt
+curl -sS http://127.0.0.1:8000/api/health
+
+# DB-Tabellen der wiederhergestellten Datenbank
+sqlite3 /srv/belivia/data/belivia.sqlite ".tables"
+```
+
+### Nach bestätigtem Restore: Sicherheitskopie aufräumen
+
+```bash
+rm /srv/belivia/data/belivia.sqlite.before-restore
+```
+
+### Rollback (Restore rückgängig machen)
+
+Falls etwas nicht stimmt, vor dem Aufräumen der Sicherheitskopie:
+
+```bash
 sudo systemctl stop belivia-api
-
-# 2. Aktuelle DB sichern (Vorsicht-Kopie)
-cp /srv/belivia/data/belivia.sqlite /srv/belivia/data/belivia.sqlite.before-restore
-
-# 3. Backup einspielen (gewünschte Datei einsetzen)
 sudo install -o beliviaapp -g beliviaapp -m 644 \
-  /srv/belivia/ops/backups/belivia-YYYYMMDD-HHMMSS.sqlite \
+  /srv/belivia/data/belivia.sqlite.before-restore \
   /srv/belivia/data/belivia.sqlite
-
-# 4. Dienst wieder starten
 sudo systemctl start belivia-api
-
-# 5. Verifikation
 systemctl is-active belivia-api
 curl -sS http://127.0.0.1:8000/api/health
 ```
+
+### Wichtige Hinweise
+
+- **Dienst muss gestoppt sein** vor dem Ersetzen der Datenbankdatei — SQLite ist nicht concurrent-write-safe
+- **Backup-Integrität immer prüfen** bevor ein Backup eingespielt wird
+- **Sicherheitskopie erst löschen** wenn Restore vollständig bestätigt ist
+- **`.before-restore`-Dateien nicht anhäufen** — nur eine gleichzeitig, danach aufräumen
 
 ## Standard-Post-Deploy-Verifikation
 ```bash
