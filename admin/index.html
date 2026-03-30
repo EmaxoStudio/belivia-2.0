@@ -5,14 +5,145 @@
   <title>Belivia Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .box { border: 1px solid #ddd; padding: 12px; margin-bottom: 16px; }
-    .controls { margin-bottom: 12px; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
-    th { background: #f5f5f5; }
-    code { background: #f3f3f3; padding: 2px 4px; }
-    button, select { padding: 6px 8px; }
+    :root {
+      --a-primary:   #1e5a8e;
+      --a-primary-d: #154275;
+      --a-text:      #1f2d3d;
+      --a-soft:      #55687a;
+      --a-bg:        #f2f5f9;
+      --a-white:     #ffffff;
+      --a-border:    #d4dde9;
+      --a-radius:    5px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--a-text);
+      background: var(--a-bg);
+      padding: 24px 20px 48px;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--a-text);
+      margin-bottom: 24px;
+    }
+
+    .box {
+      background: var(--a-white);
+      border: 1px solid var(--a-border);
+      border-radius: var(--a-radius);
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .box h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--a-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--a-border);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .controls label { font-size: 0.9rem; color: var(--a-soft); }
+
+    /* Table */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid var(--a-border);
+      padding: 9px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #edf1f7;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: var(--a-soft);
+      white-space: nowrap;
+    }
+
+    tr:hover td { background: #f6f9fd; }
+
+    /* Detail view */
+    #requestDetail p { margin-bottom: 10px; font-size: 0.93rem; }
+    #requestDetail h3 { font-size: 1rem; font-weight: 700; margin: 20px 0 10px; }
+    #requestDetail ul { padding-left: 18px; }
+    #requestDetail li { margin-bottom: 4px; font-size: 0.93rem; }
+
+    /* Forms & inputs */
+    code {
+      background: #edf1f7;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      color: var(--a-text);
+    }
+
+    button {
+      background: var(--a-primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--a-radius);
+      padding: 7px 14px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button:hover { background: var(--a-primary-d); }
+
+    select {
+      border: 1px solid var(--a-border);
+      border-radius: var(--a-radius);
+      padding: 6px 10px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--a-text);
+      background: var(--a-white);
+    }
+
+    textarea {
+      border: 1px solid var(--a-border);
+      border-radius: var(--a-radius);
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 0.93rem;
+      color: var(--a-text);
+      background: var(--a-white);
+      resize: vertical;
+    }
+
+    p { margin-bottom: 6px; }
   </style>
 </head>
 <body>
@@ -118,7 +249,7 @@
 
       cachedItems = d.items;
       let html = '<p style="margin:0 0 8px;color:#888;font-size:0.9em;">' + d.items.length + ' Anfragen</p>';
-      html += '<table><thead><tr>';
+      html += '<div class="table-wrap"><table><thead><tr>';
       html += '<th>ID</th><th>Erstellt</th><th>Name</th><th>E-Mail</th><th>Status</th><th>Interne Mail</th><th>Interne Mail versucht</th><th>Event</th><th>Notiz</th>';
       html += '</tr></thead><tbody>';
 
@@ -139,7 +270,7 @@
         html += '</tr>';
       }
 
-      html += '</tbody></table>';
+      html += '</tbody></table></div>';
       document.getElementById('requests').innerHTML = html;
     }
 
