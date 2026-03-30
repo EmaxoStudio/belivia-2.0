@@ -174,7 +174,7 @@
         '<textarea id="detailNote" rows="4" style="width:100%;">' + esc(item.internal_note) + '</textarea></p>';
       html += '<p><button onclick="saveRequestDetail(' + item.id + ')">Speichern</button></p>';
       html += '<div id="detailSaveResult"></div>';
-      html += '<p><strong>Nachricht:</strong><br>' + esc(item.message) + '</p>';
+      html += '<p><strong>Nachricht:</strong><br><span style="white-space:pre-wrap">' + esc(item.message) + '</span></p>';
 
       html += '<h3>Events</h3>';
       if (!eventsData.items || !eventsData.items.length) {
@@ -199,15 +199,16 @@
 
       resultBox.innerHTML = '<p>Speichere...</p>';
 
-      const statusRes = await fetch('/api/admin/requests/' + requestId + '/status?status=' + encodeURIComponent(status), {
-        method: 'POST'
-      });
-
-      const noteRes = await fetch('/api/admin/requests/' + requestId + '/note', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ internal_note: note })
-      });
+      let statusRes, noteRes;
+      try {
+        [statusRes, noteRes] = await Promise.all([
+          fetch('/api/admin/requests/' + requestId + '/status?status=' + encodeURIComponent(status), { method: 'POST' }),
+          fetch('/api/admin/requests/' + requestId + '/note', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ internal_note: note }) })
+        ]);
+      } catch (e) {
+        resultBox.innerHTML = '<p>Netzwerkfehler beim Speichern.</p>';
+        return;
+      }
 
       if (!statusRes.ok || !noteRes.ok) {
         resultBox.innerHTML = '<p>Speichern fehlgeschlagen.</p>';
@@ -223,12 +224,18 @@
     async function retryConfirmationMail(requestId) {
       const resultBox = document.getElementById('retryConfResult');
       resultBox.innerHTML = '<p>Sende...</p>';
-      const res = await fetch('/api/admin/requests/' + requestId + '/retry-confirmation-mail', { method: 'POST' });
-      const d = await res.json();
+      let res, d;
+      try {
+        res = await fetch('/api/admin/requests/' + requestId + '/retry-confirmation-mail', { method: 'POST' });
+        d = await res.json();
+      } catch (e) {
+        resultBox.innerHTML = '<p>Netzwerkfehler beim Senden.</p>';
+        return;
+      }
       if (res.ok && d.status === 'sent') {
         resultBox.innerHTML = '<p>Bestätigungsmail gesendet.</p>';
       } else {
-        resultBox.innerHTML = '<p>Fehlgeschlagen: ' + (d.detail || d.status || 'Fehler') + '</p>';
+        resultBox.innerHTML = '<p>Fehlgeschlagen: ' + esc(d.detail || d.status || 'Fehler') + '</p>';
       }
       await loadRequestDetail(requestId, false);
     }
