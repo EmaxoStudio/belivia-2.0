@@ -61,8 +61,14 @@
     }
 
     async function loadOverview() {
-      const r = await fetch('/api/admin/day-overview');
-      const d = await r.json();
+      let d;
+      try {
+        const r = await fetch('/api/admin/day-overview');
+        d = await r.json();
+      } catch (e) {
+        document.getElementById('overview').innerHTML = '<p>Fehler beim Laden der Übersicht.</p>';
+        return;
+      }
       document.getElementById('overview').innerHTML =
         '<p><strong>Tag:</strong> ' + d.day + '</p>' +
         '<p><strong>Heute erstellt:</strong> ' + d.created_total + '</p>' +
@@ -73,8 +79,14 @@
       const status = document.getElementById('statusFilter').value;
       const url = status ? '/api/admin/requests?limit=100&status=' + encodeURIComponent(status) : '/api/admin/requests?limit=100';
 
-      const r = await fetch(url);
-      const d = await r.json();
+      let d;
+      try {
+        const r = await fetch(url);
+        d = await r.json();
+      } catch (e) {
+        document.getElementById('requests').innerHTML = '<p>Fehler beim Laden der Anfragen.</p>';
+        return;
+      }
 
       if (!d.items || !d.items.length) {
         cachedItems = [];
@@ -118,8 +130,14 @@
         return;
       }
 
-      const eventsRes = await fetch('/api/admin/requests/' + requestId + '/events');
-      const eventsData = await eventsRes.json();
+      let eventsData;
+      try {
+        const eventsRes = await fetch('/api/admin/requests/' + requestId + '/events');
+        eventsData = await eventsRes.json();
+      } catch (e) {
+        document.getElementById('requestDetail').innerHTML = '<p>Fehler beim Laden der Details.</p>';
+        return;
+      }
 
       let html = '';
       html += '<p><strong>ID:</strong> ' + item.id + '</p>';
@@ -197,6 +215,7 @@
       }
 
       resultBox.innerHTML = '<p>Gespeichert.</p>';
+      setTimeout(() => { if (resultBox) resultBox.innerHTML = ''; }, 3000);
       await loadRequests();
       await loadRequestDetail(requestId, false);
     }
