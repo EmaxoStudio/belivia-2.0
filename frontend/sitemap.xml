@@ -6,6 +6,21 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/leistungen/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/fuer-angehoerige/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/ueber-belivia/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://www.belivia-alltagsbegleitung.de/impressum/</loc>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
