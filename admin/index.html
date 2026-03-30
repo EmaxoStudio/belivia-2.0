@@ -58,7 +58,7 @@
 
     async function loadRequests() {
       const status = document.getElementById('statusFilter').value;
-      const url = status ? '/api/admin/requests?status=' + encodeURIComponent(status) : '/api/admin/requests';
+      const url = status ? '/api/admin/requests?limit=100&status=' + encodeURIComponent(status) : '/api/admin/requests?limit=100';
 
       const r = await fetch(url);
       const d = await r.json();
