@@ -71,7 +71,7 @@
       html += '</tr></thead><tbody>';
 
       for (const item of d.items) {
-        html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer">';
+        html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer' + (item.mail_status === 'failed' ? ';background:#fff0f0' : '') + '">';
         html += '<td>' + item.id + '</td>';
         html += '<td>' + (item.created_at || '') + '</td>';
         html += '<td>' + item.name + '</td>';
