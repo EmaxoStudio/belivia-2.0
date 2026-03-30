@@ -115,6 +115,14 @@
       html += '<p><strong>Mail:</strong> <code>' + (item.mail_status || '') + '</code></p>';
       html += '<p><strong>Mail versucht:</strong> ' + (item.mail_last_attempt_at || '') + '</p>';
       html += '<p><strong>Mailfehler:</strong> ' + (item.mail_last_error || '') + '</p>';
+
+      const lastConfEvent = (eventsData.items || [])
+        .filter(e => ['confirmation_mail_sent','confirmation_mail_failed','confirmation_mail_skipped'].includes(e.event_type))
+        .slice(-1)[0];
+      if (lastConfEvent && lastConfEvent.event_type === 'confirmation_mail_failed') {
+        html += '<p><strong>Bestätigungsmail:</strong> <code>failed</code> &nbsp; <button onclick="retryConfirmationMail(' + item.id + ')">Erneut senden</button></p>';
+        html += '<div id="retryConfResult"></div>';
+      }
       html += '<p><strong>Event-Datum:</strong> ' + (item.event_date || '') + '</p>';
       html += '<p><strong>Notiz:</strong><br>' +
         '<textarea id="detailNote" rows="4" style="width:100%;">' + (item.internal_note || '') + '</textarea></p>';
@@ -161,6 +169,19 @@
 
       resultBox.innerHTML = '<p>Gespeichert.</p>';
       await loadRequests();
+      await loadRequestDetail(requestId);
+    }
+
+    async function retryConfirmationMail(requestId) {
+      const resultBox = document.getElementById('retryConfResult');
+      resultBox.innerHTML = '<p>Sende...</p>';
+      const res = await fetch('/api/admin/requests/' + requestId + '/retry-confirmation-mail', { method: 'POST' });
+      const d = await res.json();
+      if (res.ok && d.status === 'sent') {
+        resultBox.innerHTML = '<p>Bestätigungsmail gesendet.</p>';
+      } else {
+        resultBox.innerHTML = '<p>Fehlgeschlagen: ' + (d.detail || d.status || 'Fehler') + '</p>';
+      }
       await loadRequestDetail(requestId);
     }
 

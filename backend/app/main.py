@@ -337,6 +337,56 @@ def update_mail_state(request_id: int, mail_status: str, mail_last_error: str | 
     con.commit()
     con.close()
 
+@app.post("/api/admin/requests/{request_id}/retry-confirmation-mail")
+def admin_retry_confirmation_mail(request_id: int):
+    con = db_conn()
+    cur = con.cursor()
+
+    row = cur.execute(
+        "SELECT id, name, email FROM contact_requests WHERE id = ?",
+        (request_id,),
+    ).fetchone()
+
+    if not row:
+        con.close()
+        raise HTTPException(status_code=404, detail="request_not_found")
+
+    name = row["name"]
+    email = row["email"]
+
+    last_conf_event = cur.execute(
+        """
+        SELECT event_type FROM request_events
+        WHERE request_id = ?
+          AND event_type IN ('confirmation_mail_sent', 'confirmation_mail_failed', 'confirmation_mail_skipped')
+        ORDER BY id DESC
+        LIMIT 1
+        """,
+        (request_id,),
+    ).fetchone()
+
+    con.close()
+
+    if not last_conf_event or last_conf_event["event_type"] != "confirmation_mail_failed":
+        raise HTTPException(status_code=409, detail="confirmation_mail_not_failed")
+
+    add_request_event(request_id, "confirmation_mail_retry_started", "Manual retry triggered by admin")
+
+    conf_status, conf_error = send_confirmation_mail(
+        contact_id=request_id,
+        name=name,
+        email=email,
+    )
+
+    if conf_status == "sent":
+        add_request_event(request_id, "confirmation_mail_sent", "Confirmation mail sent to submitter (retry)")
+    elif conf_status == "failed":
+        add_request_event(request_id, "confirmation_mail_failed", conf_error)
+    elif conf_status == "skipped_not_configured":
+        add_request_event(request_id, "confirmation_mail_skipped", "Mail config incomplete")
+
+    return {"status": conf_status, "id": request_id}
+
 @app.get("/api/admin/requests/{request_id}/events")
 def admin_request_events(request_id: int):
     con = db_conn()
