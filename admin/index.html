@@ -79,7 +79,7 @@
       cachedItems = d.items;
       let html = '<p style="margin:0 0 8px;color:#888;font-size:0.9em;">' + d.items.length + ' Anfragen</p>';
       html += '<table><thead><tr>';
-      html += '<th>ID</th><th>Erstellt</th><th>Name</th><th>E-Mail</th><th>Status</th><th>Mail</th><th>Mail versucht</th><th>Event</th><th>Notiz</th>';
+      html += '<th>ID</th><th>Erstellt</th><th>Name</th><th>E-Mail</th><th>Status</th><th>Interne Mail</th><th>Interne Mail versucht</th><th>Event</th><th>Notiz</th>';
       html += '</tr></thead><tbody>';
 
       for (const item of d.items) {
@@ -124,9 +124,9 @@
         '<option value="done"' + (item.status === 'done' ? ' selected' : '') + '>done</option>' +
         '<option value="archived"' + (item.status === 'archived' ? ' selected' : '') + '>archived</option>' +
         '</select></p>';
-      html += '<p><strong>Mail:</strong> <code>' + (item.mail_status || '') + '</code></p>';
-      html += '<p><strong>Mail versucht:</strong> ' + fmt(item.mail_last_attempt_at) + '</p>';
-      html += '<p><strong>Mailfehler:</strong> ' + (item.mail_last_error || '') + '</p>';
+      html += '<p><strong>Interne Mail:</strong> <code>' + (item.mail_status || '') + '</code></p>';
+      html += '<p><strong>Interne Mail versucht:</strong> ' + fmt(item.mail_last_attempt_at) + '</p>';
+      html += '<p><strong>Interne Mail Fehler:</strong> ' + (item.mail_last_error || '') + '</p>';
 
       const lastConfEvent = (eventsData.items || [])
         .filter(e => ['confirmation_mail_sent','confirmation_mail_failed','confirmation_mail_skipped'].includes(e.event_type))
