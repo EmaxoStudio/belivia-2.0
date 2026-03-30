@@ -47,6 +47,13 @@
   <script>
     let cachedItems = [];
 
+    function fmt(ts) {
+      if (!ts) return '';
+      const d = new Date(ts);
+      if (isNaN(d)) return ts;
+      return d.toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    }
+
     async function loadOverview() {
       const r = await fetch('/api/admin/day-overview');
       const d = await r.json();
@@ -78,12 +85,12 @@
       for (const item of d.items) {
         html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer' + (item.mail_status === 'failed' ? ';background:#fff0f0' : '') + '">';
         html += '<td>' + item.id + '</td>';
-        html += '<td>' + (item.created_at || '') + '</td>';
+        html += '<td>' + fmt(item.created_at) + '</td>';
         html += '<td>' + item.name + '</td>';
         html += '<td>' + item.email + '</td>';
         html += '<td><code>' + item.status + '</code></td>';
         html += '<td><code>' + (item.mail_status || '') + '</code></td>';
-        html += '<td>' + (item.mail_last_attempt_at || '') + '</td>';
+        html += '<td>' + fmt(item.mail_last_attempt_at) + '</td>';
         html += '<td>' + (item.event_date || '') + '</td>';
         html += '<td>' + (item.internal_note || '') + '</td>';
         html += '</tr>';
@@ -106,7 +113,7 @@
 
       let html = '';
       html += '<p><strong>ID:</strong> ' + item.id + '</p>';
-      html += '<p><strong>Erstellt:</strong> ' + (item.created_at || '') + '</p>';
+      html += '<p><strong>Erstellt:</strong> ' + fmt(item.created_at) + '</p>';
       html += '<p><strong>Name:</strong> ' + item.name + '</p>';
       html += '<p><strong>E-Mail:</strong> ' + item.email + '</p>';
       html += '<p><strong>Telefon:</strong> ' + (item.phone || '') + '</p>';
@@ -118,7 +125,7 @@
         '<option value="archived"' + (item.status === 'archived' ? ' selected' : '') + '>archived</option>' +
         '</select></p>';
       html += '<p><strong>Mail:</strong> <code>' + (item.mail_status || '') + '</code></p>';
-      html += '<p><strong>Mail versucht:</strong> ' + (item.mail_last_attempt_at || '') + '</p>';
+      html += '<p><strong>Mail versucht:</strong> ' + fmt(item.mail_last_attempt_at) + '</p>';
       html += '<p><strong>Mailfehler:</strong> ' + (item.mail_last_error || '') + '</p>';
 
       const lastConfEvent = (eventsData.items || [])
@@ -141,7 +148,7 @@
       } else {
         html += '<ul>';
         for (const ev of eventsData.items) {
-          html += '<li><strong>' + ev.created_at + '</strong> — ' + ev.event_type + ' — ' + (ev.event_data || '') + '</li>';
+          html += '<li><strong>' + fmt(ev.created_at) + '</strong> — ' + ev.event_type + ' — ' + (ev.event_data || '') + '</li>';
         }
         html += '</ul>';
       }
