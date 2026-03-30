@@ -67,12 +67,13 @@
       }
 
       let html = '<table><thead><tr>';
-      html += '<th>ID</th><th>Name</th><th>E-Mail</th><th>Status</th><th>Mail</th><th>Mail versucht</th><th>Event</th><th>Notiz</th>';
+      html += '<th>ID</th><th>Erstellt</th><th>Name</th><th>E-Mail</th><th>Status</th><th>Mail</th><th>Mail versucht</th><th>Event</th><th>Notiz</th>';
       html += '</tr></thead><tbody>';
 
       for (const item of d.items) {
         html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer">';
         html += '<td>' + item.id + '</td>';
+        html += '<td>' + (item.created_at || '') + '</td>';
         html += '<td>' + item.name + '</td>';
         html += '<td>' + item.email + '</td>';
         html += '<td><code>' + item.status + '</code></td>';
@@ -102,6 +103,7 @@
 
       let html = '';
       html += '<p><strong>ID:</strong> ' + item.id + '</p>';
+      html += '<p><strong>Erstellt:</strong> ' + (item.created_at || '') + '</p>';
       html += '<p><strong>Name:</strong> ' + item.name + '</p>';
       html += '<p><strong>E-Mail:</strong> ' + item.email + '</p>';
       html += '<p><strong>Telefon:</strong> ' + (item.phone || '') + '</p>';
