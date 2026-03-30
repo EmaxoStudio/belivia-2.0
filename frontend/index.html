@@ -2,11 +2,788 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title>Belivia Preview</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Belivia – Alltagsbegleitung für Senioren</title>
+  <meta name="description" content="Belivia bietet persönliche Alltagsbegleitung für Senioren und verlässliche Unterstützung für pflegende Angehörige. Menschlich, diskret und zuverlässig.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Belivia",
+    "description": "Alltagsbegleitung für Senioren und pflegende Angehörige",
+    "@id": "https://belivia.de",
+    "url": "https://belivia.de"
+  }
+  </script>
+  <style>
+    :root {
+      --c-primary:      #1e5a8e;
+      --c-primary-dark: #154275;
+      --c-text:         #1f2d3d;
+      --c-text-soft:    #55687a;
+      --c-bg:           #ffffff;
+      --c-bg-alt:       #f4f8fc;
+      --c-border:       #d4e0ec;
+      --c-success-bg:   #e8f5ee;
+      --c-success-text: #1f5c38;
+      --c-error-bg:     #fdecea;
+      --c-error-text:   #8c2020;
+      --max-w:          960px;
+      --radius:         8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 17px; }
+
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      line-height: 1.75;
+      color: var(--c-text);
+      background: var(--c-bg);
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Navigation ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--c-bg);
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--c-text);
+      font-size: 0.95rem;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--c-primary); }
+
+    .nav-links .nav-cta {
+      background: var(--c-primary);
+      color: #fff;
+      padding: 7px 18px;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .nav-links .nav-cta:hover {
+      background: var(--c-primary-dark);
+      color: #fff;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--c-text);
+      padding: 4px 8px;
+    }
+
+    @media (max-width: 680px) {
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--c-bg);
+        flex-direction: column;
+        gap: 0;
+        border-bottom: 1px solid var(--c-border);
+        padding: 8px 0 12px;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links li { width: 100%; }
+
+      .nav-links a {
+        display: block;
+        padding: 10px 24px;
+      }
+
+      .nav-links .nav-cta {
+        margin: 8px 24px 0;
+        display: inline-block;
+        width: auto;
+      }
+    }
+
+    /* ── Sections ── */
+    section { padding: 72px 0; }
+    section.alt { background: var(--c-bg-alt); }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--c-text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--c-text-soft);
+      margin-bottom: 40px;
+      max-width: 640px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--c-bg-alt);
+      padding: 88px 0 80px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--c-text);
+      max-width: 700px;
+      margin: 0 auto 20px;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--c-text-soft);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 60px 0; }
+      .hero h1 { font-size: 1.6rem; }
+    }
+
+    /* ── Button ── */
+    .btn {
+      display: inline-block;
+      background: var(--c-primary);
+      color: #fff;
+      padding: 13px 30px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn:hover { background: var(--c-primary-dark); }
+
+    /* ── Services grid ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--c-bg);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--c-text);
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: var(--c-text-soft);
+    }
+
+    /* ── Für Angehörige ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .two-col { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .two-col p + p { margin-top: 14px; }
+
+    .two-col h2 { margin-bottom: 16px; }
+
+    .check-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .check-list li {
+      padding: 6px 0 6px 28px;
+      position: relative;
+      font-size: 0.97rem;
+    }
+
+    .check-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--c-primary);
+      font-weight: 700;
+    }
+
+    .angehoerige-note {
+      background: var(--c-bg);
+      border-left: 4px solid var(--c-primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 28px 28px 24px;
+    }
+
+    .angehoerige-note p {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--c-text);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .angehoerige-note span {
+      font-size: 0.88rem;
+      color: var(--c-text-soft);
+    }
+
+    /* ── Vertrauen / Trust ── */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .trust-item {
+      padding: 24px 20px;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+    }
+
+    .trust-icon {
+      font-size: 1.3rem;
+      color: var(--c-primary);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .trust-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .trust-item p {
+      font-size: 0.93rem;
+      color: var(--c-text-soft);
+    }
+
+    /* ── FAQ ── */
+    .faq-container { max-width: 720px; }
+
+    .faq-list {
+      margin-top: 36px;
+      border-top: 1px solid var(--c-border);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    .faq-item summary {
+      padding: 18px 0;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.3rem;
+      color: var(--c-primary);
+      flex-shrink: 0;
+      font-weight: 400;
+      transition: transform 0.15s;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item p {
+      padding: 0 0 18px;
+      color: var(--c-text-soft);
+      font-size: 0.97rem;
+    }
+
+    /* ── Contact form ── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+      margin-top: 36px;
+    }
+
+    @media (max-width: 720px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    .contact-info p { color: var(--c-text-soft); font-size: 0.95rem; }
+    .contact-info p + p { margin-top: 14px; }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--c-text);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--c-text);
+      background: var(--c-bg);
+      border: 1px solid var(--c-border);
+      border-radius: 5px;
+      padding: 10px 12px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      appearance: auto;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--c-primary);
+      box-shadow: 0 0 0 3px rgba(30, 90, 142, 0.12);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-group--check { flex-direction: row; align-items: flex-start; gap: 10px; }
+    .form-group--check label { font-weight: 400; font-size: 0.9rem; color: var(--c-text-soft); line-height: 1.5; }
+    .form-group--check input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; width: 17px; height: 17px; cursor: pointer; }
+    .form-group--check a { color: var(--c-primary); }
+
+    .form-error {
+      background: var(--c-error-bg);
+      color: var(--c-error-text);
+      border-radius: 5px;
+      padding: 12px 16px;
+      font-size: 0.93rem;
+    }
+
+    .form-success {
+      background: var(--c-success-bg);
+      color: var(--c-success-text);
+      border-radius: 5px;
+      padding: 16px 20px;
+      font-size: 0.97rem;
+      line-height: 1.6;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--c-text);
+      color: rgba(255,255,255,0.7);
+      padding: 28px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-inner p { font-size: 0.88rem; }
+
+    .footer-nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-nav a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.15s;
+    }
+
+    .footer-nav a:hover { color: #fff; }
+  </style>
 </head>
 <body>
-  <h1>Belivia 2.0 Preview</h1>
-  <p>Neue Preview-Umgebung auf belivia-prod-01.</p>
+
+<header>
+  <nav>
+    <div class="container nav-inner">
+      <a href="#start" class="nav-brand">Belivia</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">&#9776;</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#angehoerige">Für Angehörige</a></li>
+        <li><a href="#vertrauen">Über uns</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="start">
+    <div class="container">
+      <h1>Verlässliche Alltagsbegleitung –<br>damit das Leben leichter wird</h1>
+      <p class="hero-sub">Belivia unterstützt Senioren und ihre Familien mit persönlicher, menschlicher Hilfe im Alltag – verlässlich, diskret und individuell abgestimmt.</p>
+      <a href="#kontakt" class="btn">Jetzt Kontakt aufnehmen</a>
+    </div>
+  </section>
+
+  <section id="leistungen">
+    <div class="container">
+      <h2>Was wir anbieten</h2>
+      <p class="section-lead">Wir unterstützen dort, wo Hilfe gebraucht wird – im eigenen Tempo, ohne Druck.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">&#128172;</div>
+          <h3>Gesellschaft &amp; Gespräche</h3>
+          <p>Gemeinsam spazieren, plaudern, vorlesen – Alltag teilen und Einsamkeit entgegenwirken.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#128661;</div>
+          <h3>Begleitung &amp; Fahrten</h3>
+          <p>Beim Arztbesuch, Behördengang oder Einkauf – zuverlässige Begleitung, wenn es darauf ankommt.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#127968;</div>
+          <h3>Alltagsunterstützung</h3>
+          <p>Kleine Erledigungen, Behördenbriefe, Einkaufshilfe – Unterstützung, die den Alltag spürbar leichter macht.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#127795;</div>
+          <h3>Spazieren &amp; Aktivitäten</h3>
+          <p>Frische Luft und Bewegung im eigenen Tempo – für mehr Wohlbefinden und Lebensqualität.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#128149;</div>
+          <h3>Entlastung für Familien</h3>
+          <p>Verlässliche Unterstützung, damit auch pflegende Angehörige Kraft schöpfen können.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#10024;</div>
+          <h3>Individuelle Begleitung</h3>
+          <p>Abgestimmt auf Wünsche, Gewohnheiten und Lebensrhythmus – kein Schema, sondern Mensch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="angehoerige" class="alt">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <h2>Für pflegende Angehörige</h2>
+          <p>Sie möchten, dass Ihr Angehöriger gut versorgt ist – auch wenn Sie nicht täglich vor Ort sein können. Das ist eine Situation, die viele Familien kennen.</p>
+          <p>Belivia bietet verlässliche, menschliche Unterstützung, die das Leben für alle ein Stück leichter macht. Wir sind Ihr persönlicher Ansprechpartner – und halten Sie auf dem Laufenden.</p>
+          <ul class="check-list">
+            <li>Feste Begleitpersonen, die man kennt und denen man vertraut</li>
+            <li>Offene Kommunikation mit der Familie</li>
+            <li>Flexible Einsätze, abgestimmt auf Ihren Bedarf</li>
+            <li>Kein bürokratischer Aufwand – einfach anrufen oder schreiben</li>
+          </ul>
+        </div>
+        <div class="angehoerige-note">
+          <p>&#8222;Ich lebe weit entfernt und musste lange damit leben, nicht täglich nach Mama sehen zu können. Belivia hat das für unsere Familie möglich gemacht.&#8220;</p>
+          <span>– Angehörige, München</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vertrauen">
+    <div class="container">
+      <h2>Warum Belivia</h2>
+      <p class="section-lead">Wir glauben, dass gute Unterstützung im Alltag das Leben lebenswerter macht – in jedem Alter.</p>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">&#10003;</div>
+          <h3>Persönlich</h3>
+          <p>Keine anonymen Dienste. Sie haben feste Ansprechpartner, die Sie und Ihre Situation kennen.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">&#10003;</div>
+          <h3>Zuverlässig</h3>
+          <p>Wir kommen, wenn wir es versprechen – pünktlich und beständig.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">&#10003;</div>
+          <h3>Diskret</h3>
+          <p>Vertrauen ist die Grundlage unserer Arbeit. Ihre Privatsphäre ist uns wichtig.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">&#10003;</div>
+          <h3>Erfahren</h3>
+          <p>Wir arbeiten mit Sorgfalt, Einfühlungsvermögen und echtem Interesse an den Menschen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="alt">
+    <div class="container faq-container">
+      <h2>Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Für wen ist Belivia geeignet?</summary>
+          <p>Belivia richtet sich an Senioren, die sich im Alltag Gesellschaft oder praktische Unterstützung wünschen – und an Angehörige, die eine verlässliche Begleitung für ihre Eltern oder Großeltern suchen.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Wie läuft der erste Kontakt ab?</summary>
+          <p>Nehmen Sie einfach Kontakt über das Formular auf oder rufen Sie uns an. Wir melden uns zeitnah und besprechen gemeinsam unverbindlich, wie wir helfen können – ganz ohne Druck.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Was kostet die Unterstützung?</summary>
+          <p>Die Kosten hängen vom Umfang und der Art der Begleitung ab. Gerne beraten wir Sie dazu unverbindlich in einem ersten Gespräch.</p>
+        </details>
+        <details class="faq-item">
+          <summary>In welchen Regionen ist Belivia tätig?</summary>
+          <p>Wir sind regional tätig. Nehmen Sie Kontakt auf – wir informieren Sie gerne, ob wir auch in Ihrer Nähe verfügbar sind.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Kann ich Belivia auch nur für einzelne Termine buchen?</summary>
+          <p>Ja. Ob regelmäßige Begleitung oder einzelne Termine – wir passen uns Ihrem Bedarf an. Sprechen Sie uns einfach an.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <h2>Kontakt aufnehmen</h2>
+      <p class="section-lead">Wir melden uns persönlich und nehmen uns Zeit für Ihr Anliegen.</p>
+      <div class="contact-layout">
+        <div class="contact-info">
+          <p>Nutzen Sie das Formular für eine unverbindliche Anfrage oder einen Rückrufwunsch. Wir antworten in der Regel innerhalb eines Werktages.</p>
+          <p>Alle Felder mit * sind erforderlich.</p>
+        </div>
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="anfrageart">Art der Anfrage *</label>
+            <select id="anfrageart" name="anfrageart" required>
+              <option value="">Bitte wählen …</option>
+              <option value="allgemeine-anfrage">Allgemeine Anfrage</option>
+              <option value="rueckrufwunsch">Rückrufwunsch</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Vor- und Nachname">
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefonnummer <span id="phoneLabel"></span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Für einen Rückruf">
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse *</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="ihre@email.de">
+          </div>
+          <div class="form-group">
+            <label for="message">Ihr Anliegen *</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Schildern Sie kurz, wie wir helfen können …"></textarea>
+          </div>
+          <div class="form-group form-group--check">
+            <input type="checkbox" id="privacy" name="privacy" required>
+            <label for="privacy">Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. *</label>
+          </div>
+          <div id="formError" class="form-error" role="alert" hidden></div>
+          <div id="formSuccess" class="form-success" role="status" hidden>
+            <strong>Vielen Dank für Ihre Nachricht.</strong><br>
+            Wir melden uns so bald wie möglich bei Ihnen.
+          </div>
+          <button type="submit" class="btn" id="submitBtn">Anfrage senden</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> Belivia. Alle Rechte vorbehalten.</p>
+    <nav class="footer-nav">
+      <a href="/impressum">Impressum</a>
+      <a href="/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  document.getElementById('navToggle').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Phone required only for callback
+  document.getElementById('anfrageart').addEventListener('change', function () {
+    var phoneInput = document.getElementById('phone');
+    var phoneLabel = document.getElementById('phoneLabel');
+    if (this.value === 'rueckrufwunsch') {
+      phoneInput.required = true;
+      phoneLabel.textContent = '*';
+    } else {
+      phoneInput.required = false;
+      phoneLabel.textContent = '';
+    }
+  });
+
+  // Form submission
+  document.getElementById('contactForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    var submitBtn = document.getElementById('submitBtn');
+    var errorBox  = document.getElementById('formError');
+    var successBox = document.getElementById('formSuccess');
+
+    errorBox.hidden  = true;
+    successBox.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet \u2026';
+
+    var anfrageart = document.getElementById('anfrageart').value;
+    var name       = document.getElementById('name').value.trim();
+    var phone      = document.getElementById('phone').value.trim();
+    var email      = document.getElementById('email').value.trim();
+    var message    = document.getElementById('message').value.trim();
+    var privacy    = document.getElementById('privacy').checked;
+
+    if (!anfrageart || !name || !email || !message || !privacy) {
+      errorBox.textContent = 'Bitte füllen Sie alle Pflichtfelder aus.';
+      errorBox.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Anfrage senden';
+      return;
+    }
+
+    if (anfrageart === 'rueckrufwunsch' && !phone) {
+      errorBox.textContent = 'Für einen Rückrufwunsch ist eine Telefonnummer erforderlich.';
+      errorBox.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Anfrage senden';
+      return;
+    }
+
+    try {
+      var res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    name,
+          email:   email,
+          phone:   phone || null,
+          message: message,
+          source:  anfrageart
+        })
+      });
+
+      if (res.ok) {
+        this.reset();
+        document.getElementById('phoneLabel').textContent = '';
+        successBox.hidden = false;
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        errorBox.textContent = 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
+        errorBox.hidden = false;
+      }
+    } catch (err) {
+      errorBox.textContent = 'Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.';
+      errorBox.hidden = false;
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Anfrage senden';
+  });
+</script>
+
 </body>
 </html>
