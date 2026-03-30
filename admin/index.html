@@ -48,6 +48,11 @@
     let cachedItems = [];
     let selectedId = null;
 
+    function esc(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
     function fmt(ts) {
       if (!ts) return '';
       const d = new Date(ts);
@@ -90,13 +95,13 @@
         html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer' + (rowBg ? ';background:' + rowBg : '') + '">';
         html += '<td>' + item.id + '</td>';
         html += '<td>' + fmt(item.created_at) + '</td>';
-        html += '<td>' + item.name + '</td>';
-        html += '<td>' + item.email + '</td>';
+        html += '<td>' + esc(item.name) + '</td>';
+        html += '<td>' + esc(item.email) + '</td>';
         html += '<td><code>' + item.status + '</code></td>';
         html += '<td><code>' + (item.mail_status || '') + '</code></td>';
         html += '<td>' + fmt(item.mail_last_attempt_at) + '</td>';
-        html += '<td>' + (item.event_date || '') + '</td>';
-        html += '<td>' + noteDisplay + '</td>';
+        html += '<td>' + esc(item.event_date) + '</td>';
+        html += '<td>' + esc(noteDisplay) + '</td>';
         html += '</tr>';
       }
 
@@ -108,20 +113,20 @@
       selectedId = requestId;
       const item = cachedItems.find(x => x.id === requestId);
 
-      const eventsRes = await fetch('/api/admin/requests/' + requestId + '/events');
-      const eventsData = await eventsRes.json();
-
       if (!item) {
         document.getElementById('requestDetail').innerHTML = '<p>Anfrage nicht gefunden.</p>';
         return;
       }
 
+      const eventsRes = await fetch('/api/admin/requests/' + requestId + '/events');
+      const eventsData = await eventsRes.json();
+
       let html = '';
       html += '<p><strong>ID:</strong> ' + item.id + '</p>';
       html += '<p><strong>Erstellt:</strong> ' + fmt(item.created_at) + '</p>';
-      html += '<p><strong>Name:</strong> ' + item.name + '</p>';
-      html += '<p><strong>E-Mail:</strong> ' + item.email + '</p>';
-      html += '<p><strong>Telefon:</strong> ' + (item.phone || '') + '</p>';
+      html += '<p><strong>Name:</strong> ' + esc(item.name) + '</p>';
+      html += '<p><strong>E-Mail:</strong> ' + esc(item.email) + '</p>';
+      if (item.phone) html += '<p><strong>Telefon:</strong> ' + esc(item.phone) + '</p>';
       html += '<p><strong>Status:</strong> ' +
         '<select id="detailStatus">' +
         '<option value="new"' + (item.status === 'new' ? ' selected' : '') + '>new</option>' +
@@ -131,21 +136,27 @@
         '</select></p>';
       html += '<p><strong>Interne Mail:</strong> <code>' + (item.mail_status || '') + '</code></p>';
       html += '<p><strong>Interne Mail versucht:</strong> ' + fmt(item.mail_last_attempt_at) + '</p>';
-      html += '<p><strong>Interne Mail Fehler:</strong> ' + (item.mail_last_error || '') + '</p>';
+      if (item.mail_last_error) html += '<p><strong>Interne Mail Fehler:</strong> ' + esc(item.mail_last_error) + '</p>';
 
       const lastConfEvent = (eventsData.items || [])
         .filter(e => ['confirmation_mail_sent','confirmation_mail_failed','confirmation_mail_skipped'].includes(e.event_type))
         .slice(-1)[0];
-      if (lastConfEvent && lastConfEvent.event_type === 'confirmation_mail_failed') {
-        html += '<p><strong>Bestätigungsmail:</strong> <code>failed</code> &nbsp; <button onclick="retryConfirmationMail(' + item.id + ')">Erneut senden</button></p>';
-        html += '<div id="retryConfResult"></div>';
+      if (lastConfEvent) {
+        if (lastConfEvent.event_type === 'confirmation_mail_failed') {
+          html += '<p><strong>Bestätigungsmail:</strong> <code>failed</code> &nbsp; <button onclick="retryConfirmationMail(' + item.id + ')">Erneut senden</button></p>';
+          html += '<div id="retryConfResult"></div>';
+        } else if (lastConfEvent.event_type === 'confirmation_mail_sent') {
+          html += '<p><strong>Bestätigungsmail:</strong> <code>sent</code></p>';
+        } else if (lastConfEvent.event_type === 'confirmation_mail_skipped') {
+          html += '<p><strong>Bestätigungsmail:</strong> <code>skipped</code></p>';
+        }
       }
-      html += '<p><strong>Event-Datum:</strong> ' + (item.event_date || '') + '</p>';
+      if (item.event_date) html += '<p><strong>Event-Datum:</strong> ' + esc(item.event_date) + '</p>';
       html += '<p><strong>Notiz:</strong><br>' +
-        '<textarea id="detailNote" rows="4" style="width:100%;">' + (item.internal_note || '') + '</textarea></p>';
+        '<textarea id="detailNote" rows="4" style="width:100%;">' + esc(item.internal_note) + '</textarea></p>';
       html += '<p><button onclick="saveRequestDetail(' + item.id + ')">Speichern</button></p>';
       html += '<div id="detailSaveResult"></div>';
-      html += '<p><strong>Nachricht:</strong><br>' + (item.message || '') + '</p>';
+      html += '<p><strong>Nachricht:</strong><br>' + esc(item.message) + '</p>';
 
       html += '<h3>Events</h3>';
       if (!eventsData.items || !eventsData.items.length) {
@@ -153,7 +164,7 @@
       } else {
         html += '<ul>';
         for (const ev of eventsData.items) {
-          html += '<li><strong>' + fmt(ev.created_at) + '</strong> — ' + ev.event_type + ' — ' + (ev.event_data || '') + '</li>';
+          html += '<li><strong>' + fmt(ev.created_at) + '</strong> — ' + esc(ev.event_type) + ' — ' + esc(ev.event_data) + '</li>';
         }
         html += '</ul>';
       }
