@@ -197,6 +197,20 @@
       margin: 0 auto 36px;
     }
 
+    .hero-call {
+      margin-top: 16px;
+      font-size: 0.97rem;
+      color: var(--c-text-soft);
+    }
+
+    .hero-call a {
+      color: var(--c-primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .hero-call a:hover { text-decoration: underline; }
+
     @media (max-width: 600px) {
       .hero { padding: 60px 0; }
       .hero h1 { font-size: 1.6rem; }
@@ -575,6 +589,7 @@
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#angehoerige">Für Angehörige</a></li>
         <li><a href="#vertrauen">Über uns</a></li>
+        <li><a href="#ablauf">Ablauf</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
       </ul>
@@ -589,6 +604,7 @@
       <h1>Verlässliche Alltagsbegleitung –<br>damit das Leben leichter wird</h1>
       <p class="hero-sub">Belivia unterstützt Senioren und ihre Familien im Kreis Mettmann mit persönlicher, menschlicher Hilfe im Alltag – verlässlich, diskret und individuell abgestimmt.</p>
       <a href="#kontakt" class="btn">Jetzt Kontakt aufnehmen</a>
+      <p class="hero-call">oder direkt anrufen: <a href="tel:+4917621772620">0176 21772620</a></p>
       <div class="img-placeholder hero-img" aria-hidden="true">Foto folgt</div>
     </div>
   </section>
@@ -610,8 +626,8 @@
         </div>
         <div class="service-card">
           <div class="service-icon">&#127968;</div>
-          <h3>Alltagsunterstützung</h3>
-          <p>Kleine Erledigungen, Behördenbriefe, Einkaufshilfe – Unterstützung, die den Alltag spürbar leichter macht.</p>
+          <h3>Hauswirtschaft &amp; Alltagshilfe</h3>
+          <p>Unterstützung beim Kochen, Einkaufen, kleinen Erledigungen und Behördenpost – damit der Alltag zu Hause gelingt.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">&#127795;</div>
@@ -650,7 +666,7 @@
           <div class="img-placeholder angehoerige-img" aria-hidden="true">Foto folgt</div>
           <div class="angehoerige-note">
             <p>&#8222;Ich lebe weit entfernt und musste lange damit leben, nicht täglich nach Mama sehen zu können. Belivia hat das für unsere Familie möglich gemacht.&#8220;</p>
-            <span>– Angehörige, München</span>
+            <span>– Angehörige, Kreis Mettmann</span>
           </div>
         </div>
       </div>
@@ -733,11 +749,15 @@
         </details>
         <details class="faq-item">
           <summary>In welchen Regionen ist Belivia tätig?</summary>
-          <p>Wir sind regional tätig. Nehmen Sie Kontakt auf – wir informieren Sie gerne, ob wir auch in Ihrer Nähe verfügbar sind.</p>
+          <p>Belivia ist im Kreis Mettmann tätig, mit Schwerpunkt in Hilden und der näheren Umgebung. Bei Fragen zu Ihrer konkreten Lage sprechen Sie uns einfach an.</p>
         </details>
         <details class="faq-item">
           <summary>Kann ich Belivia auch nur für einzelne Termine buchen?</summary>
           <p>Ja. Ob regelmäßige Begleitung oder einzelne Termine – wir passen uns Ihrem Bedarf an. Sprechen Sie uns einfach an.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Kann die Begleitung über die Pflegekasse abgerechnet werden?</summary>
+          <p>Ja. Belivia ist anerkannt nach § 45a SGB XI. Das bedeutet, dass Leistungen im Rahmen des Entlastungsbetrags der Pflegekasse (bis zu 125 € monatlich) abgerechnet werden können. Wir unterstützen Sie gerne bei den notwendigen Schritten.</p>
         </details>
       </div>
     </div>
@@ -775,6 +795,15 @@
           <div class="form-group">
             <label for="email">E-Mail-Adresse *</label>
             <input type="email" id="email" name="email" required autocomplete="email" placeholder="ihre@email.de">
+          </div>
+          <div class="form-group">
+            <label for="rolle">Ich bin …</label>
+            <select id="rolle" name="rolle">
+              <option value="">Bitte wählen (optional)</option>
+              <option value="angehoerige">Angehörige / Angehöriger</option>
+              <option value="senior">Senior / Seniorin selbst</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="ort">Ort oder PLZ</label>
@@ -855,6 +884,7 @@
     var name       = document.getElementById('name').value.trim();
     var phone      = document.getElementById('phone').value.trim();
     var email      = document.getElementById('email').value.trim();
+    var rolle      = document.getElementById('rolle').value;
     var ort        = document.getElementById('ort').value.trim();
     var message    = document.getElementById('message').value.trim();
     var privacy    = document.getElementById('privacy').checked;
@@ -883,7 +913,7 @@
           name:    name,
           email:   email,
           phone:   phone || null,
-          message: ort ? 'Ort/PLZ: ' + ort + '\n\n' + message : message,
+          message: [rolle ? 'Ich bin: ' + rolle : '', ort ? 'Ort/PLZ: ' + ort : '', message].filter(Boolean).join('\n\n'),
           source:  anfrageart
         })
       });
