@@ -53,6 +53,13 @@
       return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
+    function fmtDate(s) {
+      if (!s) return '';
+      const parts = s.split('-');
+      if (parts.length === 3) return parts[2] + '.' + parts[1] + '.' + parts[0];
+      return s;
+    }
+
     function fmt(ts) {
       if (!ts) return '';
       const d = new Date(ts);
@@ -69,10 +76,25 @@
         document.getElementById('overview').innerHTML = '<p>Fehler beim Laden der Übersicht.</p>';
         return;
       }
-      document.getElementById('overview').innerHTML =
-        '<p><strong>Tag:</strong> ' + d.day + '</p>' +
-        '<p><strong>Heute erstellt:</strong> ' + d.created_total + '</p>' +
-        '<p><strong>Termine am Tag:</strong> ' + d.events_total + '</p>';
+      const byStatus = d.created_by_status || {};
+      const statusParts = ['new','in_progress','done','archived']
+        .filter(s => byStatus[s])
+        .map(s => s + ': ' + byStatus[s])
+        .join(', ');
+
+      let overviewHtml = '<p><strong>Tag:</strong> ' + fmtDate(d.day) + '</p>';
+      overviewHtml += '<p><strong>Heute erstellt:</strong> ' + d.created_total + (statusParts ? ' &nbsp;<span style="color:#888;font-size:0.9em;">(' + statusParts + ')</span>' : '') + '</p>';
+      overviewHtml += '<p><strong>Termine am Tag:</strong> ' + d.events_total + '</p>';
+
+      if (d.events_on_day && d.events_on_day.length) {
+        overviewHtml += '<ul style="margin:4px 0 0 0;padding-left:20px;">';
+        for (const ev of d.events_on_day) {
+          overviewHtml += '<li>' + esc(ev.name) + ' — ' + esc(ev.email) + (ev.phone ? ' — ' + esc(ev.phone) : '') + ' <code>' + esc(ev.status) + '</code></li>';
+        }
+        overviewHtml += '</ul>';
+      }
+
+      document.getElementById('overview').innerHTML = overviewHtml;
     }
 
     async function loadRequests() {
@@ -112,7 +134,7 @@
         html += '<td><code>' + item.status + '</code></td>';
         html += '<td><code>' + (item.mail_status || '') + '</code></td>';
         html += '<td>' + fmt(item.mail_last_attempt_at) + '</td>';
-        html += '<td>' + esc(item.event_date) + '</td>';
+        html += '<td>' + fmtDate(item.event_date) + '</td>';
         html += '<td>' + esc(noteDisplay) + '</td>';
         html += '</tr>';
       }
@@ -169,7 +191,7 @@
           html += '<p><strong>Bestätigungsmail:</strong> <code>skipped</code></p>';
         }
       }
-      if (item.event_date) html += '<p><strong>Event-Datum:</strong> ' + esc(item.event_date) + '</p>';
+      if (item.event_date) html += '<p><strong>Event-Datum:</strong> ' + fmtDate(item.event_date) + '</p>';
       html += '<p><strong>Notiz:</strong><br>' +
         '<textarea id="detailNote" rows="4" style="width:100%;">' + esc(item.internal_note) + '</textarea></p>';
       html += '<p><button onclick="saveRequestDetail(' + item.id + ')">Speichern</button></p>';
@@ -243,8 +265,7 @@
     document.getElementById('reloadBtn').addEventListener('click', loadRequests);
     document.getElementById('statusFilter').addEventListener('change', loadRequests);
 
-    loadOverview();
-    loadRequests();
+    Promise.all([loadOverview(), loadRequests()]);
   </script>
 </body>
 </html>
