@@ -81,6 +81,19 @@ def create_contact(payload: ContactIn):
     elif mail_status == "skipped_not_configured":
         add_request_event(new_id, "mail_skipped", "Mail config incomplete")
 
+    conf_status, conf_error = send_confirmation_mail(
+        contact_id=new_id,
+        name=name,
+        email=email,
+    )
+
+    if conf_status == "sent":
+        add_request_event(new_id, "confirmation_mail_sent", "Confirmation mail sent to submitter")
+    elif conf_status == "failed":
+        add_request_event(new_id, "confirmation_mail_failed", conf_error)
+    elif conf_status == "skipped_not_configured":
+        add_request_event(new_id, "confirmation_mail_skipped", "Mail config incomplete")
+
     return {"status": "ok", "id": new_id, "mail_status": mail_status}
 
 @app.get("/api/admin/requests")
@@ -255,6 +268,44 @@ def send_internal_contact_mail(contact_id: int, name: str, email: str, phone: st
         return ("sent", None)
     except Exception as e:
         logger.exception("internal_contact_mail_failed id=%s", contact_id)
+        return ("failed", str(e))
+
+def send_confirmation_mail(contact_id: int, name: str, email: str):
+    smtp_host = os.getenv("SMTP_HOST", "").strip()
+    smtp_port = int(os.getenv("SMTP_PORT", "587"))
+    smtp_starttls = os.getenv("SMTP_STARTTLS", "true").strip().lower() == "true"
+    smtp_user = os.getenv("SMTP_USER", "").strip()
+    smtp_pass = os.getenv("SMTP_PASS", "")
+    mail_from = os.getenv("MAIL_FROM", "").strip()
+    smtp_timeout = int(os.getenv("SMTP_TIMEOUT", "10"))
+
+    if not all([smtp_host, smtp_user, smtp_pass, mail_from]):
+        logger.warning("confirmation_mail_skipped_not_configured id=%s", contact_id)
+        return ("skipped_not_configured", None)
+
+    msg = EmailMessage()
+    msg["Subject"] = "Ihre Anfrage bei Belivia"
+    msg["From"] = mail_from
+    msg["To"] = email
+    msg.set_content(
+        f"Guten Tag {name},\n\n"
+        "vielen Dank für Ihre Anfrage. Wir haben Ihre Nachricht erhalten "
+        "und melden uns in Kürze bei Ihnen.\n\n"
+        "Mit freundlichen Grüßen\n"
+        "Ihr Belivia-Team\n"
+    )
+
+    try:
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=smtp_timeout) as smtp:
+            smtp.ehlo()
+            if smtp_starttls:
+                smtp.starttls(context=ssl.create_default_context())
+                smtp.ehlo()
+            smtp.login(smtp_user, smtp_pass)
+            smtp.send_message(msg)
+        return ("sent", None)
+    except Exception as e:
+        logger.exception("confirmation_mail_failed id=%s", contact_id)
         return ("failed", str(e))
 
 def add_request_event(request_id: int, event_type: str, event_data: str | None = None):
