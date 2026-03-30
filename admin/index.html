@@ -45,6 +45,8 @@
   </div>
 
   <script>
+    let cachedItems = [];
+
     async function loadOverview() {
       const r = await fetch('/api/admin/day-overview');
       const d = await r.json();
@@ -62,10 +64,12 @@
       const d = await r.json();
 
       if (!d.items || !d.items.length) {
+        cachedItems = [];
         document.getElementById('requests').innerHTML = '<p>Keine Anfragen vorhanden.</p>';
         return;
       }
 
+      cachedItems = d.items;
       let html = '<p style="margin:0 0 8px;color:#888;font-size:0.9em;">' + d.items.length + ' Anfragen</p>';
       html += '<table><thead><tr>';
       html += '<th>ID</th><th>Erstellt</th><th>Name</th><th>E-Mail</th><th>Status</th><th>Mail</th><th>Mail versucht</th><th>Event</th><th>Notiz</th>';
@@ -90,9 +94,7 @@
     }
 
     async function loadRequestDetail(requestId) {
-      const listRes = await fetch('/api/admin/requests?limit=200');
-      const listData = await listRes.json();
-      const item = (listData.items || []).find(x => x.id === requestId);
+      const item = cachedItems.find(x => x.id === requestId);
 
       const eventsRes = await fetch('/api/admin/requests/' + requestId + '/events');
       const eventsData = await eventsRes.json();
