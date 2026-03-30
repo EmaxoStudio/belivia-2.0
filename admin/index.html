@@ -46,6 +46,7 @@
 
   <script>
     let cachedItems = [];
+    let selectedId = null;
 
     function fmt(ts) {
       if (!ts) return '';
@@ -83,7 +84,10 @@
       html += '</tr></thead><tbody>';
 
       for (const item of d.items) {
-        html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer' + (item.mail_status === 'failed' ? ';background:#fff0f0' : '') + '">';
+        const rowBg = item.mail_status === 'failed' ? '#fff0f0' : (item.id === selectedId ? '#e8f4ff' : '');
+        const note = item.internal_note || '';
+        const noteDisplay = note.length > 40 ? note.slice(0, 40) + '…' : note;
+        html += '<tr onclick="loadRequestDetail(' + item.id + ')" style="cursor:pointer' + (rowBg ? ';background:' + rowBg : '') + '">';
         html += '<td>' + item.id + '</td>';
         html += '<td>' + fmt(item.created_at) + '</td>';
         html += '<td>' + item.name + '</td>';
@@ -92,7 +96,7 @@
         html += '<td><code>' + (item.mail_status || '') + '</code></td>';
         html += '<td>' + fmt(item.mail_last_attempt_at) + '</td>';
         html += '<td>' + (item.event_date || '') + '</td>';
-        html += '<td>' + (item.internal_note || '') + '</td>';
+        html += '<td>' + noteDisplay + '</td>';
         html += '</tr>';
       }
 
@@ -100,7 +104,8 @@
       document.getElementById('requests').innerHTML = html;
     }
 
-    async function loadRequestDetail(requestId) {
+    async function loadRequestDetail(requestId, scroll = true) {
+      selectedId = requestId;
       const item = cachedItems.find(x => x.id === requestId);
 
       const eventsRes = await fetch('/api/admin/requests/' + requestId + '/events');
@@ -154,7 +159,7 @@
       }
 
       document.getElementById('requestDetail').innerHTML = html;
-      document.getElementById('requestDetail').scrollIntoView();
+      if (scroll) document.getElementById('requestDetail').scrollIntoView();
     }
 
 
@@ -182,7 +187,7 @@
 
       resultBox.innerHTML = '<p>Gespeichert.</p>';
       await loadRequests();
-      await loadRequestDetail(requestId);
+      await loadRequestDetail(requestId, false);
     }
 
     async function retryConfirmationMail(requestId) {
@@ -195,7 +200,7 @@
       } else {
         resultBox.innerHTML = '<p>Fehlgeschlagen: ' + (d.detail || d.status || 'Fehler') + '</p>';
       }
-      await loadRequestDetail(requestId);
+      await loadRequestDetail(requestId, false);
     }
 
     document.getElementById('reloadBtn').addEventListener('click', loadRequests);
