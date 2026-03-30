@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kontakt – Belivia Alltagsbegleitung</title>
+  <meta name="description" content="Kontakt zu Belivia Alltagsbegleitung in Hilden – Anfrage stellen, Rückruf vereinbaren oder direkt anrufen. Wir melden uns persönlich.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="container nav-inner">
+      <a href="/" class="nav-brand">Belivia</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">&#9776;</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/leistungen/">Leistungen</a></li>
+        <li><a href="/fuer-angehoerige/">Für Angehörige</a></li>
+        <li><a href="/ueber-belivia/">Über uns</a></li>
+        <li><a href="/#ablauf">Ablauf</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/kontakt/" class="nav-cta active">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <div class="page-hero">
+    <div class="container">
+      <p class="page-tag">Kontakt &middot; Hilden &middot; Kreis Mettmann</p>
+      <h1>Sprechen Sie uns an</h1>
+      <p>Wir melden uns persönlich und nehmen uns Zeit für Ihr Anliegen. Kein Druck, kein Formular-Marathon – einfach eine kurze Nachricht genügt.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="contact-layout">
+        <div class="contact-info">
+          <p>Nutzen Sie das Formular für eine unverbindliche Anfrage oder einen Rückrufwunsch. Wir antworten in der Regel innerhalb eines Werktages.</p>
+          <p><strong>Telefon</strong><br><a href="tel:+4917621772620">0176 21772620</a></p>
+          <p><strong>E-Mail</strong><br><a href="mailto:info@belivia-alltagsbegleitung.de">info@belivia-alltagsbegleitung.de</a></p>
+          <p>Dorothear-Erxleben-Straße 41<br>40721 Hilden<br>Kreis Mettmann</p>
+          <p>Alle Felder mit * sind erforderlich.</p>
+        </div>
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="anfrageart">Art der Anfrage *</label>
+            <select id="anfrageart" name="anfrageart" required>
+              <option value="">Bitte wählen …</option>
+              <option value="allgemeine-anfrage">Allgemeine Anfrage</option>
+              <option value="rueckrufwunsch">Rückrufwunsch</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Vor- und Nachname">
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefonnummer <span id="phoneLabel"></span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="Für einen Rückruf">
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse *</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="ihre@email.de">
+          </div>
+          <div class="form-group">
+            <label for="rolle">Ich bin …</label>
+            <select id="rolle" name="rolle">
+              <option value="">Bitte wählen (optional)</option>
+              <option value="angehoerige">Angehörige / Angehöriger</option>
+              <option value="senior">Senior / Seniorin selbst</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ort">Ort oder PLZ</label>
+            <input type="text" id="ort" name="ort" autocomplete="postal-code" placeholder="z. B. Hilden, Mettmann, 40721">
+          </div>
+          <div class="form-group">
+            <label for="message">Ihr Anliegen *</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Schildern Sie kurz, wie wir helfen können …"></textarea>
+          </div>
+          <div class="form-group form-group--check">
+            <input type="checkbox" id="privacy" name="privacy" required>
+            <label for="privacy">Ich habe die <a href="/datenschutz/">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. *</label>
+          </div>
+          <div id="formError" class="form-error" role="alert" hidden></div>
+          <div id="formSuccess" class="form-success" role="status" hidden>
+            <strong>Vielen Dank für Ihre Nachricht.</strong><br>
+            Wir melden uns so bald wie möglich bei Ihnen.
+          </div>
+          <button type="submit" class="btn" id="submitBtn">Anfrage senden</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> Belivia Alltagsbegleitung &middot; Hilden, Kreis Mettmann</p>
+    <nav class="footer-nav">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  document.getElementById('navToggle').addEventListener('click', function () {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Phone required only for callback
+  document.getElementById('anfrageart').addEventListener('change', function () {
+    var phoneInput = document.getElementById('phone');
+    var phoneLabel = document.getElementById('phoneLabel');
+    if (this.value === 'rueckrufwunsch') {
+      phoneInput.required = true;
+      phoneLabel.textContent = '*';
+    } else {
+      phoneInput.required = false;
+      phoneLabel.textContent = '';
+    }
+  });
+
+  // Form submission
+  document.getElementById('contactForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    var submitBtn  = document.getElementById('submitBtn');
+    var errorBox   = document.getElementById('formError');
+    var successBox = document.getElementById('formSuccess');
+
+    errorBox.hidden   = true;
+    successBox.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet \u2026';
+
+    var anfrageart = document.getElementById('anfrageart').value;
+    var name       = document.getElementById('name').value.trim();
+    var phone      = document.getElementById('phone').value.trim();
+    var email      = document.getElementById('email').value.trim();
+    var rolle      = document.getElementById('rolle').value;
+    var ort        = document.getElementById('ort').value.trim();
+    var message    = document.getElementById('message').value.trim();
+    var privacy    = document.getElementById('privacy').checked;
+
+    if (!anfrageart || !name || !email || !message || !privacy) {
+      errorBox.textContent = 'Bitte füllen Sie alle Pflichtfelder aus.';
+      errorBox.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Anfrage senden';
+      return;
+    }
+
+    if (anfrageart === 'rueckrufwunsch' && !phone) {
+      errorBox.textContent = 'Für einen Rückrufwunsch ist eine Telefonnummer erforderlich.';
+      errorBox.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Anfrage senden';
+      return;
+    }
+
+    try {
+      var res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    name,
+          email:   email,
+          phone:   phone || null,
+          message: [rolle ? 'Ich bin: ' + rolle : '', ort ? 'Ort/PLZ: ' + ort : '', message].filter(Boolean).join('\n\n'),
+          source:  anfrageart
+        })
+      });
+
+      if (res.ok) {
+        this.reset();
+        document.getElementById('phoneLabel').textContent = '';
+        successBox.hidden = false;
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        errorBox.textContent = 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.';
+        errorBox.hidden = false;
+      }
+    } catch (err) {
+      errorBox.textContent = 'Verbindungsfehler. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.';
+      errorBox.hidden = false;
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Anfrage senden';
+  });
+</script>
+</body>
+</html>
