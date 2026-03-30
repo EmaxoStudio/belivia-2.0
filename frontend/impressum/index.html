@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Impressum – Belivia Alltagsbegleitung</title>
+  <meta name="robots" content="noindex">
+  <style>
+    :root {
+      --c-primary:  #1e5a8e;
+      --c-text:     #1f2d3d;
+      --c-text-soft:#55687a;
+      --c-bg:       #ffffff;
+      --c-bg-alt:   #f4f8fc;
+      --c-border:   #d4e0ec;
+      --max-w:      760px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 17px; }
+    body { font-family: 'Segoe UI', Arial, Helvetica, sans-serif; line-height: 1.75; color: var(--c-text); background: var(--c-bg); }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    header {
+      background: var(--c-bg);
+      border-bottom: 1px solid var(--c-border);
+      padding: 0;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand { font-size: 1.2rem; font-weight: 700; color: var(--c-primary); text-decoration: none; }
+    .nav-back { font-size: 0.9rem; color: var(--c-text-soft); text-decoration: none; }
+    .nav-back:hover { color: var(--c-primary); }
+
+    main { padding: 56px 0 80px; }
+
+    h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 36px; color: var(--c-text); }
+    h2 { font-size: 1.1rem; font-weight: 700; margin: 32px 0 8px; color: var(--c-text); }
+    p { color: var(--c-text-soft); margin-bottom: 8px; }
+    a { color: var(--c-primary); }
+
+    footer {
+      background: var(--c-text);
+      color: rgba(255,255,255,0.6);
+      padding: 24px 0;
+      font-size: 0.88rem;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-nav { display: flex; gap: 20px; }
+    .footer-nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; }
+    .footer-nav a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-inner">
+    <a href="/" class="nav-brand">Belivia</a>
+    <a href="/" class="nav-back">← Zurück zur Startseite</a>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>
+      Belivia Alltagsbegleitung<br>
+      [Name des Inhabers / Verantwortlichen]<br>
+      Dorothear-Erxleben-Straße 41<br>
+      40721 Hilden
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      Telefon: <a href="tel:+4917621772620">0176 21772620</a><br>
+      E-Mail: <a href="mailto:info@belivia-alltagsbegleitung.de">info@belivia-alltagsbegleitung.de</a>
+    </p>
+
+    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+    <p>
+      [Name des Verantwortlichen]<br>
+      Dorothear-Erxleben-Straße 41<br>
+      40721 Hilden
+    </p>
+
+    <h2>Hinweis</h2>
+    <p>
+      Dieses Impressum gilt für die Website belivia-alltagsbegleitung.de sowie alle dazugehörigen Unterseiten.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>&copy; <span id="year"></span> Belivia Alltagsbegleitung &middot; Hilden, Kreis Mettmann</p>
+    <nav class="footer-nav">
+      <a href="/impressum">Impressum</a>
+      <a href="/datenschutz">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

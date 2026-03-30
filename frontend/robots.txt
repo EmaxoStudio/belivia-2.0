@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://www.belivia-alltagsbegleitung.de/sitemap.xml
