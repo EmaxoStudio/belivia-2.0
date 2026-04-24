@@ -16,6 +16,36 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/ablauf/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/kosten-pflegekasse/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/alltagsbegleitung/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/haushaltshilfe/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/begleitung-termine/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.belivia-alltagsbegleitung.de/einsatzgebiet/</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://www.belivia-alltagsbegleitung.de/ueber-belivia/</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
