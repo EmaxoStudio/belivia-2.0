@@ -591,6 +591,8 @@ h3 {
   line-height: 1.6;
 }
 
+.form-note { font-size: 0.9rem; color: var(--c-text-soft); }
+
 /* ── Footer ── */
 footer {
   background: var(--c-text);
