@@ -758,3 +758,216 @@ a.service-card:hover {
   transition: color 0.15s;
 }
 .footer-links-area ul a:hover { color: #fff; }
+
+/* ── Batch 3: Professional Conversion Upgrade ─────────────────── */
+
+/* Benefit chips */
+.benefit-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+.benefit-chip {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 0.84rem;
+  color: #fff;
+  line-height: 1.4;
+}
+.page-hero .benefit-chip {
+  background: rgba(30,90,142,0.07);
+  border-color: rgba(30,90,142,0.22);
+  color: var(--c-primary);
+}
+
+/* Dual CTA in hero */
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+.hero-cta-group .hero-call { margin: 0; }
+
+/* Trust strip */
+.trust-strip {
+  background: var(--c-primary);
+  padding: 14px 0;
+}
+.trust-strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 36px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.trust-strip-item {
+  color: rgba(255,255,255,0.9);
+  font-size: 0.86rem;
+  padding: 4px 0;
+}
+.trust-strip-item::before {
+  content: "\2713\00a0";
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Entlastungs-Check / info cards */
+.check-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+.check-card {
+  background: #fff;
+  border: 1px solid #dde3ea;
+  border-top: 3px solid var(--c-primary);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.check-card h3 {
+  font-size: 0.97rem;
+  margin-bottom: 8px;
+  color: var(--c-primary);
+}
+.check-card p {
+  font-size: 0.88rem;
+  margin: 0;
+  color: var(--c-text-soft);
+  line-height: 1.5;
+}
+
+/* Contact type cards */
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin: 24px 0 32px;
+}
+.contact-card {
+  background: #fff;
+  border: 1px solid #dde3ea;
+  border-top: 3px solid var(--c-primary);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.contact-card h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: var(--c-primary);
+}
+.contact-card p {
+  font-size: 0.88rem;
+  color: var(--c-text-soft);
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+.contact-card a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--c-primary);
+  text-decoration: none;
+}
+.contact-card a:hover { text-decoration: underline; }
+
+/* Dual CTA group inside cta-band */
+.cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+.cta-group .hero-call { margin: 0; color: rgba(255,255,255,0.85); }
+.cta-group .hero-call a { color: #fff; }
+.btn-outline-white {
+  display: inline-block;
+  padding: 13px 28px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.65);
+  color: #fff;
+}
+.btn-outline-white:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: #fff;
+}
+
+/* "What happens next" block */
+.next-steps-block {
+  background: #fff;
+  border-left: 3px solid var(--c-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 18px 20px;
+  margin-top: 24px;
+}
+.next-steps-block h3 {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: var(--c-primary);
+}
+.next-steps-block ol {
+  margin: 0;
+  padding-left: 20px;
+}
+.next-steps-block ol li {
+  font-size: 0.88rem;
+  margin-bottom: 7px;
+  color: var(--c-text-soft);
+  line-height: 1.5;
+}
+.next-steps-block ol li:last-child { margin-bottom: 0; }
+
+/* Related services cross-links */
+.related-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.related-service-link {
+  display: block;
+  background: #fff;
+  border: 1px solid #dde3ea;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  text-decoration: none;
+  color: var(--c-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.related-service-link:hover {
+  border-color: var(--c-primary);
+  box-shadow: 0 2px 8px rgba(30,90,142,0.1);
+}
+.related-service-link h3 {
+  font-size: 0.95rem;
+  color: var(--c-primary);
+  margin-bottom: 4px;
+}
+.related-service-link p {
+  font-size: 0.85rem;
+  color: var(--c-text-soft);
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .benefit-chips { gap: 6px; }
+  .trust-strip-inner { gap: 0 16px; }
+  .check-cards, .contact-cards, .related-services-grid { grid-template-columns: 1fr; }
+  .cta-group { flex-direction: column; gap: 12px; }
+  .hero-cta-group { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
