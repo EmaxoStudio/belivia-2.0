@@ -1,13 +1,15 @@
 :root {
-  --c-primary:      #1e5a8e;
-  --c-primary-dark: #154275;
-  --c-text:         #1f2d3d;
-  --c-text-soft:    #55687a;
+  --c-primary:      #2d7d52;
+  --c-primary-dark: #1e5c3c;
+  --c-teal:         #2ba8a3;
+  --c-warm:         #f7f2eb;
+  --c-text:         #1b2d24;
+  --c-text-soft:    #4e6559;
   --c-bg:           #ffffff;
-  --c-bg-alt:       #f4f8fc;
-  --c-border:       #d4e0ec;
-  --c-success-bg:   #e8f5ee;
-  --c-success-text: #1f5c38;
+  --c-bg-alt:       #f3f8f5;
+  --c-border:       #c6dcd2;
+  --c-success-bg:   #e4f2eb;
+  --c-success-text: #1a5732;
   --c-error-bg:     #fdecea;
   --c-error-text:   #8c2020;
   --max-w:          960px;
@@ -341,8 +343,8 @@ h3 {
 }
 
 .angehoerige-note {
-  background: var(--c-bg);
-  border-left: 4px solid var(--c-primary);
+  background: var(--c-warm);
+  border-left: 4px solid var(--c-teal);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 28px 28px 24px;
 }
@@ -564,7 +566,7 @@ h3 {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--c-primary);
-  box-shadow: 0 0 0 3px rgba(30, 90, 142, 0.12);
+  box-shadow: 0 0 0 3px rgba(45, 125, 82, 0.15);
 }
 
 .form-group textarea { resize: vertical; min-height: 120px; }
@@ -635,7 +637,7 @@ a.service-card {
 }
 a.service-card:hover {
   border-color: var(--c-primary);
-  box-shadow: 0 2px 12px rgba(30, 90, 142, 0.08);
+  box-shadow: 0 2px 12px rgba(45, 125, 82, 0.10);
 }
 .card-more {
   display: block;
@@ -647,7 +649,7 @@ a.service-card:hover {
 
 /* ── Info box ── */
 .info-box {
-  background: var(--c-bg-alt);
+  background: var(--c-warm);
   border: 1px solid var(--c-border);
   border-left: 4px solid var(--c-primary);
   border-radius: 0 var(--radius) var(--radius) 0;
@@ -661,6 +663,7 @@ a.service-card:hover {
 .highlight-box {
   background: var(--c-bg-alt);
   border: 1px solid var(--c-border);
+  border-top: 4px solid var(--c-primary);
   border-radius: var(--radius);
   padding: 32px 28px;
   text-align: center;
@@ -778,8 +781,8 @@ a.service-card:hover {
   line-height: 1.4;
 }
 .page-hero .benefit-chip {
-  background: rgba(30,90,142,0.07);
-  border-color: rgba(30,90,142,0.22);
+  background: rgba(45,125,82,0.07);
+  border-color: rgba(45,125,82,0.25);
   color: var(--c-primary);
 }
 
@@ -827,7 +830,7 @@ a.service-card:hover {
 }
 .check-card {
   background: #fff;
-  border: 1px solid #dde3ea;
+  border: 1px solid var(--c-border);
   border-top: 3px solid var(--c-primary);
   border-radius: var(--radius);
   padding: 20px;
@@ -854,7 +857,7 @@ a.service-card:hover {
 }
 .contact-card {
   background: #fff;
-  border: 1px solid #dde3ea;
+  border: 1px solid var(--c-border);
   border-top: 3px solid var(--c-primary);
   border-radius: var(--radius);
   padding: 20px;
@@ -909,8 +912,8 @@ a.service-card:hover {
 
 /* "What happens next" block */
 .next-steps-block {
-  background: #fff;
-  border-left: 3px solid var(--c-primary);
+  background: var(--c-warm);
+  border-left: 3px solid var(--c-teal);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 18px 20px;
   margin-top: 24px;
@@ -918,7 +921,7 @@ a.service-card:hover {
 .next-steps-block h3 {
   font-size: 0.95rem;
   margin-bottom: 12px;
-  color: var(--c-primary);
+  color: var(--c-teal);
 }
 .next-steps-block ol {
   margin: 0;
@@ -941,7 +944,7 @@ a.service-card:hover {
 .related-service-link {
   display: block;
   background: #fff;
-  border: 1px solid #dde3ea;
+  border: 1px solid var(--c-border);
   border-radius: var(--radius);
   padding: 18px 20px;
   text-decoration: none;
@@ -950,7 +953,7 @@ a.service-card:hover {
 }
 .related-service-link:hover {
   border-color: var(--c-primary);
-  box-shadow: 0 2px 8px rgba(30,90,142,0.1);
+  box-shadow: 0 2px 8px rgba(45,125,82,0.12);
 }
 .related-service-link h3 {
   font-size: 0.95rem;
@@ -994,14 +997,14 @@ a.service-card:hover {
 }
 .trust-item:hover {
   border-color: var(--c-primary);
-  box-shadow: 0 2px 12px rgba(30,90,142,0.08);
+  box-shadow: 0 2px 12px rgba(45,125,82,0.10);
   transform: translateY(-2px);
 }
 .check-card {
   transition: box-shadow 0.15s, transform 0.15s;
 }
 .check-card:hover {
-  box-shadow: 0 4px 16px rgba(30,90,142,0.1);
+  box-shadow: 0 4px 16px rgba(45,125,82,0.12);
   transform: translateY(-2px);
 }
 a.service-card:hover { transform: translateY(-2px); }
@@ -1055,9 +1058,9 @@ a.service-card:hover { transform: translateY(-2px); }
 
 /* Soft mid-funnel CTA band */
 .cta-band-soft {
-  background: var(--c-bg-alt);
-  border-top: 1px solid var(--c-border);
-  border-bottom: 1px solid var(--c-border);
+  background: var(--c-warm);
+  border-top: 1px solid #e5d9c8;
+  border-bottom: 1px solid #e5d9c8;
   padding: 48px 0;
   text-align: center;
 }
@@ -1091,8 +1094,8 @@ a.service-card:hover { transform: translateY(-2px); }
 .inline-cta {
   margin-top: 28px;
   padding: 20px 24px;
-  background: var(--c-bg-alt);
-  border: 1px solid var(--c-border);
+  background: var(--c-warm);
+  border: 1px solid #e5d9c8;
   border-radius: var(--radius);
   display: flex;
   flex-wrap: wrap;
@@ -1166,8 +1169,8 @@ body.mobile-cta-active main { padding-bottom: 60px; }
 
 /* Subtle gradient on hero areas */
 .page-hero {
-  background: linear-gradient(160deg, var(--c-bg-alt) 0%, #e6eff8 100%);
+  background: linear-gradient(160deg, var(--c-bg-alt) 0%, #d9ede5 100%);
 }
 .hero {
-  background: linear-gradient(160deg, var(--c-bg-alt) 0%, #ddeaf6 100%);
+  background: linear-gradient(160deg, var(--c-bg-alt) 0%, #cfe8db 100%);
 }
