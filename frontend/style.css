@@ -521,15 +521,15 @@ h3 {
 }
 
 .hero-img {
-  height: 260px;
-  margin-top: 48px;
+  height: 340px;
+  margin-top: 24px;
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .angehoerige-img {
-  height: 200px;
+  height: 280px;
   margin-bottom: 20px;
 }
 
@@ -538,10 +538,11 @@ h3 {
   margin-top: 0;
 }
 
-/* Center-align text+image two-col so image doesn't float disconnected */
+/* BEL-017: Text 60% / Bild 40%, kein vertikaler Versatz */
 .two-col:has(.img-real),
 .two-col:has(.img-placeholder) {
-  align-items: center;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: start;
 }
 
 /* ── Ablauf / Steps ── */
