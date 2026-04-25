@@ -1606,3 +1606,16 @@ html.js .reveal.visible {
     transition-delay: 0ms !important;
   }
 }
+
+/* ── BEL-014: Real photo wrappers ── */
+.img-real {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.09);
+}
+.img-real img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
