@@ -355,7 +355,7 @@
   </div>
 </footer>
 
-<div class="mobile-cta-bar" id="mobileCta" aria-hidden="true">
+<div class="mobile-cta-bar" id="mobileCta" aria-hidden="false">
   <a href="/kontakt/" class="mobile-cta-btn">Anfragen</a>
   <a href="tel:+4917621772620" class="mobile-cta-phone">0176 21772620</a>
   <button class="mobile-cta-close" id="mobileCtaClose" aria-label="Schließen">&times;</button>
@@ -381,29 +381,15 @@
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }
 
-  // Mobile sticky CTA
+  // Mobile sticky CTA — dismiss only
   (function () {
     if (window.innerWidth > 680) return;
     var bar = document.getElementById('mobileCta');
-    var closed = false;
     document.getElementById('mobileCtaClose').addEventListener('click', function () {
-      closed = true; bar.classList.remove('is-visible'); bar.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('mobile-cta-active');
+      bar.classList.add('dismissed');
+      bar.setAttribute('aria-hidden', 'true');
+      document.body.classList.add('mobile-cta-dismissed');
     });
-    var hero = document.getElementById('start');
-    if ('IntersectionObserver' in window && hero) {
-      var heroObs = new IntersectionObserver(function (entries) {
-        if (closed) return;
-        if (!entries[0].isIntersecting) {
-          bar.classList.add('is-visible'); bar.setAttribute('aria-hidden', 'false');
-          document.body.classList.add('mobile-cta-active');
-        } else {
-          bar.classList.remove('is-visible'); bar.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('mobile-cta-active');
-        }
-      }, { threshold: 0.1 });
-      heroObs.observe(hero);
-    }
   }());
 </script>
 
