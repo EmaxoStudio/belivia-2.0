@@ -1178,3 +1178,37 @@ body.mobile-cta-active main { padding-bottom: 60px; }
 .hero {
   background: linear-gradient(160deg, var(--c-bg-alt) 0%, #cfe8db 100%);
 }
+
+/* ── BEL-004: Mobile Hero / First Impression ─────────────── */
+@media (max-width: 680px) {
+  /* Compact, content-first layout — remove splash-screen feel */
+  .hero {
+    padding: 32px 0 24px;
+    text-align: left;
+  }
+  .hero h1 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  .hero-tag { margin-bottom: 12px; }
+  .benefit-chips {
+    margin: 8px 0 16px;
+    gap: 6px;
+  }
+  .benefit-chip {
+    font-size: 0.79rem;
+    padding: 4px 10px;
+  }
+  .hero-sub {
+    font-size: 0.97rem;
+    margin-bottom: 20px;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  /* No value as placeholder — real image will fill this space later */
+  .hero-img { display: none; }
+}
