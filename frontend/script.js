@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var revealDelayMax = 144;
 
   var revealGroups = [
-    'main section:not(.hero)',
+    'main section:not(.hero):not(:has(.image-feature))',
     'main > .cta-band',
     'main > .cta-band-soft',
     'main > .einsatz-strip'
@@ -37,8 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
   markRevealTargets(revealGroups, false);
   markRevealTargets(cardGroups, true);
 
+  var allRevealSelector = '.reveal, .reveal-left, .reveal-right, .reveal-up';
+
   if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-    document.querySelectorAll('.reveal').forEach(function (element) {
+    document.querySelectorAll(allRevealSelector).forEach(function (element) {
       element.classList.add('visible');
     });
     return;
@@ -54,11 +56,11 @@ document.addEventListener('DOMContentLoaded', function () {
       observer.unobserve(entry.target);
     });
   }, {
-    rootMargin: '0px 0px -10% 0px',
-    threshold: 0.12
+    rootMargin: '0px 0px -8% 0px',
+    threshold: 0.10
   });
 
-  document.querySelectorAll('.reveal').forEach(function (element) {
+  document.querySelectorAll(allRevealSelector).forEach(function (element) {
     observer.observe(element);
   });
 });

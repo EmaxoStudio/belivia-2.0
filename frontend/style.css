@@ -521,28 +521,50 @@ h3 {
 }
 
 .hero-img {
-  height: 340px;
-  margin-top: 24px;
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
+  height: 440px;
+  margin-top: 32px;
+  max-width: 100%;
 }
 
 .angehoerige-img {
-  height: 280px;
+  height: 320px;
   margin-bottom: 20px;
 }
 
 .page-img {
-  height: 280px;
+  height: 380px;
   margin-top: 0;
 }
 
-/* BEL-017: Text 60% / Bild 40%, kein vertikaler Versatz */
+/* BEL-017 updated: even 50/50 split for remaining two-col with images */
 .two-col:has(.img-real),
 .two-col:has(.img-placeholder) {
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: start;
+}
+
+/* ── BEL-019: Image feature sections — bildstarke Bild/Text-Komposition ── */
+.image-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.image-feature-content p + p { margin-top: 14px; }
+.image-feature-content h2 { margin-bottom: 16px; }
+
+.feature-img {
+  height: 420px;
+}
+
+@media (max-width: 680px) {
+  .image-feature {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .image-feature-media { order: -1; }
+  .feature-img { height: 260px; }
 }
 
 /* ── Ablauf / Steps ── */
@@ -1173,6 +1195,46 @@ html.js .reveal.visible {
   html.js .reveal { opacity: 1; transform: none; transition: none; }
 }
 
+/* ── BEL-019: Directional reveal — ruhig, dezent, Belivia-passend ── */
+.reveal-left,
+.reveal-right,
+.reveal-up {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.58s ease, transform 0.58s ease;
+}
+
+html.js .reveal-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.58s ease, transform 0.58s ease;
+}
+
+html.js .reveal-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.52s ease, transform 0.52s ease;
+  transition-delay: var(--reveal-delay, 80ms);
+}
+
+html.js .reveal-left.visible,
+html.js .reveal-right.visible,
+html.js .reveal-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Mobile: horizontale Slides deaktivieren, nur vertikales Fade */
+@media (max-width: 680px) {
+  html.js .reveal-left  { transform: translateY(14px); }
+  html.js .reveal-right { transform: translateY(14px); }
+}
+
 /* Hover improvements */
 .service-card,
 .check-card,
@@ -1458,8 +1520,8 @@ html.js .reveal.visible {
     gap: 8px;
     margin-top: 4px;
   }
-  /* No value as placeholder — real image will fill this space later */
-  .hero-img { display: none; }
+  /* BEL-019: Hero-Bild auf Mobile wieder sichtbar — kompakte Höhe, kein First-Screen-Crash */
+  .hero-img { display: block; height: 240px; margin-top: 20px; }
 }
 
 /* ── BEL-005: Mobile CTA Above-the-fold ─────────────────── */
