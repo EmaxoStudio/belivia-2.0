@@ -23,6 +23,10 @@
 
 html { scroll-behavior: smooth; font-size: 17px; }
 
+html.js {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
   line-height: 1.75;
@@ -41,8 +45,9 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--c-bg);
-  border-bottom: 1px solid var(--c-border);
+  background: rgba(255,255,255,0.94);
+  border-bottom: 1px solid rgba(198, 220, 210, 0.9);
+  backdrop-filter: blur(14px);
 }
 
 .nav-inner {
@@ -53,11 +58,20 @@ header {
 }
 
 .nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--c-primary);
   text-decoration: none;
   letter-spacing: -0.02em;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.nav-brand:hover {
+  color: var(--c-primary-dark);
+  transform: translateY(-1px);
 }
 
 .nav-links {
@@ -71,23 +85,24 @@ header {
   text-decoration: none;
   color: var(--c-text);
   font-size: 0.95rem;
-  transition: color 0.15s;
+  transition: color 0.18s ease, opacity 0.18s ease;
 }
 
 .nav-links a:hover { color: var(--c-primary); }
 .nav-links a.active { color: var(--c-primary); font-weight: 600; }
 
 .nav-links .nav-cta {
-  background: var(--c-primary);
+  background: linear-gradient(180deg, #348f5e 0%, var(--c-primary) 100%);
   color: #fff;
   padding: 7px 18px;
   border-radius: 5px;
   font-weight: 600;
   font-size: 0.9rem;
+  box-shadow: 0 10px 22px -18px rgba(45, 125, 82, 0.9);
 }
 
 .nav-links .nav-cta:hover {
-  background: var(--c-primary-dark);
+  background: linear-gradient(180deg, #2f8458 0%, var(--c-primary-dark) 100%);
   color: #fff;
 }
 
@@ -202,6 +217,35 @@ h3 {
   background: var(--c-bg-alt);
   padding: 88px 0 80px;
   text-align: center;
+  position: relative;
+  overflow: clip;
+}
+
+.hero::before,
+.hero::after,
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+}
+
+.hero::before {
+  top: -120px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123, 207, 95, 0.14) 0%, rgba(123, 207, 95, 0) 72%);
+}
+
+.hero::after {
+  bottom: -140px;
+  left: -120px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(43, 168, 163, 0.10) 0%, rgba(43, 168, 163, 0) 74%);
 }
 
 .hero h1 {
@@ -255,7 +299,7 @@ h3 {
 /* ── Button ── */
 .btn {
   display: inline-block;
-  background: var(--c-primary);
+  background: linear-gradient(180deg, #378f60 0%, var(--c-primary) 100%);
   color: #fff;
   padding: 13px 30px;
   border-radius: 6px;
@@ -264,14 +308,19 @@ h3 {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: background 0.15s;
+  box-shadow: 0 18px 32px -24px rgba(45, 125, 82, 0.95);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-.btn:hover { background: var(--c-primary-dark); }
+.btn:hover {
+  background: linear-gradient(180deg, #317f55 0%, var(--c-primary-dark) 100%);
+  box-shadow: 0 20px 36px -24px rgba(30, 92, 60, 0.95);
+  transform: translateY(-1px);
+}
 
 .btn-outline {
   display: inline-block;
-  background: transparent;
+  background: rgba(255,255,255,0.72);
   color: var(--c-primary);
   padding: 11px 28px;
   border-radius: 6px;
@@ -280,10 +329,17 @@ h3 {
   text-decoration: none;
   border: 2px solid var(--c-primary);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  box-shadow: 0 14px 28px -28px rgba(45, 125, 82, 0.85);
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
-.btn-outline:hover { background: var(--c-primary); color: #fff; }
+.btn-outline:hover {
+  background: rgba(45, 125, 82, 0.08);
+  color: var(--c-primary-dark);
+  border-color: var(--c-primary-dark);
+  box-shadow: 0 18px 30px -28px rgba(45, 125, 82, 0.95);
+  transform: translateY(-1px);
+}
 
 /* ── Services grid ── */
 .services-grid {
@@ -298,6 +354,8 @@ h3 {
   border-top: 3px solid var(--c-primary);
   border-radius: var(--radius);
   padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
 }
 
 .service-card h3 {
@@ -378,6 +436,8 @@ h3 {
   padding: 24px 20px;
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
 }
 
 .trust-icon {
@@ -637,11 +697,7 @@ a.service-card {
   text-decoration: none;
   color: inherit;
   display: block;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-a.service-card:hover {
-  border-color: var(--c-primary);
-  box-shadow: 0 2px 12px rgba(45, 125, 82, 0.10);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 .card-more {
   display: block;
@@ -704,9 +760,13 @@ a.service-card:hover {
 
 /* ── CTA band ── */
 .cta-band {
-  background: var(--c-primary);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 38%),
+    linear-gradient(180deg, #2d7d52 0%, #246946 100%);
   padding: 64px 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 .cta-band h2 { color: #fff; margin-bottom: 12px; }
 .cta-band p {
@@ -724,9 +784,14 @@ a.service-card:hover {
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.15s;
+  box-shadow: 0 18px 30px -24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
-.btn-white:hover { background: rgba(255,255,255,0.92); }
+.btn-white:hover {
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 20px 34px -24px rgba(0, 0, 0, 0.38);
+  transform: translateY(-1px);
+}
 .cta-band .hero-call { color: rgba(255,255,255,0.75); margin-top: 20px; }
 .cta-band .hero-call a { color: #fff; font-weight: 600; }
 
@@ -840,6 +905,8 @@ a.service-card:hover {
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
 }
 .check-card h3 {
   font-size: 0.97rem;
@@ -867,6 +934,8 @@ a.service-card:hover {
   border-radius: var(--radius);
   padding: 20px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
 }
 .contact-card h3 {
   font-size: 1rem;
@@ -905,14 +974,17 @@ a.service-card:hover {
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  transition: background 0.15s, border-color 0.15s;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
   background: transparent;
   border: 2px solid rgba(255,255,255,0.65);
   color: #fff;
+  box-shadow: 0 18px 28px -28px rgba(0, 0, 0, 0.45);
 }
 .btn-outline-white:hover {
   background: rgba(255,255,255,0.1);
   border-color: #fff;
+  box-shadow: 0 20px 34px -28px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
 }
 
 /* "What happens next" block */
@@ -955,6 +1027,8 @@ a.service-card:hover {
   text-decoration: none;
   color: var(--c-text);
   transition: border-color 0.15s, box-shadow 0.15s;
+  position: relative;
+  overflow: hidden;
 }
 .related-service-link:hover {
   border-color: var(--c-primary);
@@ -984,35 +1058,82 @@ a.service-card:hover {
 
 /* Scroll reveal */
 .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  opacity: 1;
+  transform: none;
 }
-.reveal.visible {
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.42s ease, transform 0.42s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.js .reveal.visible {
   opacity: 1;
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* Hover improvements */
-.trust-item {
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+.service-card,
+.check-card,
+.contact-card,
+.related-service-link,
+.trust-item,
+.funnel-check-item {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
-.trust-item:hover {
-  border-color: var(--c-primary);
-  box-shadow: 0 2px 12px rgba(45,125,82,0.10);
-  transform: translateY(-2px);
+
+.service-card::after,
+.check-card::after,
+.contact-card::after,
+.related-service-link::after,
+.trust-item::after,
+.funnel-check-item::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(45, 125, 82, 0) 0%, rgba(45, 125, 82, 0.72) 18%, rgba(45, 125, 82, 0.22) 100%);
+  opacity: 0;
+  transform: scaleX(0.94);
+  transform-origin: left center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.check-card {
-  transition: box-shadow 0.15s, transform 0.15s;
+
+.service-card:hover,
+.service-card:focus-visible,
+.check-card:hover,
+.check-card:focus-within,
+.contact-card:hover,
+.contact-card:focus-within,
+.related-service-link:hover,
+.related-service-link:focus-visible,
+.trust-item:hover,
+.funnel-check-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(45, 125, 82, 0.45);
+  box-shadow: 0 22px 30px -28px rgba(45, 125, 82, 0.45);
+  background-color: #fff;
 }
-.check-card:hover {
-  box-shadow: 0 4px 16px rgba(45,125,82,0.12);
-  transform: translateY(-2px);
+
+.service-card:hover::after,
+.service-card:focus-visible::after,
+.check-card:hover::after,
+.check-card:focus-within::after,
+.contact-card:hover::after,
+.contact-card:focus-within::after,
+.related-service-link:hover::after,
+.related-service-link:focus-visible::after,
+.trust-item:hover::after,
+.funnel-check-item:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
-a.service-card:hover { transform: translateY(-2px); }
 
 /* Funnel check grid ("Passt Belivia zu uns?") */
 .funnel-check-grid {
@@ -1030,6 +1151,8 @@ a.service-card:hover { transform: translateY(-2px); }
   border-radius: var(--radius);
   padding: 16px 20px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
 }
 .funnel-check-icon {
   width: 26px;
@@ -1063,11 +1186,15 @@ a.service-card:hover { transform: translateY(-2px); }
 
 /* Soft mid-funnel CTA band */
 .cta-band-soft {
-  background: var(--c-warm);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg, #f7f2eb 0%, #f3eee6 100%);
   border-top: 1px solid var(--c-warm-border);
   border-bottom: 1px solid var(--c-warm-border);
   padding: 48px 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 .cta-band-soft h2 { margin-bottom: 12px; }
 .cta-band-soft p {
@@ -1124,12 +1251,14 @@ a.service-card:hover { transform: translateY(-2px); }
   left: 0;
   right: 0;
   z-index: 200;
-  background: var(--c-primary);
-  padding: 10px 16px;
+  background: linear-gradient(180deg, rgba(45, 125, 82, 0.96) 0%, rgba(36, 105, 70, 0.97) 100%);
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
   gap: 12px;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.18);
+  border-top: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 -14px 28px -22px rgba(0,0,0,0.45);
+  backdrop-filter: blur(12px);
 }
 .mobile-cta-btn {
   background: #fff;
@@ -1141,6 +1270,7 @@ a.service-card:hover { transform: translateY(-2px); }
   text-decoration: none !important;
   white-space: nowrap;
   flex-shrink: 0;
+  box-shadow: 0 10px 24px -20px rgba(0, 0, 0, 0.45);
 }
 .mobile-cta-phone {
   color: rgba(255,255,255,0.9) !important;
@@ -1171,9 +1301,20 @@ a.service-card:hover { transform: translateY(-2px); }
 /* Subtle gradient on hero areas */
 .page-hero {
   background: linear-gradient(160deg, var(--c-bg-alt) 0%, #d9ede5 100%);
+  position: relative;
+  overflow: clip;
 }
 .hero {
   background: linear-gradient(160deg, var(--c-bg-alt) 0%, #cfe8db 100%);
+}
+
+.page-hero::before {
+  top: -100px;
+  right: -100px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45, 125, 82, 0.12) 0%, rgba(45, 125, 82, 0) 72%);
 }
 
 /* ── BEL-004: Mobile Hero / First Impression ─────────────── */
@@ -1275,5 +1416,55 @@ a.service-card:hover { transform: translateY(-2px); }
     padding-top: 10px;
     margin-top: 2px;
     text-align: center;
+  }
+}
+
+.btn:focus-visible,
+.btn-outline:focus-visible,
+.btn-white:focus-visible,
+.btn-outline-white:focus-visible,
+.nav-links a:focus-visible,
+.nav-brand:focus-visible,
+.mobile-cta-btn:focus-visible,
+.mobile-cta-phone:focus-visible,
+.mobile-cta-close:focus-visible {
+  outline: 3px solid rgba(45, 125, 82, 0.22);
+  outline-offset: 3px;
+}
+
+@media (hover: none) {
+  .service-card:hover,
+  .check-card:hover,
+  .contact-card:hover,
+  .related-service-link:hover,
+  .trust-item:hover,
+  .funnel-check-item:hover,
+  .btn:hover,
+  .btn-outline:hover,
+  .btn-white:hover,
+  .btn-outline-white:hover,
+  .nav-brand:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .service-card:hover::after,
+  .check-card:hover::after,
+  .contact-card:hover::after,
+  .related-service-link:hover::after,
+  .trust-item:hover::after,
+  .funnel-check-item:hover::after {
+    opacity: 0;
+    transform: scaleX(0.94);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }
