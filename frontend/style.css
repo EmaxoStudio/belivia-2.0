@@ -535,7 +535,13 @@ h3 {
 
 .page-img {
   height: 280px;
-  margin-top: 48px;
+  margin-top: 0;
+}
+
+/* Center-align text+image two-col so image doesn't float disconnected */
+.two-col:has(.img-real),
+.two-col:has(.img-placeholder) {
+  align-items: center;
 }
 
 /* ── Ablauf / Steps ── */
