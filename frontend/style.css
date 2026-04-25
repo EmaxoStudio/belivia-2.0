@@ -2,7 +2,10 @@
   --c-primary:      #2d7d52;
   --c-primary-dark: #1e5c3c;
   --c-teal:         #2ba8a3;
+  --c-teal-light:   #63bfd0;
+  --c-leaf:         #7bcf5f;
   --c-warm:         #f7f2eb;
+  --c-warm-border:  #e5d9c8;
   --c-text:         #1b2d24;
   --c-text-soft:    #4e6559;
   --c-bg:           #ffffff;
@@ -292,6 +295,7 @@ h3 {
 .service-card {
   background: var(--c-bg);
   border: 1px solid var(--c-border);
+  border-top: 3px solid var(--c-primary);
   border-radius: var(--radius);
   padding: 28px 24px;
 }
@@ -781,9 +785,9 @@ a.service-card:hover {
   line-height: 1.4;
 }
 .page-hero .benefit-chip {
-  background: rgba(45,125,82,0.07);
-  border-color: rgba(45,125,82,0.25);
-  color: var(--c-primary);
+  background: rgba(43,168,163,0.08);
+  border-color: rgba(43,168,163,0.28);
+  color: var(--c-teal);
 }
 
 /* Dual CTA in hero */
@@ -1059,8 +1063,8 @@ a.service-card:hover { transform: translateY(-2px); }
 /* Soft mid-funnel CTA band */
 .cta-band-soft {
   background: var(--c-warm);
-  border-top: 1px solid #e5d9c8;
-  border-bottom: 1px solid #e5d9c8;
+  border-top: 1px solid var(--c-warm-border);
+  border-bottom: 1px solid var(--c-warm-border);
   padding: 48px 0;
   text-align: center;
 }
@@ -1095,7 +1099,7 @@ a.service-card:hover { transform: translateY(-2px); }
   margin-top: 28px;
   padding: 20px 24px;
   background: var(--c-warm);
-  border: 1px solid #e5d9c8;
+  border: 1px solid var(--c-warm-border);
   border-radius: var(--radius);
   display: flex;
   flex-wrap: wrap;
