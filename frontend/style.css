@@ -1252,3 +1252,22 @@ body.mobile-cta-active main { padding-bottom: 60px; }
     font-size: 0.93rem;
   }
 }
+
+/* ── BEL-007: Mobile Hero Polish ─────────────────────────── */
+@media (max-width: 680px) {
+  /* Trust-signal chips — tinted fill + dark readable text */
+  .hero .benefit-chip {
+    background: var(--c-success-bg);
+    border-color: rgba(45,125,82,0.22);
+    color: var(--c-success-text);
+  }
+  /* Phone line — separated from CTA, centered, quieter */
+  .hero .hero-cta-group .hero-call {
+    width: 100%;
+    font-size: 0.88rem;
+    border-top: 1px solid var(--c-border);
+    padding-top: 10px;
+    margin-top: 2px;
+    text-align: center;
+  }
+}
