@@ -1328,7 +1328,12 @@ html.js .reveal.visible {
   right: 0;
   z-index: 200;
   background: linear-gradient(180deg, rgba(45, 125, 82, 0.96) 0%, rgba(36, 105, 70, 0.97) 100%);
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  padding: 10px 14px 10px;
+  padding-bottom: min(calc(10px + env(safe-area-inset-bottom, 0px)), 22px);
+  min-height: 0;
+  max-height: 76px;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
   gap: 12px;
   align-items: center;
   justify-content: space-between;
@@ -1356,6 +1361,17 @@ html.js .reveal.visible {
   flex: 1;
   text-align: center;
 }
+
+.mobile-cta-bar > * {
+  min-height: 0;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.mobile-cta-phone {
+  white-space: nowrap;
+}
+
 .mobile-cta-close {
   background: none;
   border: none;
