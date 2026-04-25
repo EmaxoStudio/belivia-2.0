@@ -971,3 +971,203 @@ a.service-card:hover {
   .cta-group { flex-direction: column; gap: 12px; }
   .hero-cta-group { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
+
+/* ── BEL-002: Professional Funnel Upgrade ─────────────────── */
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Hover improvements */
+.trust-item {
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.trust-item:hover {
+  border-color: var(--c-primary);
+  box-shadow: 0 2px 12px rgba(30,90,142,0.08);
+  transform: translateY(-2px);
+}
+.check-card {
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.check-card:hover {
+  box-shadow: 0 4px 16px rgba(30,90,142,0.1);
+  transform: translateY(-2px);
+}
+a.service-card:hover { transform: translateY(-2px); }
+
+/* Funnel check grid ("Passt Belivia zu uns?") */
+.funnel-check-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 28px 0;
+}
+.funnel-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.funnel-check-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--c-primary);
+  color: var(--c-primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.funnel-check-item p {
+  font-size: 0.97rem;
+  color: var(--c-text);
+  margin: 0;
+  line-height: 1.5;
+}
+.funnel-check-cta {
+  text-align: center;
+  margin-top: 28px;
+}
+.funnel-check-cta p {
+  font-size: 1rem;
+  color: var(--c-text-soft);
+  margin-bottom: 18px;
+}
+
+/* Soft mid-funnel CTA band */
+.cta-band-soft {
+  background: var(--c-bg-alt);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+  padding: 48px 0;
+  text-align: center;
+}
+.cta-band-soft h2 { margin-bottom: 12px; }
+.cta-band-soft p {
+  font-size: 1.02rem;
+  color: var(--c-text-soft);
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+
+/* Einsatzgebiet strip */
+.einsatz-strip {
+  padding: 36px 0;
+  text-align: center;
+  border-top: 1px solid var(--c-border);
+}
+.einsatz-strip p {
+  font-size: 0.97rem;
+  color: var(--c-text-soft);
+  margin-bottom: 10px;
+}
+.einsatz-strip a {
+  color: var(--c-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.einsatz-strip a:hover { text-decoration: underline; }
+
+/* Inline CTA block (within section) */
+.inline-cta {
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.inline-cta p {
+  font-size: 0.97rem;
+  color: var(--c-text-soft);
+  margin: 0;
+  flex: 1;
+  min-width: 180px;
+}
+
+/* Sticky mobile CTA bar — shown only via JS */
+.mobile-cta-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: var(--c-primary);
+  padding: 10px 16px;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.18);
+}
+.mobile-cta-bar.is-visible { display: flex; }
+.mobile-cta-btn {
+  background: #fff;
+  color: var(--c-primary) !important;
+  font-weight: 700;
+  font-size: 0.93rem;
+  padding: 8px 18px;
+  border-radius: 5px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mobile-cta-phone {
+  color: rgba(255,255,255,0.9) !important;
+  font-size: 0.88rem;
+  text-decoration: none !important;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+}
+.mobile-cta-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.mobile-cta-bar.is-visible ~ main,
+body.mobile-cta-active main { padding-bottom: 60px; }
+
+@media (min-width: 681px) {
+  .mobile-cta-bar { display: none !important; }
+}
+@media (max-width: 680px) {
+  .funnel-check-grid { grid-template-columns: 1fr; }
+  .inline-cta { flex-direction: column; align-items: flex-start; }
+}
+
+/* Subtle gradient on hero areas */
+.page-hero {
+  background: linear-gradient(160deg, var(--c-bg-alt) 0%, #e6eff8 100%);
+}
+.hero {
+  background: linear-gradient(160deg, var(--c-bg-alt) 0%, #ddeaf6 100%);
+}
