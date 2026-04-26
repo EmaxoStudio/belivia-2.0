@@ -2678,3 +2678,76 @@ img.footer-logo, .footer-brand img { max-width: 40px !important; max-height: 40p
     margin-top: 18px;
   }
 }
+
+/* ── BEL-036: Mobile hero viewport + sticky CTA spacing ── */
+@media (max-width: 680px) {
+  :root {
+    --mobile-cta-space: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .hero,
+  .hero-inner {
+    min-height: max(560px, calc(100svh - var(--header-h)));
+  }
+
+  @supports (height: 100dvh) {
+    .hero,
+    .hero-inner {
+      min-height: max(560px, calc(100dvh - var(--header-h)));
+    }
+  }
+
+  .hero {
+    padding: 0;
+    overflow: clip;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(12, 27, 20, 0.86) 0%, rgba(14, 31, 23, 0.76) 48%, rgba(14, 31, 23, 0.58) 100%),
+      linear-gradient(90deg, rgba(12, 27, 20, 0.72) 0%, rgba(14, 31, 23, 0.36) 100%);
+  }
+
+  .hero-inner {
+    justify-content: center;
+    padding-top: clamp(46px, 9svh, 72px);
+    padding-bottom: calc(var(--mobile-cta-space) + 28px);
+  }
+
+  .hero-copy {
+    max-width: 36rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 9vw, 2.35rem);
+    line-height: 1.12;
+    margin-bottom: 12px;
+  }
+
+  .hero-subline {
+    font-size: clamp(1.05rem, 4.6vw, 1.25rem);
+    line-height: 1.36;
+    margin-bottom: 14px;
+    max-width: 30rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.94rem, 3.8vw, 1rem);
+    line-height: 1.58;
+    margin: 0;
+    max-width: 34rem;
+  }
+
+  .hero-scroll-hint {
+    display: none;
+  }
+
+  .hero-slide-controls {
+    bottom: calc(var(--mobile-cta-space) + 8px);
+    left: 20px;
+  }
+
+  main {
+    padding-bottom: var(--mobile-cta-space);
+  }
+}
