@@ -405,7 +405,7 @@ header nav { position: relative; }
     text-underline-offset: 3px;
   }
 
-  .mega-side-cta {
+  .nav-links .mega-side-cta {
     font-size: 0.95rem;
     font-weight: 700;
     padding: 13px 18px;
@@ -413,16 +413,18 @@ header nav { position: relative; }
     display: block;
     box-sizing: border-box;
     text-align: center;
-    color: #fff;
+    color: var(--c-text);
     box-shadow: none;
     letter-spacing: 0.01em;
-    background: linear-gradient(180deg, #2a7049 0%, var(--c-primary-dark) 100%);
+    background: #fff;
   }
 
-  .mega-side-cta:hover,
-  .mega-side-cta:focus-visible {
-    background: linear-gradient(180deg, var(--c-primary-dark) 0%, #163f2a 100%);
-    color: #fff;
+  .nav-links .mega-side-cta:hover,
+  .nav-links .mega-side-cta:focus,
+  .nav-links .mega-side-cta:focus-visible,
+  .nav-links .mega-side-cta:active {
+    background: rgba(255,255,255,0.92);
+    color: var(--c-text);
     box-shadow: none;
     transform: none;
   }
