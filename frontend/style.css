@@ -810,6 +810,22 @@ h3 {
   padding: 56px 0 64px;
 }
 
+body.legal-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.legal-page .legal-main {
+  flex: 1 0 auto;
+  padding: clamp(48px, 7vh, 72px) 0 clamp(72px, 10vh, 104px);
+}
+
+body.legal-page footer {
+  flex-shrink: 0;
+}
+
 .section-lead {
   font-size: 1.05rem;
   color: var(--c-text-soft);
