@@ -1,3 +1,34 @@
+/* ── Nav dropdown ── */
+(function () {
+  function closeAll(except) {
+    document.querySelectorAll('.has-dropdown.open').forEach(function (item) {
+      if (item === except) return;
+      item.classList.remove('open');
+      var btn = item.querySelector('.nav-chevron');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  document.querySelectorAll('.nav-chevron').forEach(function (btn) {
+    var item = btn.closest('.has-dropdown');
+    if (!item) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) closeAll(item);
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.has-dropdown')) closeAll(null);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll(null);
+  });
+}());
+
 document.addEventListener('DOMContentLoaded', function () {
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var revealDelayStep = 130;

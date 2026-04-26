@@ -43,11 +43,32 @@
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-controls="navLinks" aria-expanded="false">&#9776;</button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="/leistungen/">Leistungen</a></li>
-        <li><a href="/fuer-angehoerige/">Für Angehörige</a></li>
-        <li><a href="/ablauf/">Ablauf</a></li>
-        <li><a href="/kosten-pflegekasse/">Kosten</a></li>
-        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/" class="active" aria-current="page">Startseite</a></li>
+        <li class="nav-item has-dropdown">
+          <a href="/leistungen/" class="nav-link">Leistungen</a>
+          <button class="nav-chevron" aria-expanded="false" aria-label="Untermenü Leistungen"><svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-dropdown">
+            <li><a href="/alltagsbegleitung/">Alltagsbegleitung</a></li>
+            <li><a href="/haushaltshilfe/">Haushaltshilfe</a></li>
+            <li><a href="/begleitung-termine/">Begleitung zu Terminen</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/fuer-angehoerige/" class="nav-link">Für Angehörige</a>
+          <button class="nav-chevron" aria-expanded="false" aria-label="Untermenü Für Angehörige"><svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-dropdown">
+            <li><a href="/ablauf/">Ablauf</a></li>
+            <li><a href="/kosten-pflegekasse/">Kosten &amp; Pflegekasse</a></li>
+            <li><a href="/faq/">Häufige Fragen</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="/ueber-belivia/" class="nav-link">Über Belivia</a>
+          <button class="nav-chevron" aria-expanded="false" aria-label="Untermenü Über Belivia"><svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="nav-dropdown">
+            <li><a href="/einsatzgebiet/">Einsatzgebiet</a></li>
+          </ul>
+        </li>
         <li><a href="/kontakt/" class="nav-cta">Kontakt</a></li>
       </ul>
     </div>
