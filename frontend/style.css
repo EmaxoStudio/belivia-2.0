@@ -525,7 +525,7 @@ section.alt { background: var(--c-bg-alt); }
 .section-slant-bottom-right,
 .section-slant-both,
 .section-slant-both-reverse {
-  --section-shape-h: clamp(56px, 8vw, 104px);
+  --section-shape-h: clamp(72px, 10vw, 148px);
   --section-shape-bg: var(--c-bg);
   --section-flow-pad-y: 72px;
   --section-content-clearance: 24px;
@@ -600,41 +600,41 @@ div.section-slant-both-reverse {
 
 .section-slant-top::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 78%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 70%, 100% 0, 100% 100%, 0 100%);
 }
 
 .section-slant-top-left::before,
 .section-slant-both::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 78%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 70%, 100% 100%, 0 100%);
 }
 
 .section-slant-top-right::before,
 .section-slant-both-reverse::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 78%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 70%, 100% 0, 100% 100%, 0 100%);
 }
 
 .section-slant-bottom::after {
   bottom: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 0, 100% 22%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
 }
 
 .section-slant-bottom-left::after,
 .section-slant-both::after {
   bottom: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 22%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 30%);
 }
 
 .section-slant-bottom-right::after,
 .section-slant-both-reverse::after {
   bottom: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 0, 100% 22%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
 }
 
 .section-soft-wave::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 64%, 38% 28%, 100% 56%, 100% 100%, 0 100%);
+  clip-path: polygon(0 58%, 38% 22%, 100% 50%, 100% 100%, 0 100%);
 }
 
 section.alt.section-slant-top,
@@ -696,7 +696,7 @@ section.alt.section-slant-both-reverse,
   .section-slant-bottom-right,
   .section-slant-both,
   .section-slant-both-reverse {
-    --section-shape-h: 36px;
+    --section-shape-h: 48px;
     --section-flow-pad-y: 56px;
     --section-content-clearance: 14px;
   }
@@ -758,8 +758,7 @@ h3 {
 
 .page-hero {
   background: var(--c-bg-alt);
-  padding: 64px 0 56px;
-  border-bottom: 1px solid var(--c-border);
+  padding: 88px 0 84px;
 }
 
 .page-hero .page-tag {
@@ -772,20 +771,24 @@ h3 {
 }
 
 .page-hero h1 {
-  max-width: 700px;
-  margin-bottom: 16px;
+  max-width: 720px;
+  margin-bottom: 18px;
 }
 
 .page-hero p {
   font-size: 1.05rem;
   color: var(--c-text-soft);
-  max-width: 600px;
+  max-width: 620px;
   line-height: 1.7;
 }
 
+.page-hero .benefit-chips {
+  margin-top: 22px;
+}
+
 @media (max-width: 600px) {
-  .page-hero { padding: 48px 0 40px; }
-  .page-hero h1 { font-size: 1.6rem; }
+  .page-hero { padding: 64px 0 60px; }
+  .page-hero h1 { font-size: 1.65rem; }
 }
 
 .section-lead {
@@ -797,7 +800,7 @@ h3 {
 
 /* ── Hero (homepage only) ── */
 .hero {
-  min-height: clamp(640px, 82vh, 820px);
+  min-height: clamp(640px, calc(100vh - var(--header-h)), 960px);
   background: #1b2d24;
   padding: 0;
   text-align: left;
@@ -854,7 +857,7 @@ h3 {
 .hero-inner {
   position: relative;
   z-index: 3;
-  min-height: clamp(640px, 82vh, 820px);
+  min-height: clamp(640px, calc(100vh - var(--header-h)), 960px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1048,7 +1051,7 @@ h3 {
 @media (max-width: 600px) {
   .hero,
   .hero-inner {
-    min-height: 680px;
+    min-height: clamp(560px, calc(100vh - 60px), 780px);
   }
 
   .hero-overlay {
@@ -2261,7 +2264,7 @@ html.js .reveal-soft.visible {
 
 /* Subtle gradient on hero areas */
 .page-hero {
-  background: linear-gradient(160deg, var(--c-bg-alt) 0%, #d9ede5 100%);
+  background: linear-gradient(148deg, var(--c-bg-alt) 0%, #cde6da 52%, #b5d8c8 100%);
   position: relative;
   overflow: clip;
 }
@@ -2270,12 +2273,26 @@ html.js .reveal-soft.visible {
 }
 
 .page-hero::before {
-  top: -100px;
-  right: -100px;
-  width: 280px;
-  height: 280px;
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 380px;
+  height: 380px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(45, 125, 82, 0.12) 0%, rgba(45, 125, 82, 0) 72%);
+  background: radial-gradient(circle, rgba(45, 125, 82, 0.13) 0%, rgba(45, 125, 82, 0) 70%);
+  pointer-events: none;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--c-primary) 0%, var(--c-teal) 48%, rgba(43,168,163,0.08) 100%);
+  pointer-events: none;
 }
 
 /* ── BEL-004: Mobile Hero / First Impression ─────────────── */
