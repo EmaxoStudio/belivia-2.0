@@ -808,7 +808,7 @@ h3 {
 
 /* ── Hero (homepage only) ── */
 .hero {
-  min-height: clamp(640px, calc(100vh - var(--header-h)), 960px);
+  min-height: max(640px, calc(100vh - var(--header-h)));
   background: #1b2d24;
   padding: 0;
   text-align: left;
@@ -865,7 +865,7 @@ h3 {
 .hero-inner {
   position: relative;
   z-index: 3;
-  min-height: clamp(640px, calc(100vh - var(--header-h)), 960px);
+  min-height: max(640px, calc(100vh - var(--header-h)));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -886,11 +886,20 @@ h3 {
   text-wrap: balance;
 }
 
+.hero-subline {
+  font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  margin: 0 0 22px;
+  line-height: 1.38;
+  max-width: 640px;
+}
+
 .hero-sub {
   font-size: 1.1rem;
-  color: rgba(255,255,255,0.86);
-  max-width: 650px;
-  margin: 0 0 26px;
+  color: rgba(255,255,255,0.82);
+  max-width: 620px;
+  margin: 0;
   line-height: 1.72;
 }
 
@@ -1059,7 +1068,7 @@ h3 {
 @media (max-width: 600px) {
   .hero,
   .hero-inner {
-    min-height: clamp(560px, calc(100vh - 60px), 780px);
+    min-height: max(560px, calc(100vh - 60px));
   }
 
   .hero-overlay {
