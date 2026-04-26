@@ -1,15 +1,15 @@
-/* ── Nav dropdown ── */
+/* ── Mega menu toggle ── */
 (function () {
   function closeAll(except) {
     document.querySelectorAll('.has-dropdown.open').forEach(function (item) {
       if (item === except) return;
       item.classList.remove('open');
-      var btn = item.querySelector('.nav-chevron');
+      var btn = item.querySelector('.nav-top-btn');
       if (btn) btn.setAttribute('aria-expanded', 'false');
     });
   }
 
-  document.querySelectorAll('.nav-chevron').forEach(function (btn) {
+  document.querySelectorAll('.nav-top-btn').forEach(function (btn) {
     var item = btn.closest('.has-dropdown');
     if (!item) return;
     btn.addEventListener('click', function (e) {
