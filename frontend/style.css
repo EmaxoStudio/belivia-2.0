@@ -2585,7 +2585,7 @@ img.footer-logo, .footer-brand img { max-width: 40px !important; max-height: 40p
 
 .service-img-actions {
   text-align: center;
-  margin-top: 42px;
+  margin-top: 56px;
 }
 
 .service-img-card,
@@ -2715,7 +2715,7 @@ img.footer-logo, .footer-brand img { max-width: 40px !important; max-height: 40p
     gap: 14px;
   }
   .service-img-actions {
-    margin-top: 30px;
+    margin-top: 40px;
   }
   .service-img { height: 230px; }
   .trust-img-grid { grid-template-columns: 1fr; gap: 14px; }
