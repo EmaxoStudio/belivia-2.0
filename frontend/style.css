@@ -2539,11 +2539,13 @@ img.footer-logo, .footer-brand img { max-width: 40px !important; max-height: 40p
 /* ── BEL-022: Service image grid — Leistungsbilder Startseite ── */
 .service-img-intro {
   text-align: center;
-  margin: 0 auto 26px;
+  max-width: 680px;
+  margin: 0 auto 32px;
 }
 
 .service-img-intro .section-lead {
   margin: 0 auto;
+  text-align: center;
 }
 
 .service-img-grid {
@@ -2554,7 +2556,7 @@ img.footer-logo, .footer-brand img { max-width: 40px !important; max-height: 40p
 
 .service-img-actions {
   text-align: center;
-  margin-top: 28px;
+  margin-top: 42px;
 }
 
 .service-img-card,
@@ -2676,14 +2678,15 @@ img.footer-logo, .footer-brand img { max-width: 40px !important; max-height: 40p
 
 @media (max-width: 680px) {
   .service-img-intro {
-    margin-bottom: 20px;
+    max-width: 100%;
+    margin-bottom: 24px;
   }
   .service-img-grid {
     grid-template-columns: 1fr;
     gap: 14px;
   }
   .service-img-actions {
-    margin-top: 22px;
+    margin-top: 30px;
   }
   .service-img { height: 230px; }
   .trust-img-grid { grid-template-columns: 1fr; gap: 14px; }
