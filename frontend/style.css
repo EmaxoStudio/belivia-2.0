@@ -1723,12 +1723,44 @@ a.service-card {
   border-bottom: 1px solid rgba(255,255,255,0.1);
   color: rgba(255,255,255,0.7);
 }
+
+body.home-page .footer-links-area {
+  position: relative;
+  margin-top: clamp(48px, 7vw, 92px);
+  padding-top: clamp(58px, 8vw, 96px);
+  isolation: isolate;
+}
+
+body.home-page .footer-links-area::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(clamp(48px, 7vw, 92px) * -1 + 1px);
+  height: clamp(48px, 7vw, 92px);
+  background: var(--c-text);
+  clip-path: polygon(0 100%, 70% 18%, 100% 56%, 100% 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 .footer-cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
 }
 @media (max-width: 640px) {
+  body.home-page .footer-links-area {
+    margin-top: 48px;
+    padding-top: 58px;
+  }
+
+  body.home-page .footer-links-area::before {
+    top: -47px;
+    height: 48px;
+    clip-path: polygon(0 100%, 76% 28%, 100% 58%, 100% 100%);
+  }
+
   .footer-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
 }
 @media (max-width: 380px) {
