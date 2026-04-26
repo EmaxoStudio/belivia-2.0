@@ -181,9 +181,16 @@ section.alt { background: var(--c-bg-alt); }
 
 .section-slant-top,
 .section-slant-bottom,
-.section-soft-wave {
-  --section-shape-h: clamp(18px, 3vw, 34px);
+.section-soft-wave,
+.section-slant-top-left,
+.section-slant-top-right,
+.section-slant-bottom-left,
+.section-slant-bottom-right,
+.section-slant-both,
+.section-slant-both-reverse {
+  --section-shape-h: clamp(34px, 4.6vw, 60px);
   --section-shape-bg: var(--c-bg);
+  --section-flow-pad-y: 72px;
   position: relative;
   isolation: isolate;
 }
@@ -191,21 +198,55 @@ section.alt { background: var(--c-bg-alt); }
 .section-slant-top > .container,
 .section-slant-bottom > .container,
 .section-soft-wave > .container,
+.section-slant-top-left > .container,
+.section-slant-top-right > .container,
+.section-slant-bottom-left > .container,
+.section-slant-bottom-right > .container,
+.section-slant-both > .container,
+.section-slant-both-reverse > .container,
 .trust-strip-inner {
   position: relative;
   z-index: 1;
 }
 
-.section-slant-top {
-  padding-top: calc(72px + var(--section-shape-h));
+section.section-slant-top,
+section.section-soft-wave,
+section.section-slant-top-left,
+section.section-slant-top-right,
+section.section-slant-both,
+section.section-slant-both-reverse,
+div.section-slant-top,
+div.section-soft-wave,
+div.section-slant-top-left,
+div.section-slant-top-right,
+div.section-slant-both,
+div.section-slant-both-reverse {
+  padding-top: calc(var(--section-flow-pad-y) + var(--section-shape-h));
 }
 
-.section-slant-bottom {
-  padding-bottom: calc(72px + var(--section-shape-h));
+section.section-slant-bottom,
+section.section-slant-bottom-left,
+section.section-slant-bottom-right,
+section.section-slant-both,
+section.section-slant-both-reverse,
+div.section-slant-bottom,
+div.section-slant-bottom-left,
+div.section-slant-bottom-right,
+div.section-slant-both,
+div.section-slant-both-reverse {
+  padding-bottom: calc(var(--section-flow-pad-y) + var(--section-shape-h));
 }
 
 .section-slant-top::before,
+.section-slant-top-left::before,
+.section-slant-top-right::before,
+.section-slant-both::before,
+.section-slant-both-reverse::before,
 .section-slant-bottom::after,
+.section-slant-bottom-left::after,
+.section-slant-bottom-right::after,
+.section-slant-both::after,
+.section-slant-both-reverse::after,
 .section-soft-wave::before {
   content: "";
   position: absolute;
@@ -222,52 +263,128 @@ section.alt { background: var(--c-bg-alt); }
   clip-path: polygon(0 42%, 100% 0, 100% 100%, 0 100%);
 }
 
+.section-slant-top-left::before,
+.section-slant-both::before {
+  top: calc(var(--section-shape-h) * -1 + 1px);
+  clip-path: polygon(0 0, 100% 58%, 100% 100%, 0 100%);
+}
+
+.section-slant-top-right::before,
+.section-slant-both-reverse::before {
+  top: calc(var(--section-shape-h) * -1 + 1px);
+  clip-path: polygon(0 58%, 100% 0, 100% 100%, 0 100%);
+}
+
 .section-slant-bottom::after {
   bottom: calc(var(--section-shape-h) * -1 + 1px);
   clip-path: polygon(0 0, 100% 0, 100% 58%, 0 100%);
 }
 
+.section-slant-bottom-left::after,
+.section-slant-both::after {
+  bottom: calc(var(--section-shape-h) * -1 + 1px);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 42%);
+}
+
+.section-slant-bottom-right::after,
+.section-slant-both-reverse::after {
+  bottom: calc(var(--section-shape-h) * -1 + 1px);
+  clip-path: polygon(0 0, 100% 0, 100% 42%, 0 100%);
+}
+
 .section-soft-wave::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: ellipse(78% 70% at 50% 100%);
+  clip-path: polygon(0 64%, 38% 28%, 100% 56%, 100% 100%, 0 100%);
 }
 
 section.alt.section-slant-top,
 section.alt.section-slant-bottom,
 section.alt.section-soft-wave,
+section.alt.section-slant-top-left,
+section.alt.section-slant-top-right,
+section.alt.section-slant-bottom-left,
+section.alt.section-slant-bottom-right,
+section.alt.section-slant-both,
+section.alt.section-slant-both-reverse,
 .section-service-imgs.alt {
   --section-shape-bg: var(--c-bg-alt);
 }
 
-.trust-strip.section-slant-top {
-  --section-shape-h: clamp(14px, 2.2vw, 26px);
+.trust-strip.section-slant-top,
+.trust-strip.section-slant-top-left,
+.trust-strip.section-slant-top-right {
+  --section-flow-pad-y: 14px;
+  --section-shape-h: clamp(24px, 3.6vw, 44px);
   --section-shape-bg: var(--c-primary);
 }
 
 .cta-band-soft.section-slant-top,
 .cta-band-soft.section-slant-bottom,
-.cta-band-soft.section-soft-wave {
+.cta-band-soft.section-soft-wave,
+.cta-band-soft.section-slant-top-left,
+.cta-band-soft.section-slant-top-right,
+.cta-band-soft.section-slant-bottom-left,
+.cta-band-soft.section-slant-bottom-right,
+.cta-band-soft.section-slant-both,
+.cta-band-soft.section-slant-both-reverse {
+  --section-flow-pad-y: 48px;
   --section-shape-bg: #f7f2eb;
 }
 
 .cta-band.section-slant-top,
-.cta-band.section-slant-bottom {
+.cta-band.section-slant-bottom,
+.cta-band.section-slant-top-left,
+.cta-band.section-slant-top-right,
+.cta-band.section-slant-bottom-left,
+.cta-band.section-slant-bottom-right,
+.cta-band.section-slant-both,
+.cta-band.section-slant-both-reverse {
+  --section-flow-pad-y: 64px;
   --section-shape-bg: #2d7d52;
 }
 
 @media (max-width: 680px) {
   .section-slant-top,
   .section-slant-bottom,
-  .section-soft-wave {
-    --section-shape-h: 14px;
+  .section-soft-wave,
+  .section-slant-top-left,
+  .section-slant-top-right,
+  .section-slant-bottom-left,
+  .section-slant-bottom-right,
+  .section-slant-both,
+  .section-slant-both-reverse {
+    --section-shape-h: 24px;
+    --section-flow-pad-y: 56px;
   }
 
-  .section-slant-top {
-    padding-top: calc(56px + var(--section-shape-h));
+  .trust-strip.section-slant-top,
+  .trust-strip.section-slant-top-left,
+  .trust-strip.section-slant-top-right {
+    --section-flow-pad-y: 14px;
+    --section-shape-h: 20px;
   }
 
-  .section-slant-bottom {
-    padding-bottom: calc(56px + var(--section-shape-h));
+  .cta-band-soft.section-slant-top,
+  .cta-band-soft.section-slant-bottom,
+  .cta-band-soft.section-soft-wave,
+  .cta-band-soft.section-slant-top-left,
+  .cta-band-soft.section-slant-top-right,
+  .cta-band-soft.section-slant-bottom-left,
+  .cta-band-soft.section-slant-bottom-right,
+  .cta-band-soft.section-slant-both,
+  .cta-band-soft.section-slant-both-reverse {
+    --section-flow-pad-y: 44px;
+  }
+
+  .cta-band.section-slant-top,
+  .cta-band.section-slant-bottom,
+  .cta-band.section-slant-top-left,
+  .cta-band.section-slant-top-right,
+  .cta-band.section-slant-bottom-left,
+  .cta-band.section-slant-bottom-right,
+  .cta-band.section-slant-both,
+  .cta-band.section-slant-both-reverse {
+    --section-flow-pad-y: 52px;
   }
 }
 
