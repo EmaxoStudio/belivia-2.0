@@ -609,36 +609,36 @@ div.section-slant-both-reverse {
 
 .section-slant-top::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 70%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 86%, 100% 0, 100% 100%, 0 100%);
 }
 
 .section-slant-top-left::before,
 .section-slant-both::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 70%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 86%, 100% 100%, 0 100%);
 }
 
 .section-slant-top-right::before,
 .section-slant-both-reverse::before {
   top: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 70%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 86%, 100% 0, 100% 100%, 0 100%);
 }
 
 .section-slant-bottom::after {
   bottom: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 14%, 0 100%);
 }
 
 .section-slant-bottom-left::after,
 .section-slant-both::after {
   bottom: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 30%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 14%);
 }
 
 .section-slant-bottom-right::after,
 .section-slant-both-reverse::after {
   bottom: calc(var(--section-shape-h) * -1 + 1px);
-  clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 14%, 0 100%);
 }
 
 .section-soft-wave::before {
