@@ -758,7 +758,7 @@ h3 {
 
 .page-hero {
   background: var(--c-bg-alt);
-  padding: 88px 0 84px;
+  padding: 80px 0 48px;
 }
 
 .page-hero .page-tag {
@@ -786,8 +786,16 @@ h3 {
   margin-top: 22px;
 }
 
+/* Tighten slant + padding for first section directly after page-hero */
+.page-hero + section,
+.page-hero + div {
+  --section-shape-h: clamp(36px, 4.5vw, 64px);
+  --section-flow-pad-y: 48px;
+  --section-content-clearance: 8px;
+}
+
 @media (max-width: 600px) {
-  .page-hero { padding: 64px 0 60px; }
+  .page-hero { padding: 56px 0 36px; }
   .page-hero h1 { font-size: 1.65rem; }
 }
 

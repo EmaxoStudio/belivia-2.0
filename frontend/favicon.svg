@@ -1,4 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#2d7d52"/>
-  <text x="16" y="23" font-family="Segoe UI,Arial,sans-serif" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#ffffff"/>
+  <!-- Beige arc frame right side -->
+  <path d="M52 6 Q88 6 88 42 L88 88 L76 88 L76 50 Q76 22 52 22 Z" fill="#c9a878"/>
+  <!-- Green leaf top-left -->
+  <path d="M10 76 Q4 48 15 26 Q26 4 46 6 Q44 14 36 18 Q18 24 14 48 Q10 62 12 80 Z" fill="#6cc762"/>
+  <path d="M10 76 Q11 58 16 40 Q12 54 12 72 Z" fill="rgba(255,255,255,0.28)"/>
+  <!-- Adult teal figure -->
+  <circle cx="38" cy="34" r="8.5" fill="#4aafc9"/>
+  <path d="M23 80 Q27 58 38 54 Q49 58 53 80 Z" fill="#4aafc9"/>
+  <!-- Child teal figure -->
+  <circle cx="60" cy="50" r="6" fill="#4aafc9"/>
+  <path d="M50 84 Q53 68 60 64 Q67 68 70 84 Z" fill="#4aafc9"/>
 </svg>
