@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var revealDelayStep = 46;
-  var revealDelayMax = 230;
+  var revealDelayStep = 130;
+  var revealDelayMax = 480;
 
   var revealGroups = [
     'main > .cta-band',
@@ -48,27 +48,27 @@ document.addEventListener('DOMContentLoaded', function () {
   markRevealTargets(cardGroups, 'reveal-up', true);
 
   document.querySelectorAll('.hero .hero-tag, .hero h1, .hero .hero-sub, .hero .benefit-chips, .hero .hero-cta-group').forEach(function (element, index) {
-    addReveal(element, 'reveal-up', Math.min(index * 70, revealDelayMax));
+    addReveal(element, 'reveal-up', Math.min(index * 140, revealDelayMax));
   });
-  addReveal(document.querySelector('.hero .hero-slides'), 'reveal-right', 120);
+  addReveal(document.querySelector('.hero .hero-slides'), 'reveal-right', 160);
 
   document.querySelectorAll('.image-feature').forEach(function (feature, index) {
-    addReveal(feature.querySelector('.image-feature-content'), 'reveal-up', 60);
+    addReveal(feature.querySelector('.image-feature-content'), 'reveal-up', 80);
 
     var media = feature.querySelector('.image-feature-media');
     if (media && !media.classList.contains('reveal-left') && !media.classList.contains('reveal-right')) {
-      addReveal(media, index % 2 === 0 ? 'reveal-right' : 'reveal-left', 120);
+      addReveal(media, index % 2 === 0 ? 'reveal-right' : 'reveal-left', 180);
     }
   });
 
   document.querySelectorAll('.two-col, .contact-layout').forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (element, index) {
-      addReveal(element, index % 2 === 0 ? 'reveal-up' : 'reveal-right', Math.min(index * 70, revealDelayMax));
+      addReveal(element, index % 2 === 0 ? 'reveal-up' : 'reveal-right', Math.min(index * 140, revealDelayMax));
     });
   });
 
   document.querySelectorAll('.trust-strip-item').forEach(function (element, index) {
-    addReveal(element, 'reveal-soft', Math.min(index * 45, revealDelayMax));
+    addReveal(element, 'reveal-soft', Math.min(index * 100, revealDelayMax));
   });
 
   document.querySelectorAll('.section-lead, .steps-note, .funnel-check-cta, .info-box, .highlight-box, .next-steps-block, .scope-not-list').forEach(function (element) {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     heroSlideTimer = window.setInterval(function () {
       setHeroSlide((heroSlideIndex + 1) % heroSlides.length);
-    }, 7000);
+    }, 9000);
   }
 
   heroDots.forEach(function (dot, index) {
@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
       observer.unobserve(entry.target);
     });
   }, {
-    rootMargin: '0px 0px -10% 0px',
-    threshold: 0.12
+    rootMargin: '0px 0px -18% 0px',
+    threshold: 0.16
   });
 
   document.querySelectorAll(allRevealSelector).forEach(function (element) {
