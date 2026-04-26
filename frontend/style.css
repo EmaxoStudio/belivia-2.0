@@ -191,6 +191,7 @@ section.alt { background: var(--c-bg-alt); }
   --section-shape-h: clamp(34px, 4.6vw, 60px);
   --section-shape-bg: var(--c-bg);
   --section-flow-pad-y: 72px;
+  --section-content-clearance: 14px;
   position: relative;
   isolation: isolate;
 }
@@ -206,7 +207,7 @@ section.alt { background: var(--c-bg-alt); }
 .section-slant-both-reverse > .container,
 .trust-strip-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 section.section-slant-top,
@@ -221,7 +222,7 @@ div.section-slant-top-left,
 div.section-slant-top-right,
 div.section-slant-both,
 div.section-slant-both-reverse {
-  padding-top: calc(var(--section-flow-pad-y) + var(--section-shape-h));
+  padding-top: calc(var(--section-flow-pad-y) + var(--section-shape-h) + var(--section-content-clearance));
 }
 
 section.section-slant-bottom,
@@ -255,7 +256,7 @@ div.section-slant-both-reverse {
   height: var(--section-shape-h);
   background: var(--section-shape-bg);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .section-slant-top::before {
@@ -314,7 +315,8 @@ section.alt.section-slant-both-reverse,
 .trust-strip.section-slant-top-left,
 .trust-strip.section-slant-top-right {
   --section-flow-pad-y: 14px;
-  --section-shape-h: clamp(24px, 3.6vw, 44px);
+  --section-shape-h: clamp(18px, 2.4vw, 30px);
+  --section-content-clearance: 16px;
   --section-shape-bg: var(--c-primary);
 }
 
@@ -328,6 +330,7 @@ section.alt.section-slant-both-reverse,
 .cta-band-soft.section-slant-both,
 .cta-band-soft.section-slant-both-reverse {
   --section-flow-pad-y: 48px;
+  --section-content-clearance: 10px;
   --section-shape-bg: #f7f2eb;
 }
 
@@ -340,6 +343,7 @@ section.alt.section-slant-both-reverse,
 .cta-band.section-slant-both,
 .cta-band.section-slant-both-reverse {
   --section-flow-pad-y: 64px;
+  --section-content-clearance: 12px;
   --section-shape-bg: #2d7d52;
 }
 
@@ -355,13 +359,15 @@ section.alt.section-slant-both-reverse,
   .section-slant-both-reverse {
     --section-shape-h: 24px;
     --section-flow-pad-y: 56px;
+    --section-content-clearance: 8px;
   }
 
   .trust-strip.section-slant-top,
   .trust-strip.section-slant-top-left,
   .trust-strip.section-slant-top-right {
     --section-flow-pad-y: 14px;
-    --section-shape-h: 20px;
+    --section-shape-h: 16px;
+    --section-content-clearance: 14px;
   }
 
   .cta-band-soft.section-slant-top,
@@ -374,6 +380,7 @@ section.alt.section-slant-both-reverse,
   .cta-band-soft.section-slant-both,
   .cta-band-soft.section-slant-both-reverse {
     --section-flow-pad-y: 44px;
+    --section-content-clearance: 8px;
   }
 
   .cta-band.section-slant-top,
@@ -385,6 +392,7 @@ section.alt.section-slant-both-reverse,
   .cta-band.section-slant-both,
   .cta-band.section-slant-both-reverse {
     --section-flow-pad-y: 52px;
+    --section-content-clearance: 8px;
   }
 }
 
@@ -1415,7 +1423,8 @@ html.js .reveal.visible {
   html.js .reveal,
   html.js .reveal-left,
   html.js .reveal-right,
-  html.js .reveal-up {
+  html.js .reveal-up,
+  html.js .reveal-soft {
     opacity: 1;
     transform: none;
     transition: none;
@@ -1425,50 +1434,62 @@ html.js .reveal.visible {
 /* ── BEL-019: Directional reveal — ruhig, dezent, Belivia-passend ── */
 .reveal-left,
 .reveal-right,
-.reveal-up {
+.reveal-up,
+.reveal-soft {
   opacity: 1;
   transform: none;
 }
 
 html.js .reveal-left {
   opacity: 0;
-  transform: translateX(-28px);
-  transition: opacity 0.66s cubic-bezier(0.22, 0.72, 0.22, 1), transform 0.66s cubic-bezier(0.22, 0.72, 0.22, 1);
+  transform: translateX(-26px);
+  transition: opacity 0.68s cubic-bezier(0.22, 0.72, 0.22, 1), transform 0.68s cubic-bezier(0.22, 0.72, 0.22, 1);
   transition-delay: var(--reveal-delay, 80ms);
 }
 
 html.js .reveal-right {
   opacity: 0;
-  transform: translateX(28px);
-  transition: opacity 0.66s cubic-bezier(0.22, 0.72, 0.22, 1), transform 0.66s cubic-bezier(0.22, 0.72, 0.22, 1);
+  transform: translateX(26px);
+  transition: opacity 0.68s cubic-bezier(0.22, 0.72, 0.22, 1), transform 0.68s cubic-bezier(0.22, 0.72, 0.22, 1);
   transition-delay: var(--reveal-delay, 80ms);
 }
 
 html.js .reveal-up {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.62s cubic-bezier(0.22, 0.72, 0.22, 1), transform 0.62s cubic-bezier(0.22, 0.72, 0.22, 1);
+  transform: translateY(20px);
+  transition: opacity 0.64s cubic-bezier(0.22, 0.72, 0.22, 1), transform 0.64s cubic-bezier(0.22, 0.72, 0.22, 1);
   transition-delay: var(--reveal-delay, 80ms);
+}
+
+html.js .reveal-soft {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.72s cubic-bezier(0.22, 0.72, 0.22, 1), transform 0.72s cubic-bezier(0.22, 0.72, 0.22, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 html.js .reveal-left.visible,
 html.js .reveal-right.visible,
-html.js .reveal-up.visible {
+html.js .reveal-up.visible,
+html.js .reveal-soft.visible {
   opacity: 1;
   transform: none;
 }
 
 /* Mobile: horizontale Slides deaktivieren, nur vertikales Fade */
 @media (max-width: 680px) {
-  html.js .reveal-left  { transform: translateY(14px); }
-  html.js .reveal-right { transform: translateY(14px); }
+  html.js .reveal-left,
+  html.js .reveal-right { transform: translateY(12px); }
+  html.js .reveal-up { transform: translateY(14px); }
+  html.js .reveal-soft { transform: translateY(8px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal,
   html.js .reveal-left,
   html.js .reveal-right,
-  html.js .reveal-up {
+  html.js .reveal-up,
+  html.js .reveal-soft {
     opacity: 1;
     transform: none;
     transition: none;
