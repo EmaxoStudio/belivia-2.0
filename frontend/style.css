@@ -1724,24 +1724,12 @@ a.service-card {
   color: rgba(255,255,255,0.7);
 }
 
-body.home-page .footer-links-area {
-  position: relative;
-  margin-top: clamp(48px, 7vw, 92px);
-  padding-top: clamp(58px, 8vw, 96px);
-  isolation: isolate;
-}
-
-body.home-page .footer-links-area::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(clamp(48px, 7vw, 92px) * -1 + 1px);
-  height: clamp(48px, 7vw, 92px);
+body.home-page .home-geo-bridge {
   background: var(--c-text);
-  clip-path: polygon(0 100%, 70% 18%, 100% 56%, 100% 100%);
-  pointer-events: none;
-  z-index: -1;
+  height: clamp(100px, 13vw, 160px);
+  clip-path: polygon(0 60%, 100% 0, 100% 100%, 0 100%);
+  margin-top: calc(clamp(100px, 13vw, 160px) * -0.6);
+  position: relative;
 }
 
 .footer-cols {
@@ -1750,15 +1738,10 @@ body.home-page .footer-links-area::before {
   gap: 40px;
 }
 @media (max-width: 640px) {
-  body.home-page .footer-links-area {
-    margin-top: 48px;
-    padding-top: 58px;
-  }
-
-  body.home-page .footer-links-area::before {
-    top: -47px;
-    height: 48px;
-    clip-path: polygon(0 100%, 76% 28%, 100% 58%, 100% 100%);
+  body.home-page .home-geo-bridge {
+    height: 90px;
+    clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+    margin-top: -45px;
   }
 
   .footer-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
