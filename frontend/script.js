@@ -78,10 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
   markRevealTargets(revealGroups, 'reveal-soft', false);
   markRevealTargets(cardGroups, 'reveal-up', true);
 
-  document.querySelectorAll('.hero .hero-tag, .hero h1, .hero .hero-sub, .hero .benefit-chips, .hero .hero-cta-group').forEach(function (element, index) {
-    addReveal(element, 'reveal-up', Math.min(index * 140, revealDelayMax));
-  });
-  addReveal(document.querySelector('.hero .hero-slides'), 'reveal-right', 160);
+  /* Hero copy is immediately visible via CSS animation — no scroll-reveal needed */
 
   document.querySelectorAll('.image-feature').forEach(function (feature, index) {
     addReveal(feature.querySelector('.image-feature-content'), 'reveal-up', 80);
