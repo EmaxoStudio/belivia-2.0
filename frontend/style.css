@@ -186,10 +186,20 @@ img.brand-logo,
   flex: 1;
 }
 
+/* Base: always hidden until overridden per breakpoint */
+.nav-dropdown {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .nav-chevron {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  appearance: none;
+  -webkit-appearance: none;
   background: none;
   border: none;
   cursor: pointer;
@@ -222,8 +232,15 @@ img.brand-logo,
   transform: rotate(180deg);
 }
 
-/* Desktop dropdown panel */
+/* Active parent when on sub-page */
+.has-dropdown.active > .nav-link {
+  color: var(--c-primary);
+  font-weight: 600;
+}
+
+/* ── Desktop dropdown panel ── */
 @media (min-width: 681px) {
+  /* Override base display:none — keep hidden via visibility+opacity */
   .nav-dropdown {
     display: block;
     visibility: hidden;
@@ -235,9 +252,8 @@ img.brand-logo,
     background: var(--c-bg);
     border: 1px solid var(--c-border);
     border-radius: var(--radius);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
     min-width: 215px;
-    list-style: none;
     padding: 6px 0;
     z-index: 200;
     transform: translateY(-6px);
@@ -269,13 +285,7 @@ img.brand-logo,
   }
 }
 
-/* Active parent when on sub-page */
-.has-dropdown.active > .nav-link {
-  color: var(--c-primary);
-  font-weight: 600;
-}
-
-/* Mobile dropdown */
+/* ── Mobile dropdown ── */
 @media (max-width: 680px) {
   .nav-item {
     flex-wrap: wrap;
@@ -283,26 +293,23 @@ img.brand-logo,
   }
 
   .nav-item > .nav-link {
+    flex: 1;
     padding: 10px 24px;
     display: block;
   }
 
   .nav-chevron {
-    padding: 8px 20px 8px 8px;
-    color: var(--c-text-soft);
+    padding: 10px 20px 10px 8px;
+    min-height: 44px;
   }
 
-  .nav-dropdown {
-    display: none;
-    list-style: none;
+  /* nav-dropdown stays display:none (base); shown only when chevron is tapped */
+  .has-dropdown.open .nav-dropdown {
+    display: block;
     width: 100%;
     padding: 0 0 4px;
     background: var(--c-bg-alt);
     border-left: 3px solid var(--c-border);
-  }
-
-  .has-dropdown.open .nav-dropdown {
-    display: block;
   }
 
   .nav-dropdown a {
