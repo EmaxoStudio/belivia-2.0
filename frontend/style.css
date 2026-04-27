@@ -1716,20 +1716,20 @@ a.service-card {
 .cta-band .hero-call { color: rgba(255,255,255,0.75); margin-top: 20px; }
 .cta-band .hero-call a { color: #fff; font-weight: 600; }
 
-/* ── Expanded footer links area ── */
-.footer-links-area {
-  background: var(--c-text);
-  padding: 48px 0 40px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.7);
-}
-
-body.home-page .home-geo-bridge {
+/* ── Footer geometry bridge + links area ── */
+.footer-geo-bridge {
   background: var(--c-text);
   height: clamp(100px, 13vw, 160px);
   clip-path: polygon(0 60%, 100% 0, 100% 100%, 0 100%);
   margin-top: calc(clamp(100px, 13vw, 160px) * -0.6);
   position: relative;
+}
+
+.footer-links-area {
+  background: var(--c-text);
+  padding: 48px 0 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
 }
 
 .footer-cols {
@@ -1738,7 +1738,7 @@ body.home-page .home-geo-bridge {
   gap: 40px;
 }
 @media (max-width: 640px) {
-  body.home-page .home-geo-bridge {
+  .footer-geo-bridge {
     height: 90px;
     clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
     margin-top: -45px;
